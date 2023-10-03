@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xbacklight -dec 4
+xprop -root -set WM_NAME "$(xbacklight -get)"

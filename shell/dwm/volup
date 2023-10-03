@@ -1,0 +1,4 @@
+#!/bin/bash
+
+amixer set Master 1+
+xprop -root -set WM_NAME "$(amixer get Master | awk -F'[][]' 'END{ print $2 }')"
