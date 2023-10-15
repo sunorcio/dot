@@ -1,6 +1,8 @@
-:colorscheme koehler
+:colorscheme habamax
 :highlight Normal ctermfg=231 ctermbg=16
-:highlight StatusLine ctermfg=12 ctermbg=16
+:highlight StatusLine ctermfg=4 ctermbg=8
+:highlight Identifier ctermfg=181
+:highlight Constant ctermfg=178
 
 :set nowrap
 :set number
