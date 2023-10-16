@@ -16,13 +16,12 @@ fi
 # Put your fun stuff here.
 
 
-PROMPT_COMMAND="xprop -id $(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2) -format _NET_WM_NAME 8s -set _NET_WM_NAME  "my_value""
-
+PROMPT_COMMAND="xprop -id $(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2) -format _NET_WM_NAME 8s -set _NET_WM_NAME "\$PWD""
 
 #uncolored PS1="\D{%a}[\A]\u@\h \w$ "
 #coloring \[\e[$MD;$FG;$BGm\]
 #PS1="\[\e[36m\]\u\[\e[0m\]@\[\e[35m\]\h \[\e[1;34m\]\w\[\e[0m\]$\[\e[0m\] "
-PS1="\[\e[36m\]\u\[\e[0m\]@\[\e[35m\]\h \[\e[1;34m\]\w\[\e[0m\]$\[\e[0m\] "
+PS1="\[\e[36m\]\u\[\e[0m\]@\[\e[35m\]\h \[\e[0m\]$\[\e[0m\] "
 
 
 if [ $(cat /home/santi/dot/initvar) -eq 1 ]
@@ -32,7 +31,9 @@ then
 	xbacklight -set 50
 	clear
 	PROMPT_COMMAND="neofetch --bold off
-					PROMPT_COMMAND='xprop -id $(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2) -format _NET_WM_NAME 8s -set _NET_WM_NAME  'my_value''"
+					xprop -id $(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2) -format _NET_WM_NAME 8s -set _NET_WM_NAME  'st'
+					xprop -root -set WM_NAME  'dwm'
+					PROMPT_COMMAND='xprop -id $(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2) -format _NET_WM_NAME 8s -set _NET_WM_NAME  "\$PWD"'"
 	echo 0 > "/home/santi/dot/initvar"
 fi
 
