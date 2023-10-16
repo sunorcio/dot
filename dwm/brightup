@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "$(xbacklight -get)" = "0.000000" ]
+then
+	xbacklight -set 0.1
+else
+	xbacklight -inc 10
+fi
+xprop -root -set WM_NAME "$(xbacklight -get)"
