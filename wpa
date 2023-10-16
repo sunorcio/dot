@@ -1,0 +1,3 @@
+#!/bin/bash
+
+su -c "rc-service wpa_supplicant restart"

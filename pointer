@@ -1,0 +1,12 @@
+#!/sbin/openrc-run
+
+description="Thinkpad X240 trackpoint settings"
+
+start()
+{
+	echo 200 > /sys/devices/platform/i8042/serio1/driver/serio3/sensitivity
+	echo 80 > /sys/devices/platform/i8042/serio1/driver/serio3/speed
+	echo 30 > /sys/devices/platform/i8042/serio1/driver/serio3/drift_time
+	echo 0 > /sys/devices/platform/i8042/serio1/driver/serio3/inertia
+	return 0
+}
