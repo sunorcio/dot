@@ -7,7 +7,7 @@ if [[ -f ~/.bashrc ]] ; then
 fi
 
 
-echo 1 > /home/santi/shell/initvar
+echo 1 > /home/santi/dot/initvar
 
 
 startx
