@@ -1,7 +1,7 @@
 :colorscheme habamax
-:highlight Normal ctermfg=8 ctermbg=16
+:highlight Normal ctermfg=120 ctermbg=16
 :highlight StatusLine ctermfg=69 ctermbg=232
-:highlight MsgArea ctermfg=250 ctermbg=233
+:highlight MsgArea ctermfg=255 ctermbg=233
 :highlight Identifier ctermfg=181
 :highlight Constant ctermfg=178
 

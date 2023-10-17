@@ -36,6 +36,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Example",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Firefox",  NULL,       NULL,			   4,       0,           -1 },
 };
 
 /* layout(s) */
@@ -66,13 +67,13 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *vmt[]  = { "amixer","set","Master","toggle", NULL };
-static const char *vdn[]  = { "/home/santi/dot/shell/dwm/voldn", NULL };
-static const char *vup[]  = { "/home/santi/dot/shell/dwm/volup", NULL };
+static const char *vdn[]  = { "/home/santi/dot/dwm/voldn", NULL };
+static const char *vup[]  = { "/home/santi/dot/dwm/volup", NULL };
 static const char *mmt[]  = { "amixer","set","Capture","toggle", NULL };
-static const char *bdn[]  = { "/home/santi/dot/shell/dwm/brightdn", NULL };
-static const char *bup[]  = { "/home/santi/dot/shell/dwm/brightup", NULL };
+static const char *bdn[]  = { "/home/santi/dot/dwm/brightdn", NULL };
+static const char *bup[]  = { "/home/santi/dot/dwm/brightup", NULL };
 static const char *opt[]  = { "st","-e","btop", NULL };
-static const char *loc[]  = { "st","-T","Type search query:","-e","/home/santi/dot/shell/dwm/search", NULL };
+static const char *loc[]  = { "st","-T","Type search query:","-e","/home/santi/dot/dwm/search", NULL };
 static const char *scr[]  = { "scrot","-s","-F","/home/santi/scrot/scrot", NULL };
 
 static const Key keys[] = {

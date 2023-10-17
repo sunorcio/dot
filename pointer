@@ -2,6 +2,10 @@
 
 description="Thinkpad X240 trackpoint settings"
 
+depend() {
+	need udev
+}
+
 start()
 {
 	echo 200 > /sys/devices/platform/i8042/serio1/driver/serio3/sensitivity
