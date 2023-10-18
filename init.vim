@@ -1,9 +1,11 @@
 :colorscheme habamax
-:highlight Normal ctermfg=120 ctermbg=16
-:highlight StatusLine ctermfg=69 ctermbg=232
+:highlight Normal ctermfg=121 ctermbg=16
+:highlight StatusLine ctermfg=68 ctermbg=232
 :highlight MsgArea ctermfg=255 ctermbg=233
 :highlight Identifier ctermfg=181
 :highlight Constant ctermfg=178
+:highlight Type ctermfg=65
+:highlight String ctermfg=106
 
 :set nowrap
 :set number
