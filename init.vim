@@ -69,8 +69,8 @@
 
 :noremap f n
 :noremap b N
-:noremap B w
-:noremap F ge
+:noremap B ge
+:noremap F w
 :noremap w b
 :noremap W B
 
@@ -98,6 +98,8 @@
 :vnoremap X C
 :vnoremap c x
 :vnoremap C X
+
+:noremap <A-v> gv
 
 :inoremap <C-B> <left>
 :inoremap <C-F> <right>
