@@ -3,5 +3,5 @@
 while [ true ]
 do
 	xprop -root -set WM_NAME "$(cat /sys/class/power_supply/BAT1/capacity)%amp $(date +%H:%M)"
-	sleep 16
+	sleep 32
 done

@@ -36,7 +36,6 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Example",  NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "Firefox",  NULL,       NULL,			   4,       0,           -1 },
 };
 
 /* layout(s) */
@@ -80,12 +79,10 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_t,	   spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,                       XK_r,      togglebar,      {0} },
+	{ MODKEY,                       XK_f,      setlayout,	   {.v = &layouts[0] } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_Down,   focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_Up,	   focusstack,     {.i = -1 } },
 	{ MODKEY,			            XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,						XK_n,      incnmaster,     {.i = 0 } },//reset to 1
 	{ MODKEY,                       XK_h,	   viewreldn,	   {0} },
@@ -96,8 +93,10 @@ static const Key keys[] = {
 	{ MODKEY,						XK_m,      setmfact,       {.f = +0.01 } },
 	{ MODKEY,                       XK_space,  zoom,           {0} },
 	{ MODKEY|ShiftMask,             XK_space,  setlayout,      {.v = &layouts[1] } },
-	{ MODKEY,                       XK_f,      setlayout,	   {.v = &layouts[0] } },
+	{ MODKEY,                       XK_t,	   setlayout,	   {.v = &layouts[1] } },
 	{ MODKEY|ShiftMask,             XK_f,	   setlayout,	   {.v = &layouts[2] } },
+	{ MODKEY|ShiftMask,             XK_u,	   setlayout,	   {.v = &layouts[2] } },
+	{ MODKEY,				        XK_b,	  togglefullscreen,{0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
@@ -114,7 +113,7 @@ static const Key keys[] = {
 	{ 0,							XF86XK_Tools,				spawn,	{.v = opt } },
 	{ 0,							XF86XK_Search,				spawn,	{.v = loc } },
 	{ 0,							XF86XK_LaunchA,				spawn,	{.v = dmenucmd } },
-	{ 0,							XF86XK_Display,			spawn,	{.v = scr } },
+	{ 0,							XF86XK_Display,				spawn,	{.v = scr } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
