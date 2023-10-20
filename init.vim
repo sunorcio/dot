@@ -16,7 +16,7 @@
 :set mouse=a
 :set clipboard^=unnamed,unnamedplus
 :set cmdheight=0
-:set title
+:set notitle
 :set foldmethod=indent
 :set foldlevel=1
 :set foldnestmax=1

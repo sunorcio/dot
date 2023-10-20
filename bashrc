@@ -20,19 +20,18 @@ fi
 #uncolored PS1="\D{%a}[\A]\u@\h \w$ "
 #coloring \[\e[$MD;$FG;$BGm\]
 #PS1="\[\e[36m\]\u\[\e[0m\]@\[\e[35m\]\h \[\e[1;34m\]\w\[\e[0m\]$\[\e[0m\] "
-PS1="\[\e[36m\]\u\[\e[0m\] \[\e[1;34m\]\w \[\e[0m\]$\[\e[0m\] "
+PS1="\[\e[36m\]\u\[\e[0m\] \[\e[1;34m\]\$PWD \[\e[0m\]$\[\e[0m\] "
 
 
 if [ $(cat /home/santi/dot/initvar) -eq 1 ]
 then
-	xkbcomp /home/santi/.xkb-custom $DISPLAY
-	xset r rate 180 70
 	xbacklight -set 50
+	xset r rate 180 70
+	xkbcomp /home/santi/.xkb-custom $DISPLAY
 	clear
 	PROMPT_COMMAND="neofetch
-					xprop -id $(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2) -format _NET_WM_NAME 8s -set _NET_WM_NAME  'st'
 					xprop -root -set WM_NAME  'dwm'
-					PROMPT_COMMAND=''"
+					PROMPT_COMMAND='' "
 	echo 0 > "/home/santi/dot/initvar"
 fi
 

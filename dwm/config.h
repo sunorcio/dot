@@ -12,8 +12,8 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 */
-static const char *fonts[]          = { "BmPlus ToshibaSat 8x14:pixelsize=15" };
-static const char dmenufont[]       = "BmPlus ToshibaSat 8x14:pixelsize=15";
+static const char *fonts[]          = { "BmPlus ToshibaSat 8x16:pixelsize=16" };
+static const char dmenufont[]       = "BmPlus ToshibaSat 8x16:pixelsize=16";
 
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
