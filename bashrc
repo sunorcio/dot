@@ -35,4 +35,4 @@ then
 	echo 0 > "/home/santi/dot/initvar"
 fi
 
-
+#xprop -id $(xprop -root _NET_ACTIVE_WINDOW | cut -b 41-) -f _NET_WM_NAME 8s -set _NET_WM_NAME "asdfasdf"

@@ -87,13 +87,15 @@
 :vnoremap a A
 :vnoremap i I
 
-:vnoremap <TAB> >
-:vnoremap <S-TAB> <
+:vnoremap <TAB> >gv
+:vnoremap <S-TAB> <gv
 :nnoremap <TAB> >>
 :nnoremap <S-TAB> <<
 
 :noremap d "_d
 :noremap s "_s
+:vnoremap S :s/
+:noremap S :%s/
 :vnoremap x c
 :vnoremap X C
 :vnoremap c x
@@ -109,15 +111,14 @@
 :vnoremap p P
 :vnoremap <C-p> c*/<esc>Pi<CR><up>/*<esc>
 :vnoremap <A-p> c/**/<esc><left><left>p
-:vnoremap <C-A-p> c<space><BS>}<esc>Pi<CR><up>for(int i = 0;i<n;i++){<esc>
-:vnoremap <S-A-p> c<space><BS>}<esc>Pi<CR><up>if(){<left><left>				
+:vnoremap <C-A-p> >gvc<space><BS>}<esc>POfor(int i = 0;i<0;i++){<esc>
+:vnoremap <S-A-p> >gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
 :nnoremap <S-A-p> A<CR>if(<esc>pa){<CR>}<up><end><CR>
 
 :nnoremap <silent> <esc> <esc>:noh<CR>
 
 :noremap <silent> <A-?> :Inspect<CR>
-
 
 
 call plug#begin()
