@@ -95,11 +95,20 @@
 :noremap d "_d
 :noremap s "_s
 :vnoremap S :s/
-:noremap S :%s/
+:nnoremap S :%s/
 :vnoremap x c
 :vnoremap X C
 :vnoremap c x
 :vnoremap C X
+:vnoremap D <Nop>
+:vnoremap D" s""<left><esc>p 
+:vnoremap D' s''<left><esc>p
+:vnoremap D( s()<left><esc>p
+:vnoremap D) s()<left><esc>p
+:vnoremap D[ s[]<left><esc>p
+:vnoremap D] s[]<left><esc>p
+:vnoremap D{ s{}<left><esc>p
+:vnoremap D} s{}<left><esc>p
 
 :noremap <A-v> gv
 
