@@ -13,7 +13,6 @@
 :set shiftwidth=4
 :set smarttab
 :set softtabstop=4
-:set mouse=a
 :set clipboard^=unnamed,unnamedplus
 :set cmdheight=0
 :set notitle
@@ -74,7 +73,7 @@
 :noremap w b
 :noremap W B
 
-:vnoremap / "1y/<C-R>1<CR>N
+:vnoremap / "ay/<C-R>a<CR>N
 :noremap ? f
 :noremap , ;
 :noremap > ;
@@ -92,23 +91,27 @@
 :nnoremap <TAB> >>
 :nnoremap <S-TAB> <<
 
-:noremap d "_d
 :noremap s "_s
 :vnoremap S :s/
 :nnoremap S :%s/
+:nnoremap x c<right>
+:nnoremap X c
 :vnoremap x c
 :vnoremap X C
-:vnoremap c x
-:vnoremap C X
+:noremap c x
+:noremap C d
+:nnoremap d "_d<right>
+:nnoremap D "_d
+:vnoremap d "_d
 :vnoremap D <Nop>
-:vnoremap D" s""<left><esc>p 
-:vnoremap D' s''<left><esc>p
-:vnoremap D( s()<left><esc>p
-:vnoremap D) s()<left><esc>p
-:vnoremap D[ s[]<left><esc>p
-:vnoremap D] s[]<left><esc>p
-:vnoremap D{ s{}<left><esc>p
-:vnoremap D} s{}<left><esc>p
+:vnoremap D" "bs""<esc>"bP
+:vnoremap D' "bs''<esc>"bP
+:vnoremap D( "bs()<esc>"bP
+:vnoremap D) "bs()<esc>"bP
+:vnoremap D[ "bs[]<esc>"bP
+:vnoremap D] "bs[]<esc>"bP
+:vnoremap D{ "bs{}<esc>"bP
+:vnoremap D} "bs{}<esc>"bP
 
 :noremap <A-v> gv
 
