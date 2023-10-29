@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 cd /usr/src/linux
 diff --changed-group-format="%>" --unchanged-group-format="" .config-old .config | tee -a /etc/kernel/config.d/x240-kernel.config

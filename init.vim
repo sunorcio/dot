@@ -6,6 +6,7 @@
 :highlight Constant ctermfg=178
 :highlight Type ctermfg=65
 :highlight String ctermfg=106
+:highlight MatchParen cterm=NONE
 
 :set nowrap
 :set number
@@ -21,7 +22,6 @@
 :set foldnestmax=1
 :set nofoldenable
 :set noignorecase
-:set makeprg=clang
 :set guicursor=i-ci-ve:ver25
 
 :set cul
@@ -31,6 +31,11 @@
 
 :cnoremap <C-F> <Right>
 :cnoremap <C-B> <Left>
+
+:nnoremap <Right>		zl
+:nnoremap <Down>		<C-e>
+:nnoremap <Left>		zh
+:nnoremap <Up>			<C-y>
 
 :noremap <A-Right>		<C-w><Right>
 :noremap <A-Down>		<C-w><Down>
@@ -66,10 +71,10 @@
 :noremap <C-h>	0
 :vnoremap <C-l>	$h
 
-:noremap f n
-:noremap b N
-:noremap B ge
-:noremap F w
+:noremap b ge
+:noremap B gE
+:noremap f w
+:noremap F W
 :noremap w b
 :noremap W B
 
@@ -112,6 +117,8 @@
 :vnoremap D] "bs[]<esc>"bP
 :vnoremap D{ "bs{}<esc>"bP
 :vnoremap D} "bs{}<esc>"bP
+:vnoremap D< "bs<><esc>"bP
+:vnoremap D> "bs<><esc>"bP
 
 :noremap <A-v> gv
 
@@ -123,7 +130,7 @@
 :vnoremap p P
 :vnoremap <C-p> c*/<esc>Pi<CR><up>/*<esc>
 :vnoremap <A-p> c/**/<esc><left><left>p
-:vnoremap <C-A-p> >gvc<space><BS>}<esc>POfor(int i = 0;i<0;i++){<esc>
+:vnoremap <C-A-p> >gvc<space><BS>}<esc>POint i;<CR>for(i = 0;i<0;i++){<esc>
 :vnoremap <S-A-p> >gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
 :nnoremap <S-A-p> A<CR>if(<esc>pa){<CR>}<up><end><CR>
@@ -266,6 +273,7 @@ lua <<EOF
 		"--completion-style=detailed",
 		"--clang-tidy",
 		"--header-insertion=never",
+		"--function-arg-placeholders=0",
 	},
   }
 
