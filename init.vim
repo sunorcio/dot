@@ -121,7 +121,7 @@
 :vnoremap D> "ws<><esc>"wP
 :noremap <A-v> gv
 
-:vnoremap \ <C-v>079lA\<esc>
+:vnoremap \ <C-v>077lA\<esc>
 :vnoremap p P
 :vnoremap P p
 :vnoremap <C-p>   "cs/*  */<left><left><left><c-r>c<esc>
