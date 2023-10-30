@@ -74,11 +74,15 @@ static const char *bup[]  = { "/home/santi/dot/dwm/brightup", NULL };
 static const char *opt[]  = { "st","-e","btop", NULL };
 static const char *loc[]  = { "st","-T","Type search query:","-e","/home/santi/dot/dwm/search", NULL };
 static const char *scr[]  = { "scrot","-s","-F","/home/santi/scrot/scrot", NULL };
+static const char *clk[]  = { "/home/santi/dot/dwm/date", NULL };
+static const char *now[]  = { "/home/santi/dot/dwm/now", NULL };
+static const char *lsh[]  = { "/home/santi/dot/dwm/lsh", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_q,	   spawn,          {.v = lsh } },
 	{ MODKEY,                       XK_r,      togglebar,      {0} },
 	{ MODKEY,                       XK_f,      setlayout,	   {.v = &layouts[0] } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -89,6 +93,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_l,	   viewrelup,	   {0} },
 	{ MODKEY,                       XK_Left,   viewreldn,	   {0} },
 	{ MODKEY,                       XK_Right,  viewrelup,	   {0} },
+	{ MODKEY,                       XK_Down,   focusstack,     {.i = +1 } },
 	{ MODKEY,						XK_o,      setmfact,       {.f = -0.01 } },
 	{ MODKEY,						XK_m,      setmfact,       {.f = +0.01 } },
 	{ MODKEY,				        XK_u,	  togglefullscreen,{0} },
@@ -135,7 +140,9 @@ static const Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button2,        setlayout,      {.v = &layouts[1]} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        spawn,			{.v = dmenucmd } },
+	{ ClkStatusText,        0,              Button1,        spawn,          {.v = clk } },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = opt } },
+	{ ClkStatusText,        0,              Button3,        spawn,          {.v = now } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },

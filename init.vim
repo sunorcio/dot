@@ -1,5 +1,6 @@
 :colorscheme habamax
 :highlight Normal ctermfg=121 ctermbg=16
+:highlight Special ctermfg=121 ctermbg=16
 :highlight StatusLine ctermfg=68 ctermbg=232
 :highlight MsgArea ctermfg=255 ctermbg=233
 :highlight Identifier ctermfg=181
@@ -7,6 +8,7 @@
 :highlight Type ctermfg=65
 :highlight String ctermfg=106
 :highlight MatchParen cterm=NONE
+:highlight WinSeparator ctermbg=0
 
 :set nowrap
 :set number
@@ -37,36 +39,20 @@
 :nnoremap <Left>		zh
 :nnoremap <Up>			<C-y>
 
-:noremap <A-Right>		<C-w><Right>
-:noremap <A-Down>		<C-w><Down>
-:noremap <A-Left>		<C-w><Left>
-:noremap <A-Up>			<C-w><Up>
-
-:noremap <C-A-Right>	<C-w><C-v>
-:noremap <C-A-Down>		<C-w><C-s>
-:noremap <C-A-Left>		<C-w><C-v><C-w><Right>
-:noremap <C-A-Up>		<C-w><C-s><C-w><Down>
-
-:noremap <S-A-Right>	<C-w>2<C->>
-:noremap <S-A-Down>		<C-w><C-+>
-:noremap <S-A-Left>		<C-w>2<C-<>
-:noremap <S-A-Up>		<C-w><C-->
-
-:noremap <C-S-Right>	<C-w><S-l>
-:noremap <C-S-Down> 	<C-w><S-j>
-:noremap <C-S-Left>		<C-w><S-h>
-:noremap <C-S-Up>		<C-w><S-k>
-
+:noremap <S-A-l> :vsplit<CR><C-w>w
+:noremap <S-A-j> :tabnew<CR>
+:noremap <S-l>	<C-w>w
+:noremap <S-h>	<C-w>p
+:noremap <S-j>  :tabnext<CR>
+:noremap <S-k>	:tabprevious<CR>
 :noremap =		<S-j>
 :noremap _		-
 :noremap -		<S-k>
-:noremap <S-j>	20jzz
-:noremap <S-k>	20kzz
-:noremap <S-l>	e
-:noremap <S-h>	b
 
 :noremap <C-j>	2jzz
 :noremap <C-k>	2kzz
+:noremap <S-C-j> 20jzz
+:noremap <S-C-k> 20kzz
 :noremap <C-l>	$
 :noremap <C-h>	0
 :vnoremap <C-l>	$h
@@ -78,7 +64,7 @@
 :noremap w b
 :noremap W B
 
-:vnoremap / "ay/<C-R>a<CR>N
+:vnoremap / "qy/<C-R>q<CR>N
 :noremap ? f
 :noremap , ;
 :noremap > ;
@@ -98,7 +84,9 @@
 
 :noremap s "_s
 :vnoremap S :s/
+:vnoremap <c-s> :s/<c-r>+/
 :nnoremap S :%s/
+:nnoremap <c-s> :%s/<c-r>+/
 :nnoremap x c<right>
 :nnoremap X c
 :vnoremap x c
@@ -109,16 +97,16 @@
 :nnoremap D "_d
 :vnoremap d "_d
 :vnoremap D <Nop>
-:vnoremap D" "bs""<esc>"bP
-:vnoremap D' "bs''<esc>"bP
-:vnoremap D( "bs()<esc>"bP
-:vnoremap D) "bs()<esc>"bP
-:vnoremap D[ "bs[]<esc>"bP
-:vnoremap D] "bs[]<esc>"bP
-:vnoremap D{ "bs{}<esc>"bP
-:vnoremap D} "bs{}<esc>"bP
-:vnoremap D< "bs<><esc>"bP
-:vnoremap D> "bs<><esc>"bP
+:vnoremap D" "ws""<esc>"wP
+:vnoremap D' "ws''<esc>"wP
+:vnoremap D( "ws()<esc>"wP
+:vnoremap D) "ws()<esc>"wP
+:vnoremap D[ "ws[]<esc>"wP
+:vnoremap D] "ws[]<esc>"wP
+:vnoremap D{ "ws{}<esc>"wP
+:vnoremap D} "ws{}<esc>"wP
+:vnoremap D< "ws<><esc>"wP
+:vnoremap D> "ws<><esc>"wP
 
 :noremap <A-v> gv
 
@@ -128,6 +116,7 @@
 :noremap <C-F> <right>
 
 :vnoremap p P
+:vnoremap P p
 :vnoremap <C-p> c*/<esc>Pi<CR><up>/*<esc>
 :vnoremap <A-p> c/**/<esc><left><left>p
 :vnoremap <C-A-p> >gvc<space><BS>}<esc>POint i;<CR>for(i = 0;i<0;i++){<esc>
@@ -140,7 +129,11 @@
 :noremap <silent> <A-?> :Inspect<CR>
 
 
+"pluginstall:
+"sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+"   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 call plug#begin()
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'hrsh7th/cmp-nvim-lsp'
@@ -148,12 +141,10 @@ call plug#begin()
 	Plug 'hrsh7th/cmp-path'
 	Plug 'hrsh7th/cmp-cmdline'
 	Plug 'hrsh7th/nvim-cmp'
-
 	Plug 'hrsh7th/cmp-vsnip'
 	Plug 'hrsh7th/vim-vsnip'
 
 	Plug 'tikhomirov/vim-glsl'
-	Plug 'timtro/glslView-nvim'
 	set encoding=UTF-8
 
 call plug#end()
@@ -162,7 +153,33 @@ call plug#end()
 set completeopt=menu,menuone,noselect
 
 lua <<EOF
-  -- Set up nvim-cmp.
+
+-- Set up nvim-treesitter.
+	require'nvim-treesitter.configs'.setup {
+	  -- A list of parser names, or "all" (the five listed parsers should always be installed)
+	  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "make", "glsl", "bash" },
+
+	  -- Install parsers synchronously (only applied to `ensure_installed`)
+	  sync_install = false,
+
+	  -- Automatically install missing parsers when entering buffer
+	  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+	  auto_install = true,
+
+	  highlight = {
+		enable = true,
+
+		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+		-- Using this option may slow down your editor, and you may see some duplicate highlights.
+		-- Instead of true it can also be a list of languages
+		additional_vim_regex_highlighting = false,
+	  },
+	}
+
+
+
+-- Set up nvim-cmp.
   local cmp = require'cmp'
 
   cmp.setup({
@@ -280,6 +297,5 @@ lua <<EOF
 
 EOF
 
-"pluginstall:
-"sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-"   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+
