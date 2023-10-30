@@ -1,16 +1,23 @@
 :colorscheme habamax
-:highlight Normal ctermfg=121 ctermbg=16
+:highlight Normal ctermfg=151 ctermbg=16
 :highlight Special ctermfg=121 ctermbg=16
+:highlight Type ctermfg=65
+:highlight Identifier ctermfg=181
+:highlight Constant ctermfg=173
+:highlight String ctermfg=107
+:highlight MatchParen cterm=NONE
 :highlight StatusLine ctermfg=68 ctermbg=232
 :highlight MsgArea ctermfg=255 ctermbg=233
-:highlight Identifier ctermfg=181
-:highlight Constant ctermfg=178
-:highlight Type ctermfg=65
-:highlight String ctermfg=106
-:highlight MatchParen cterm=NONE
-:highlight WinSeparator ctermbg=0
+:highlight WinSeparator ctermbg=0 ctermfg=68
+:highlight StatusLineNC ctermbg=232 ctermfg=238
+:highlight TabLineFill ctermbg=232
+:highlight TabLineSel ctermbg=0 ctermfg=68 cterm=NONE
+:highlight TabLine ctermbg=232 ctermfg=238
+:autocmd VimEnter * syntax off
 
-:set nowrap
+:set wrap
+:set sel=old
+:set virtualedit=block
 :set number
 :set tabstop=4
 :set shiftwidth=4
@@ -31,31 +38,35 @@
 :autocmd InsertEnter * set culopt=line
 :autocmd InsertLeave * set culopt=number
 
-:cnoremap <C-F> <Right>
-:cnoremap <C-B> <Left>
-
 :nnoremap <Right>		zl
 :nnoremap <Down>		<C-e>
 :nnoremap <Left>		zh
 :nnoremap <Up>			<C-y>
+:nnoremap <C-Right>		2zl
+:nnoremap <C-Down>		2<C-e>
+:nnoremap <C-Left>		2zh
+:nnoremap <C-Up>		2<C-y>
 
-:noremap <S-A-l> :vsplit<CR><C-w>w
-:noremap <S-A-j> :tabnew<CR>
-:noremap <S-l>	<C-w>w
-:noremap <S-h>	<C-w>p
-:noremap <S-j>  :tabnext<CR>
-:noremap <S-k>	:tabprevious<CR>
+:cnoremap <C-f> <Right>
+:cnoremap <C-b> <Left>
+:inoremap <C-b> <left>
+:inoremap <C-f> <right>
+:noremap  <C-b> 20<C-e>
+:noremap  <C-f> 20<C-y>
+
+:noremap <S-A-j> :vsplit<CR><C-w>w
+:noremap <S-A-l> :tabnew<CR>
+:noremap <S-j>	<C-w>w
+:noremap <S-k>	<C-w>p
+:noremap <S-l>  :tabnext<CR>
+:noremap <S-h>	:tabprevious<CR>
 :noremap =		<S-j>
-:noremap _		-
-:noremap -		<S-k>
+:noremap ?		<S-k>
 
-:noremap <C-j>	2jzz
-:noremap <C-k>	2kzz
-:noremap <S-C-j> 20jzz
-:noremap <S-C-k> 20kzz
-:noremap <C-l>	$
-:noremap <C-h>	0
-:vnoremap <C-l>	$h
+:noremap  <C-j>	2jzz
+:noremap  <C-k>	2kzz
+:noremap  <C-l>	$
+:noremap  <C-h>	0
 
 :noremap b ge
 :noremap B gE
@@ -65,7 +76,8 @@
 :noremap W B
 
 :vnoremap / "qy/<C-R>q<CR>N
-:noremap ? f
+:noremap t f
+:noremap T t
 :noremap , ;
 :noremap > ;
 :noremap < ,
@@ -107,20 +119,14 @@
 :vnoremap D} "ws{}<esc>"wP
 :vnoremap D< "ws<><esc>"wP
 :vnoremap D> "ws<><esc>"wP
-
 :noremap <A-v> gv
 
-:inoremap <C-B> <left>
-:inoremap <C-F> <right>
-:noremap <C-B> <left>
-:noremap <C-F> <right>
-
+:vnoremap \ <C-v>079lA\<esc>
 :vnoremap p P
 :vnoremap P p
-:vnoremap <C-p> c*/<esc>Pi<CR><up>/*<esc>
-:vnoremap <A-p> c/**/<esc><left><left>p
-:vnoremap <C-A-p> >gvc<space><BS>}<esc>POint i;<CR>for(i = 0;i<0;i++){<esc>
-:vnoremap <S-A-p> >gvc<space><BS>}<esc>POif(){<left><left>
+:vnoremap <C-p>   "cs/*  */<left><left><left><c-r>c<esc>
+:vnoremap <C-A-p> V>gvc<space><BS>}<esc>POint i;<CR>for(i = 0;i<0;i++){<esc>
+:vnoremap <S-A-p> V>gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
 :nnoremap <S-A-p> A<CR>if(<esc>pa){<CR>}<up><end><CR>
 
@@ -254,6 +260,7 @@ lua <<EOF
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
   local on_attach = function(client, bufnr)
+  client.server_capabilities.semanticTokensProvider = nil
   -- Enable completion triggered by <c-x><c-o>
 
   -- Mappings.
@@ -286,7 +293,6 @@ lua <<EOF
     flags = lsp_flags,
 	cmd = {
 		"clangd",
-        "--cross-file-rename",
 		"--completion-style=detailed",
 		"--clang-tidy",
 		"--header-insertion=never",
