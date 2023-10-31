@@ -1,3 +1,4 @@
 #!/bin/sh
+#TODO rewrite to automatically perform localmodconfig and move diff file to gentoos dist config folder
 cd /usr/src/linux
 diff --changed-group-format="%>" --unchanged-group-format="" .config-old .config | tee -a /etc/kernel/config.d/x240-kernel.config
