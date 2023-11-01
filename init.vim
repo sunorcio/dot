@@ -1,11 +1,11 @@
-":autocmd! BufNewFile,BufRead *.h,*.c set filetype=c
+:autocmd! BufNewFile,BufRead *.h,*.c set filetype=c
 
 ":set background=dark
 :colorscheme habamax
 :highlight Normal		ctermfg=195	ctermbg=16
 :highlight Type			ctermfg=65
 :highlight Identifier	ctermfg=181
-:highlight PreProc		ctermfg=101
+:highlight PreProc		ctermfg=94
 :highlight Constant		ctermfg=172
 :highlight String		ctermfg=36
 :highlight Statement	ctermfg=139
@@ -237,8 +237,8 @@ lua <<EOF
   local opts = { noremap=true, silent=true }
   vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
   vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-  vim.keymap.set('n', '<space>b', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', '<space>f', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', '<space>p', vim.diagnostic.goto_prev, opts)
+  vim.keymap.set('n', '<space>n', vim.diagnostic.goto_next, opts)
 
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
