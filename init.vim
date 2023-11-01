@@ -1,4 +1,4 @@
-:autocmd! BufNewFile,BufRead *.h,*.c set filetype=c
+:autocmd! BufNewFile,BufRead *.h set filetype=c
 
 ":set background=dark
 :colorscheme habamax
@@ -256,7 +256,7 @@ lua <<EOF
   vim.keymap.set("n", "gi", "<cmd>tab split | lua vim.lsp.buf.implementation()<CR>", bufopts)
   vim.keymap.set("n", "gr", "<cmd>tab split | lua vim.lsp.buf.references()<CR>", bufopts)
   vim.keymap.set("n", "gt", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>", bufopts)
-  vim.keymap.set("n", "gr", "<cmd>tab split | lua vim.lsp.buf.references()<CR>", bufopts)
+  vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', '<space>j', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<space>k', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>w', vim.lsp.buf.rename, bufopts)
