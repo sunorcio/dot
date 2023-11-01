@@ -1,19 +1,24 @@
+":autocmd! BufNewFile,BufRead *.h,*.c set filetype=c
+
+":set background=dark
 :colorscheme habamax
-:highlight Normal ctermfg=151 ctermbg=16
-:highlight Special ctermfg=121 ctermbg=16
-:highlight Type ctermfg=65
-:highlight Identifier ctermfg=181
-:highlight Constant ctermfg=173
-:highlight String ctermfg=107
-:highlight MatchParen cterm=NONE
-:highlight StatusLine ctermfg=68 ctermbg=232
-:highlight MsgArea ctermfg=255 ctermbg=233
-:highlight WinSeparator ctermbg=0 ctermfg=68
-:highlight StatusLineNC ctermbg=232 ctermfg=238
-:highlight TabLineFill ctermbg=232
-:highlight TabLineSel ctermbg=0 ctermfg=68 cterm=NONE
-:highlight TabLine ctermbg=232 ctermfg=238
-:autocmd VimEnter * syntax off
+:highlight Normal		ctermfg=195	ctermbg=16
+:highlight Type			ctermfg=65
+:highlight Identifier	ctermfg=181
+:highlight PreProc		ctermfg=101
+:highlight Constant		ctermfg=172
+:highlight String		ctermfg=36
+:highlight Statement	ctermfg=139
+:highlight Special		ctermfg=153
+:highlight MatchParen	ctermfg=195	ctermbg=236	cterm=NONE
+:highlight MsgArea		ctermfg=255	ctermbg=233
+:highlight WinSeparator	ctermfg=68	ctermbg=0
+:highlight StatusLine	ctermfg=68	ctermbg=232
+:highlight StatusLineNC	ctermfg=238	ctermbg=232
+:highlight TabLineSel	ctermfg=68	ctermbg=0	cterm=NONE
+:highlight TabLine		ctermfg=238	ctermbg=232
+:highlight TabLineFill				ctermbg=232
+":autocmd VimEnter * syntax off
 
 :set wrap
 :set sel=old
@@ -38,26 +43,30 @@
 :autocmd InsertEnter * set culopt=line
 :autocmd InsertLeave * set culopt=number
 
-:nnoremap <Right>		zl
-:nnoremap <Down>		<C-e>
-:nnoremap <Left>		zh
-:nnoremap <Up>			<C-y>
-:nnoremap <C-Right>		2zl
-:nnoremap <C-Down>		2<C-e>
-:nnoremap <C-Left>		2zh
-:nnoremap <C-Up>		2<C-y>
+:autocmd VimEnter * noremap <c-right> 2zl
+:autocmd VimEnter * noremap <c-left> 2zh
+":noremap <c-right>	2zl
+":noremap <c-left>	2zh
+:noremap <s-right>	:set nowrap<CR>:set virtualedit=all<CR>
+:noremap <s-left>	:set wrap<CR>:set virtualedit=block<CR>
+:noremap <right>	zl
+:noremap <down>		<c-e>
+:noremap <left>		zh
+:noremap <up>		<c-y>
+:noremap <c-down>	2<c-e>
+:noremap <c-up>		2<c-y>
 
-:cnoremap <C-f> <Right>
-:cnoremap <C-b> <Left>
+:cnoremap <C-b> <left>
+:cnoremap <C-f> <right>
 :inoremap <C-b> <left>
 :inoremap <C-f> <right>
-:noremap  <C-b> 20<C-e>
-:noremap  <C-f> 20<C-y>
+:noremap  <C-b> 20<c-y>
+:noremap  <C-f> 20<c-e>
 
-:noremap <S-A-j> :vsplit<CR><C-w>w
-:noremap <S-A-l> :tabnew<CR>
-:noremap <S-j>	<C-w>w
-:noremap <S-k>	<C-w>p
+:noremap <S-A-j> <c-w>v<c-w>w:e .<CR>
+:noremap <S-A-l> :tabnew<CR>:e .<CR>
+:noremap <S-j>	<c-w>w
+:noremap <S-k>	<c-w>p
 :noremap <S-l>  :tabnext<CR>
 :noremap <S-h>	:tabprevious<CR>
 :noremap =		<S-j>
@@ -75,7 +84,6 @@
 :noremap w b
 :noremap W B
 
-:vnoremap / "qy/<C-R>q<CR>N
 :noremap t f
 :noremap T t
 :noremap , ;
@@ -94,11 +102,12 @@
 :nnoremap <TAB> >>
 :nnoremap <S-TAB> <<
 
+:vnoremap / "qy/\V<C-R>q<CR>N
 :noremap s "_s
 :vnoremap S :s/
-:vnoremap <c-s> :s/<c-r>+/
+:vnoremap <c-s> :s/\V<c-r>+/
 :nnoremap S :%s/
-:nnoremap <c-s> :%s/<c-r>+/
+:nnoremap <c-s> :%s/\V<c-r>+/
 :nnoremap x c<right>
 :nnoremap X c
 :vnoremap x c
@@ -121,10 +130,11 @@
 :vnoremap D> "ws<><esc>"wP
 :noremap <A-v> gv
 
-:vnoremap \ <C-v>077lA\<esc>
 :vnoremap p P
 :vnoremap P p
-:vnoremap <C-p>   "cs/*  */<left><left><left><c-r>c<esc>
+:inoremap <c-r>p <c-r>+
+:vnoremap \ <C-v>077lA\<esc>
+:vnoremap <C-p> "cs/*  */<left><left><left><c-r>c<esc>
 :vnoremap <C-A-p> V>gvc<space><BS>}<esc>POint i;<CR>for(i = 0;i<0;i++){<esc>
 :vnoremap <S-A-p> V>gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
@@ -136,11 +146,8 @@
 
 
 "pluginstall:
-"sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-"   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+"sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 call plug#begin()
-	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'hrsh7th/cmp-nvim-lsp'
 	Plug 'hrsh7th/cmp-buffer'
@@ -159,30 +166,6 @@ call plug#end()
 set completeopt=menu,menuone,noselect
 
 lua <<EOF
-
--- Set up nvim-treesitter.
-	require'nvim-treesitter.configs'.setup {
-	  -- A list of parser names, or "all" (the five listed parsers should always be installed)
-	  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "make", "glsl", "bash" },
-
-	  -- Install parsers synchronously (only applied to `ensure_installed`)
-	  sync_install = false,
-
-	  -- Automatically install missing parsers when entering buffer
-	  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-	  auto_install = true,
-
-	  highlight = {
-		enable = true,
-
-		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-		-- Using this option may slow down your editor, and you may see some duplicate highlights.
-		-- Instead of true it can also be a list of languages
-		additional_vim_regex_highlighting = false,
-	  },
-	}
-
 
 
 -- Set up nvim-cmp.
@@ -206,8 +189,8 @@ lua <<EOF
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
-      ['<CR>'] = cmp.mapping.abort(),
-      ['<TAB>'] = cmp.mapping.confirm({ select = true }),
+      ['<C-j>'] = cmp.mapping.abort(),
+      ['<C-i>'] = cmp.mapping.confirm({ select = true }),
 	  }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
@@ -260,21 +243,23 @@ lua <<EOF
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
   local on_attach = function(client, bufnr)
-  client.server_capabilities.semanticTokensProvider = nil
+  --Disable semantic tokens for highlights
+  --client.server_capabilities.semanticTokensProvider = nil
+
   -- Enable completion triggered by <c-x><c-o>
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.declaration()<CR>", bufopts)
+  vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", bufopts)
+  vim.keymap.set("n", "gi", "<cmd>tab split | lua vim.lsp.buf.implementation()<CR>", bufopts)
+  vim.keymap.set("n", "gr", "<cmd>tab split | lua vim.lsp.buf.references()<CR>", bufopts)
+  vim.keymap.set("n", "gt", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>", bufopts)
+  vim.keymap.set("n", "gr", "<cmd>tab split | lua vim.lsp.buf.references()<CR>", bufopts)
   vim.keymap.set('n', '<space>j', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<space>k', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>w', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, bufopts)
   end
 
   vim.diagnostic.config {
