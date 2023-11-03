@@ -11,13 +11,15 @@
 :highlight Statement	ctermfg=139
 :highlight Special		ctermfg=153
 :highlight MatchParen	ctermfg=195	ctermbg=236	cterm=NONE
-:highlight MsgArea		ctermfg=255	ctermbg=233
-:highlight WinSeparator	ctermfg=68	ctermbg=0
-:highlight StatusLine	ctermfg=68	ctermbg=232
-:highlight StatusLineNC	ctermfg=238	ctermbg=232
+:highlight MsgArea		ctermfg=255	ctermbg=234
+:highlight WinSeparator	ctermfg=233	ctermbg=0
+:highlight StatusLine	ctermfg=68	ctermbg=233
+:highlight StatusLineNC	ctermfg=238	ctermbg=233
 :highlight TabLineSel	ctermfg=68	ctermbg=0	cterm=NONE
-:highlight TabLine		ctermfg=238	ctermbg=232
-:highlight TabLineFill				ctermbg=232
+:highlight TabLine		ctermfg=238	ctermbg=233
+:highlight TabLineFill				ctermbg=233
+:highlight CursorLine	ctermbg=235
+:highlight CursorColumn	ctermbg=232
 ":autocmd VimEnter * syntax off
 
 :set wrap
@@ -40,8 +42,9 @@
 
 :set cul
 :set culopt=number
-:autocmd InsertEnter * set culopt=line
-:autocmd InsertLeave * set culopt=number
+:autocmd ModeChanged n:* set culopt=line
+:autocmd ModeChanged *:[v] set cuc
+:autocmd ModeChanged *:n set nocuc | set culopt=number
 
 :autocmd VimEnter * noremap <c-right> 2zl
 :autocmd VimEnter * noremap <c-left> 2zh
@@ -55,6 +58,7 @@
 :noremap <up>		<c-y>
 :noremap <c-down>	2<c-e>
 :noremap <c-up>		2<c-y>
+:noremap <c-end>	<>
 
 :cnoremap <C-b> <left>
 :cnoremap <C-f> <right>
@@ -63,10 +67,10 @@
 :noremap  <C-b> 20<c-y>
 :noremap  <C-f> 20<c-e>
 
-:noremap <S-A-j> <c-w>v<c-w>w:e .<CR>
+:noremap <S-A-j> <c-w>v<c-w>w<c-w>=:e .<CR>
 :noremap <S-A-l> :tabnew<CR>:e .<CR>
-:noremap <S-j>	<c-w>w
-:noremap <S-k>	<c-w>p
+:noremap <S-j>	<c-w>w<c-w>=
+:noremap <S-k>	<c-w>R<c-w>w<c-w>=
 :noremap <S-l>  :tabnext<CR>
 :noremap <S-h>	:tabprevious<CR>
 :noremap =		<S-j>
@@ -129,13 +133,15 @@
 :vnoremap D< "ws<><esc>"wP
 :vnoremap D> "ws<><esc>"wP
 :noremap <A-v> gv
+:noremap <c-a> za
+:noremap <c-A> za
 
 :vnoremap p P
 :vnoremap P p
 :inoremap <c-r>p <c-r>+
 :vnoremap \ <C-v>077lA\<esc>
-:vnoremap <C-p> "cs/*  */<left><left><left><c-r>c<esc>
-:vnoremap <C-A-p> V>gvc<space><BS>}<esc>POint i;<CR>for(i = 0;i<0;i++){<esc>
+:vnoremap <C-p> "cs */<left><left><left><c-r>c<esc>gv"cs/* <esc>"cp
+:vnoremap <C-A-p> V>gvc<space><BS>}<esc>POfor(i = 0;i<0;i++){<esc>
 :vnoremap <S-A-p> V>gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
 :nnoremap <S-A-p> A<CR>if(<esc>pa){<CR>}<up><end><CR>
