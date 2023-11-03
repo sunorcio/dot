@@ -4,7 +4,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int snap      = 64;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 
@@ -79,57 +79,58 @@ static const char *now[]  = { "/home/santi/dot/dwm/now", NULL };
 static const char *lsh[]  = { "/home/santi/dot/dwm/lsh", NULL };
 
 static const Key keys[] = {
-	/* modifier                     key        function        argument */
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_q,	   spawn,          {.v = lsh } },
-	{ MODKEY,                       XK_r,      togglebar,      {0} },
-	{ MODKEY,                       XK_f,      setlayout,	   {.v = &layouts[0] } },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,			            XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,						XK_n,      incnmaster,     {.i = 0 } },//reset to 1
-	{ MODKEY,                       XK_h,	   viewreldn,	   {0} },
-	{ MODKEY,                       XK_l,	   viewrelup,	   {0} },
-	{ MODKEY,                       XK_Left,   viewreldn,	   {0} },
-	{ MODKEY,                       XK_Right,  viewrelup,	   {0} },
-	{ MODKEY,                       XK_Down,   focusstack,     {.i = +1 } },
-	{ MODKEY,						XK_o,      setmfact,       {.f = -0.01 } },
-	{ MODKEY,						XK_m,      setmfact,       {.f = +0.01 } },
-	{ MODKEY,				        XK_u,	  togglefullscreen,{0} },
-	{ MODKEY,			            XK_space,  zoom,	       {0} },
-	{ MODKEY|ShiftMask,	            XK_space,  setlayout,      {.v = &layouts[1] } },
-	{ MODKEY,                       XK_t,	   setlayout,	   {.v = &layouts[1] } },
-	{ MODKEY|ShiftMask,             XK_f,	   setlayout,	   {.v = &layouts[2] } },
-	{ MODKEY,			            XK_b,	   setlayout,	   {.v = &layouts[2] } },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ 0,							XF86XK_AudioMute,			spawn,	{.v = vmt } },
-	{ 0,							XF86XK_AudioLowerVolume,	spawn,	{.v = vdn } },
-	{ 0,							XF86XK_AudioRaiseVolume,	spawn,	{.v = vup } },
-	{ 0,							XF86XK_AudioMicMute,		spawn,	{.v = mmt } },
-	{ 0,							XF86XK_MonBrightnessDown,	spawn,	{.v = bdn } },
-	{ 0,							XF86XK_MonBrightnessUp,		spawn,	{.v = bup } },
-	{ 0,							XF86XK_Tools,				spawn,	{.v = opt } },
-	{ 0,							XF86XK_Search,				spawn,	{.v = loc } },
-	{ 0,							XF86XK_LaunchA,				spawn,	{.v = dmenucmd } },
-	{ 0,							XF86XK_Display,				spawn,	{.v = scr } },
-	TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_w,      killclient,     {0} },
-	{ MODKEY|ShiftMask|Mod1Mask,	XK_q,      quit,           {0} },
+	/* modifier                     key                         function        argument */
+	{ MODKEY|ShiftMask,             XK_Return,                  spawn,           {.v = dmenucmd } },
+	{ MODKEY,                       XK_Return,                  spawn,           {.v = termcmd } },
+	{ MODKEY,                       XK_q,	                    spawn,           {.v = lsh } },
+	{ MODKEY,                       XK_r,                       togglebar,       {0} },
+	{ MODKEY,                       XK_f,                       setlayout,	     {.v = &layouts[0] } },
+	{ MODKEY,                       XK_j,                       focusstack,      {.i = +1 } },
+	{ MODKEY,                       XK_k,                       focusstack,      {.i = -1 } },
+	{ MODKEY,			            XK_i,                       incnmaster,      {.i = +1 } },
+	{ MODKEY,						XK_n,                       incnmaster,      {.i = 0 } },//reset to 1
+	{ MODKEY,                       XK_h,	                    viewreldn,	     {0} },
+	{ MODKEY,                       XK_l,	                    viewrelup,	     {0} },
+	{ MODKEY,                       XK_Left,                    viewreldn,	     {0} },
+	{ MODKEY,                       XK_Right,                   viewrelup,	     {0} },
+	{ MODKEY,                       XK_Down,                    focusstack,      {.i = +1 } },
+	{ MODKEY,						XK_o,                       setmfact,        {.f = -0.01 } },
+	{ MODKEY,						XK_m,                       setmfact,        {.f = +0.01 } },
+	{ MODKEY,				        XK_u,						togglefullscreen,{0} },
+	{ MODKEY,			            XK_space,                   zoom,	         {0} },
+	{ MODKEY|ShiftMask,	            XK_space,                   setlayout,       {.v = &layouts[1] } },
+	{ MODKEY,                       XK_t,	                    setlayout,	     {.v = &layouts[1] } },
+	{ MODKEY|ShiftMask,             XK_f,	                    setlayout,	     {.v = &layouts[2] } },
+	{ MODKEY,			            XK_b,	                    setlayout,	     {.v = &layouts[2] } },
+	{ MODKEY,                       XK_Tab,                     view,            {0} },
+	{ MODKEY,                       XK_0,                       view,            {.ui = ~0 } },
+	{ MODKEY|ShiftMask,             XK_0,                       tag,             {.ui = ~0 } },
+	{ MODKEY,                       XK_comma,                   focusmon,        {.i = -1 } },
+	{ MODKEY,                       XK_period,                  focusmon,        {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_comma,                   tagmon,          {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_period,                  tagmon,          {.i = +1 } },
+	{ 0,							XF86XK_AudioMute,			spawn,           {.v = vmt } },
+	{ 0,							XF86XK_AudioLowerVolume,	spawn,           {.v = vdn } },
+	{ 0,							XF86XK_AudioRaiseVolume,	spawn,           {.v = vup } },
+	{ 0,							XF86XK_AudioMicMute,		spawn,           {.v = mmt } },
+	{ 0,							XF86XK_MonBrightnessDown,	spawn,           {.v = bdn } },
+	{ 0,							XF86XK_MonBrightnessUp,		spawn,           {.v = bup } },
+	{ 0,							XF86XK_Tools,				spawn,           {.v = opt } },
+	{ 0,							XF86XK_Search,				spawn,           {.v = loc } },
+	{ 0,							XF86XK_LaunchA,				spawn,           {.v = dmenucmd } },
+	{ 0,							XF86XK_Display,				spawn,           {.v = scr } },
+	{ 0,							XF86XK_Explorer,			spawn,           {.v = lsh } },
+	TAGKEYS(                        XK_1,                       0)
+	TAGKEYS(                        XK_2,                       1)
+	TAGKEYS(                        XK_3,                       2)
+	TAGKEYS(                        XK_4,                       3)
+	TAGKEYS(                        XK_5,                       4)
+	TAGKEYS(                        XK_6,                       5)
+	TAGKEYS(                        XK_7,                       6)
+	TAGKEYS(                        XK_8,                       7)
+	TAGKEYS(                        XK_9,                       8)
+	{ MODKEY|ShiftMask,             XK_w,                       killclient,       {0} },
+	{ MODKEY|ShiftMask|Mod1Mask,	XK_q,                       quit,             {0} },
 };
 
 /* button definitions */

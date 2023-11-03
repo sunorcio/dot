@@ -140,7 +140,7 @@
 :vnoremap P p
 :inoremap <c-r>p <c-r>+
 :vnoremap \ <C-v>077lA\<esc>
-:vnoremap <C-p> "cs */<left><left><left><c-r>c<esc>gv"cs/* <esc>"cp
+:vnoremap <C-p> <esc>`>a */<esc>`<i/* <esc>
 :vnoremap <C-A-p> V>gvc<space><BS>}<esc>POfor(i = 0;i<0;i++){<esc>
 :vnoremap <S-A-p> V>gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
