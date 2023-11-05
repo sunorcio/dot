@@ -38,6 +38,7 @@
 :set foldnestmax=1
 :set nofoldenable
 :set noignorecase
+:set gdefault
 :set guicursor=i-ci-ve:ver25
 
 :set cul
@@ -66,6 +67,7 @@
 :inoremap <C-f> <right>
 :noremap  <C-b> 20<c-y>
 :noremap  <C-f> 20<c-e>
+:noremap  <C-a> za
 
 :noremap <S-A-j> <c-w>v<c-w>w<c-w>=:e .<CR>
 :noremap <S-A-l> :tabnew<CR>:e .<CR>
@@ -132,13 +134,11 @@
 :vnoremap D} "ws{}<esc>"wP
 :vnoremap D< "ws<><esc>"wP
 :vnoremap D> "ws<><esc>"wP
-:noremap <A-v> gv
-:noremap <c-a> za
-:noremap <c-A> za
 
 :vnoremap p P
 :vnoremap P p
 :inoremap <c-r>p <c-r>+
+:cnoremap <c-r>p <c-r>+
 :vnoremap \ <C-v>077lA\<esc>
 :vnoremap <C-p> <esc>`>a */<esc>`<i/* <esc>
 :vnoremap <C-A-p> V>gvc<space><BS>}<esc>POfor(i = 0;i<0;i++){<esc>
@@ -149,6 +149,7 @@
 :nnoremap <silent> <esc> <esc>:noh<CR>
 
 :noremap <silent> <A-?> :Inspect<CR>
+:noremap <A-v> gv
 
 
 "pluginstall:

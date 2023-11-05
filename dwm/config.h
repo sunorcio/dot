@@ -34,8 +34,8 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Example",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class		instance    title       tags mask		isfloating		monitor */
+	{ "Name",		NULL,       NULL,       1 << 0,			0,				-1 },
 };
 
 /* layout(s) */
@@ -102,7 +102,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_t,	                    setlayout,	     {.v = &layouts[1] } },
 	{ MODKEY|ShiftMask,             XK_f,	                    setlayout,	     {.v = &layouts[2] } },
 	{ MODKEY,			            XK_b,	                    setlayout,	     {.v = &layouts[2] } },
-	{ MODKEY,                       XK_Tab,                     view,            {0} },
+	{ MODKEY,                       XK_Tab,                     focusstack,      {.i = +1 } },
 	{ MODKEY,                       XK_0,                       view,            {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,                       tag,             {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,                   focusmon,        {.i = -1 } },
