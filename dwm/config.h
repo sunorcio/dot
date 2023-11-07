@@ -77,6 +77,7 @@ static const char *scr[]  = { "scrot","-s","-F","/home/santi/scrot/scrot", NULL 
 static const char *clk[]  = { "/home/santi/dot/dwm/date", NULL };
 static const char *now[]  = { "/home/santi/dot/dwm/now", NULL };
 static const char *lsh[]  = { "/home/santi/dot/dwm/lsh", NULL };
+static const char *jrnl[]  = { "/home/santi/dot/dwm/jrnl", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key                         function        argument */
@@ -143,7 +144,7 @@ static const Button buttons[] = {
  	{ ClkWinTitle,          0,              Button1,        focusstack,     {.i = +1 } },
 /* 	{ ClkWinTitle,          0,              Button2,        spawn,			{.v = dmenucmd } }, */
 	{ ClkStatusText,        0,              Button1,        spawn,          {.v = clk } },
-/* 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = opt } }, */
+ 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = jrnl } },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = now } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        resizemouse,    {0} },

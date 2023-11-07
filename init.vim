@@ -150,11 +150,13 @@
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
 :nnoremap <S-A-p> A<CR>if(<esc>pa){<CR>}<up><end><CR>
 
+:tnoremap ; <c-\><c-n>:
+:tnoremap <esc> <c-\><c-n>
 :nnoremap <silent> <esc> <esc>:noh<CR>
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
 :noremap <A-CR> :make<CR>
-:noremap <A-m> :tabnew<CR>:ter<CR>ibc -l<CR>
+:noremap <A-m> :tabnew<CR>:ter<CR>iclear && bc -l<CR>
 ":noremap <A-M> :mk<CR>
 ":noremap <S-A-M> :!rm .exrc<CR>
 
