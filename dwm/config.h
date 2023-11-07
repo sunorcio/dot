@@ -56,8 +56,8 @@ static const Layout layouts[] = {
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ Mod1Mask|ControlMask,			KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ Mod1Mask|ShiftMask,			KEY,      toggletag,      {.ui = 1 << TAG} },
+/* 	{ Mod1Mask|ControlMask,			KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ Mod1Mask|ShiftMask,			KEY,      toggletag,      {.ui = 1 << TAG} }, */
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -140,16 +140,17 @@ static const Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {.v = &layouts[0]} },
 	{ ClkLtSymbol,          0,              Button2,        setlayout,      {.v = &layouts[1]} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        spawn,			{.v = dmenucmd } },
+ 	{ ClkWinTitle,          0,              Button1,        focusstack,     {.i = +1 } },
+/* 	{ ClkWinTitle,          0,              Button2,        spawn,			{.v = dmenucmd } }, */
 	{ ClkStatusText,        0,              Button1,        spawn,          {.v = clk } },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = opt } },
-	{ ClkStatusText,        0,              Button3,        spawn,          {.v = now } },
+/* 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = opt } }, */
+	{ ClkStatusText,        0,              Button2,        spawn,          {.v = now } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+	{ ClkClientWin,         MODKEY,         Button2,        resizemouse,    {0} },
+	{ ClkClientWin,         MODKEY,         Button3,        togglefloating, {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkTagBar,            0,              Button2,        tag,		    {0} },
+	{ ClkTagBar,            MODKEY,         Button1,        toggleview,		{0} },
+	{ ClkTagBar,            MODKEY,         Button2,        toggletag,		{0} },
 };
 
