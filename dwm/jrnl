@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nvim ~/main/journal/journal.c
