@@ -66,8 +66,8 @@
 :cnoremap <C-f> <right>
 :inoremap <C-b> <left>
 :inoremap <C-f> <right>
-:noremap  <C-b> 20<c-y>
-:noremap  <C-f> 20<c-e>
+:noremap  <C-b> 20<c-y>M0
+:noremap  <C-f> 20<c-e>M0
 
 :noremap  <C-a> za
 :noremap  <C-m> zm
@@ -154,6 +154,7 @@
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
 :noremap <A-CR> :make<CR>
+:noremap <A-m> :tabnew<CR>:ter<CR>ibc -l<CR>
 ":noremap <A-M> :mk<CR>
 ":noremap <S-A-M> :!rm .exrc<CR>
 
