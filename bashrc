@@ -41,4 +41,4 @@ fi
 
 alias qlist='qlist --color'
 alias qlist='eix -F'
-alias sudo="/home/$USER/dot/sudo"
+alias emerge="emerge --color y"
