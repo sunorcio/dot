@@ -42,3 +42,7 @@ fi
 alias qlist='qlist --color'
 alias qlist='eix -F'
 alias emerge="emerge --color y"
+
+alias sudo="~/sudo"
+alias gitclone="~/gitclone"
+alias wpa="~/wpa"
