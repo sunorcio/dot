@@ -24,6 +24,7 @@ PS1="\[\e[36m\]\u\[\e[0m\] \[\e[1;34m\]\$PWD \[\e[0m\]$\[\e[0m\] "
 
 
 
+#xprop -root -set WM_NAME  'dwm'
 #xprop -id $(xprop -root _NET_ACTIVE_WINDOW | cut -b 41-) -f _NET_WM_NAME 8s -set _NET_WM_NAME "asdfasdf"
 if [ $(cat /home/santi/dot/initvar) -eq 1 ]
 then
@@ -32,9 +33,8 @@ then
 	xkbcomp /home/santi/.xkb-custom $DISPLAY
 	clear
 	PROMPT_COMMAND="neofetch
-					xprop -root -set WM_NAME  'dwm'
 					PROMPT_COMMAND='' "
-	echo 0 > "/home/$USER/dot/initvar"
+	echo 0 > "/home/santi/dot/initvar"
 fi
 
 

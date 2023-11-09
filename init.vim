@@ -22,6 +22,7 @@
 :highlight CursorColumn	ctermbg=232
 ":autocmd VimEnter * syntax off
 
+":set timeoutlen=100
 :set wrap
 :set sel=old
 :set virtualedit=block
@@ -33,9 +34,10 @@
 :set clipboard^=unnamed,unnamedplus
 :set cmdheight=0
 :set notitle
-:set foldmethod=indent
+:set nofoldenable
+:set foldlevel=0
+:set foldmethod=syntax
 :set foldignore=#\*/
-:set foldlevel=1
 :set foldnestmax=1
 :set nofoldenable
 :set noignorecase
@@ -52,6 +54,7 @@
 ":noremap <c-right>	2zl
 ":noremap <c-left>	2zh
 ":noremap i :noremap <lt>esc> :echo "asdf"<lt>CR><CR>
+:noremap <silent> <MiddleMouse> :set nowrap<CR>:set virtualedit=all<CR>:set nocul<CR>0:set guicursor=a:ver25<CR>:noremap <lt>esc> :set wrap <lt>CR>:set virtualedit=block<lt>CR>:set cul<lt>CR>:set guicursor=n-v-sm-c:block,i-ci-ve:ver25,r-cr-o:hor20<lt>CR>:noremap <lt>lt>silent> <lt>lt>esc> <lt>lt>esc>:noh<lt>lt>CR><lt>CR><CR>M
 :noremap <silent> <s-right> :set nowrap<CR>:set virtualedit=all<CR>:set nocul<CR>0:set guicursor=a:ver25<CR>:noremap <lt>esc> :set wrap <lt>CR>:set virtualedit=block<lt>CR>:set cul<lt>CR>:set guicursor=n-v-sm-c:block,i-ci-ve:ver25,r-cr-o:hor20<lt>CR>:noremap <lt>lt>silent> <lt>lt>esc> <lt>lt>esc>:noh<lt>lt>CR><lt>CR><CR>M
 :noremap <silent> <s-left> :set wrap<CR>:set virtualedit=block<CR>:set cul<CR>:set guicursor=n-v-sm-c:block,i-ci-ve:ver25,r-cr-o:hor20<CR>:noremap <lt>silent> <lt>esc> <lt>esc>:noh<lt>CR><CR>
 :noremap <right>	zlM
@@ -62,16 +65,33 @@
 :noremap <c-up>		2<c-y>M
 :noremap <c-end>	<>
 
-:cnoremap <C-b> <left>
-:cnoremap <C-f> <right>
-:inoremap <C-b> <left>
-:inoremap <C-f> <right>
-:noremap  <C-b> 20<c-y>M0
-:noremap  <C-f> 20<c-e>M0
+:noremap <C-a> za
+":noremap <silent> <C-m> :set foldenable<CR>:%foldc<CR>
+:noremap <S-m> zi
 
-:noremap  <C-a> za
-:noremap  <C-m> zm
-:noremap  <S-m> zr
+:noremap! <C-b> <left>
+:noremap! <C-f> <right>
+:noremap  <C-b> 10<c-y>M0
+:noremap  <C-f> 10<c-e>M0
+:noremap  <C-n> <c-e>
+:noremap  <C-p> <c-y>
+
+:nnoremap <C-e> r<C-e>l
+:nnoremap <C-y> r<C-y>l
+:vnoremap <C-e> <esc>`<v`>
+:vnoremap <C-y> <esc>`>v`<
+
+:noremap! <C-t> ^
+:noremap! <C-y> &
+:noremap! <C-u> *
+:noremap r<C-t> r^
+:noremap r<C-y> r&
+:noremap r<C-u> r*
+
+:noremap  <C-j>	2jzz
+:noremap  <C-k>	2kzz
+:noremap  <C-l>	$
+:noremap  <C-h>	0
 
 :noremap <S-A-j> <c-w>v<c-w>w<c-w>=:e .<CR>
 :noremap <S-A-l> :tabnew<CR>:e .<CR>
@@ -82,10 +102,15 @@
 :noremap =		<S-j>
 :noremap ?		<S-k>
 
-:noremap  <C-j>	2jzz
-:noremap  <C-k>	2kzz
-:noremap  <C-l>	$
-:noremap  <C-h>	0
+:tnoremap ; <c-\><c-n>:
+:tnoremap <esc> <c-\><c-n>
+:nnoremap <silent> <esc> <esc>:noh<CR>
+:noremap <silent> <A-?> :Inspect<CR>
+:noremap <A-v> gv
+:noremap <A-CR> :make<CR>
+:noremap <A-m> :tabnew<CR>:ter<CR>iclear && bc -l<CR>
+":noremap <A-M> :mk<CR>
+":noremap <S-A-M> :!rm .exrc<CR>
 
 :noremap b ge
 :noremap B gE
@@ -99,12 +124,14 @@
 :noremap , ;
 :noremap > ;
 :noremap < ,
-
+:nnoremap , ;
 :noremap ; :
-:nnoremap : A;<esc>
-:noremap q; q:
+:nnoremap : q:
+":noremap q; q:
 
 :vnoremap a A
+:vnoremap a<c-r> <nop>
+:vnoremap a<c-r>p A<c-r>+
 :vnoremap i I
 
 :vnoremap <TAB> >gv
@@ -144,52 +171,13 @@
 :inoremap <c-r>p <c-r>+
 :cnoremap <c-r>p <c-r>+
 :vnoremap \ <C-v>077lA\<esc>
-:vnoremap <C-p> <esc>`>a */<esc>`<i/* <esc>
+:vnoremap <A-p> <esc>`>a */<esc>`<i/* <esc>
 :vnoremap <C-A-p> V>gvc<space><BS>}<esc>POfor(i = 0;i<0;i++){<esc>
 :vnoremap <S-A-p> V>gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
 :nnoremap <S-A-p> A<CR>if(<esc>pa){<CR>}<up><end><CR>
 
-:tnoremap ; <c-\><c-n>:
-:tnoremap <esc> <c-\><c-n>
-:nnoremap <silent> <esc> <esc>:noh<CR>
-:noremap <silent> <A-?> :Inspect<CR>
-:noremap <A-v> gv
-:noremap <A-CR> :make<CR>
-:noremap <A-m> :tabnew<CR>:ter<CR>iclear && bc -l<CR>
-":noremap <A-M> :mk<CR>
-":noremap <S-A-M> :!rm .exrc<CR>
 
-:noremap! <A-q> 1
-:noremap! <A-w> 2
-:noremap! <A-e> 3
-:noremap! <A-r> 4
-:noremap! <A-t> 5
-:noremap! <A-y> 6
-:noremap! <A-u> 7
-:noremap! <A-i> 8
-:noremap! <A-o> 9
-:noremap! <A-p> 0
-:noremap! <S-A-q> !
-:noremap! <S-A-w> @
-:noremap! <S-A-e> #
-:noremap! <S-A-r> $
-:noremap! <S-A-t> %
-:noremap! <S-A-y> ^
-:noremap! <S-A-u> &
-:noremap! <S-A-i> *
-:noremap! <S-A-o> \|
-:noremap! <S-A-p> \
-:nnoremap r<A-q> r! 
-:nnoremap r<A-w> r@ 
-:nnoremap r<A-e> r# 
-:nnoremap r<A-r> r$ 
-:nnoremap r<A-t> r% 
-:nnoremap r<A-y> r^ 
-:nnoremap r<A-u> r& 
-:nnoremap r<A-i> r* 
-:nnoremap r<A-o> r\|
-:nnoremap r<A-p> r\
 
 
 "pluginstall:
@@ -334,5 +322,4 @@ lua <<EOF
 
 
 EOF
-
 
