@@ -78,9 +78,11 @@ static const char *clk[]  = { "/home/santi/dot/dwm/date", NULL };
 static const char *now[]  = { "/home/santi/dot/dwm/now", NULL };
 static const char *lsh[]  = { "/home/santi/dot/dwm/lsh", NULL };
 static const char *jrn[]  = { "st","-e","/home/santi/dot/dwm/jrn", NULL };
+static const char *lck[]  = { "slock", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key                         function        argument */
+	{ MODKEY,						XK_Escape,					spawn,           {.v = lck } },
 	{ MODKEY|ShiftMask,             XK_Return,                  spawn,           {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                  spawn,           {.v = termcmd } },
 	{ MODKEY,                       XK_q,	                    spawn,           {.v = lsh } },

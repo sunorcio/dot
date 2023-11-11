@@ -40,9 +40,11 @@ fi
 
 
 alias qlist='qlist --color'
-alias qlist='eix -F'
+alias eix='eix -F'
 alias emerge="emerge --color y"
+alias ls="ls --color=always"
 
-alias sudo="~/sudo"
-alias gitclone="~/gitclone"
-alias wpa="~/wpa"
+alias sudo="~/00_past/sudo"
+alias gitclone="~/00_past/gitclone"
+alias wpa="~/00_past/wpa"
+alias modlist="~/00_past/modlist"

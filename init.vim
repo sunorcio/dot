@@ -53,7 +53,7 @@
 :autocmd VimEnter * noremap <c-left> 2zh2h
 ":noremap <c-right>	2zl
 ":noremap <c-left>	2zh
-":noremap i :noremap <lt>esc> :echo "asdf"<lt>CR><CR>
+":noremap t :noremap <lt>esc> :echo "asdf"<lt>CR><CR>
 :noremap <silent> <MiddleMouse> :set nowrap<CR>:set virtualedit=all<CR>:set nocul<CR>0:set guicursor=a:ver25<CR>:noremap <lt>esc> :set wrap <lt>CR>:set virtualedit=block<lt>CR>:set cul<lt>CR>:set guicursor=n-v-sm-c:block,i-ci-ve:ver25,r-cr-o:hor20<lt>CR>:noremap <lt>lt>silent> <lt>lt>esc> <lt>lt>esc>:noh<lt>lt>CR><lt>CR><CR>M
 :noremap <silent> <s-right> :set nowrap<CR>:set virtualedit=all<CR>:set nocul<CR>0:set guicursor=a:ver25<CR>:noremap <lt>esc> :set wrap <lt>CR>:set virtualedit=block<lt>CR>:set cul<lt>CR>:set guicursor=n-v-sm-c:block,i-ci-ve:ver25,r-cr-o:hor20<lt>CR>:noremap <lt>lt>silent> <lt>lt>esc> <lt>lt>esc>:noh<lt>lt>CR><lt>CR><CR>M
 :noremap <silent> <s-left> :set wrap<CR>:set virtualedit=block<CR>:set cul<CR>:set guicursor=n-v-sm-c:block,i-ci-ve:ver25,r-cr-o:hor20<CR>:noremap <lt>silent> <lt>esc> <lt>esc>:noh<lt>CR><CR>
@@ -171,7 +171,13 @@
 :inoremap <c-r>p <c-r>+
 :cnoremap <c-r>p <c-r>+
 :vnoremap \ <C-v>077lA\<esc>
+":vnoremap t :s/no\\|map/got/
+:vnoremap <A-t> :s/    /\t/<CR>
 :vnoremap <A-p> <esc>`>a */<esc>`<i/* <esc>
+:vnoremap <A-d>p :s/\/\* \\| \*\//   /<CR>`>a */<esc>`<i/* <esc>
+:vnoremap <A-d><A-p> :s/\/\* \\| \*\//   /<CR>`>a */<esc>`<i/* <esc>
+:vnoremap <A-d>d :s/\/\* *\\| *\*\/\\|   *//<CR>
+:vnoremap <A-d><A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>
 :vnoremap <C-A-p> V>gvc<space><BS>}<esc>POfor(i = 0;i<0;i++){<esc>
 :vnoremap <S-A-p> V>gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
