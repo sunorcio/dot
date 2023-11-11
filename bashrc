@@ -26,15 +26,15 @@ PS1="\[\e[36m\]\u\[\e[0m\] \[\e[1;34m\]\$PWD \[\e[0m\]$\[\e[0m\] "
 
 #xprop -root -set WM_NAME  'dwm'
 #xprop -id $(xprop -root _NET_ACTIVE_WINDOW | cut -b 41-) -f _NET_WM_NAME 8s -set _NET_WM_NAME "asdfasdf"
-if [ $(cat /home/santi/dot/initvar) -eq 1 ]
+if [ $(cat ~/dot/initvar) -eq 1 ]
 then
 	xbacklight -set 50
 	xset r rate 180 70
-	xkbcomp /home/santi/.xkb-custom $DISPLAY
+	xkbcomp ~/.xkb-custom $DISPLAY
 	clear
 	PROMPT_COMMAND="neofetch
 					PROMPT_COMMAND='' "
-	echo 0 > "/home/santi/dot/initvar"
+	echo 0 > ~/dot/initvar
 fi
 
 
