@@ -2178,18 +2178,18 @@ zoom(const Arg *arg)
 void
 initconf()
 {
-	const char* cmd[] = {"st",NULL};
+	const char* cmd[] = {"alacritty",NULL};
 	hackbuffer.v = cmd;
 	spawn(&hackbuffer);
 
-	const char* cmd1[] = {"/home/santi/dot/dwm/batt",NULL};
+ 	const char* cmd1[] = {"/home/santi/dot/dwm/batt",NULL};
 	hackbuffer.v = cmd1;
 	spawn(&hackbuffer);
 }
 void
 clearconf()
 {
-	const char* cmd[] = {"killall","batt",NULL};
+ 	const char* cmd[] = {"killall","batt",NULL};
 	hackbuffer.v = cmd;
 	spawn(&hackbuffer);
 }
