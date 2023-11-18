@@ -59,33 +59,22 @@ static const Layout layouts[] = {
 /* 	{ Mod1Mask|ControlMask,			KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ Mod1Mask|ShiftMask,			KEY,      toggletag,      {.ui = 1 << TAG} }, */
 
+/* static const char* terminal = "alacritty" */
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
+#define TERMINAL "st"
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-
+#define TSHCMD(tittle,cmd) { .v = (const char*[]){ "/bin/sh", "-c",TERMINAL " -T " tittle " -e " cmd, NULL } }
 /* commands */
+static const char *termcmd[]  = { TERMINAL, NULL };
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
-static const char *vmt[]  = { "amixer","set","Master","toggle", NULL };
-static const char *vdn[]  = { "/home/santi/dot/dwm/voldn", NULL };
-static const char *vup[]  = { "/home/santi/dot/dwm/volup", NULL };
-static const char *mmt[]  = { "amixer","set","Capture","toggle", NULL };
-static const char *bdn[]  = { "/home/santi/dot/dwm/brightdn", NULL };
-static const char *bup[]  = { "/home/santi/dot/dwm/brightup", NULL };
-static const char *opt[]  = { "st","-e","btop", NULL };
-static const char *loc[]  = { "st","-T","Type search query:","-e","/home/santi/dot/dwm/search", NULL };
-static const char *scr[]  = { "scrot","-s","-F","/home/santi/scrot/scrot", NULL };
-static const char *clk[]  = { "/home/santi/dot/dwm/date", NULL };
-static const char *now[]  = { "/home/santi/dot/dwm/now", NULL };
-static const char *lsh[]  = { "/home/santi/dot/dwm/lsh", NULL };
-static const char *jrn[]  = { "st","-e","/home/santi/dot/dwm/jrn", NULL };
-static const char *lck[]  = { "slock", NULL };
+static const char *lockcmd[]  = { "slock", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key                         function        argument */
-	{ MODKEY,						XK_Escape,					spawn,           {.v = lck } },
+	{ MODKEY,						XK_Escape,					spawn,           {.v = lockcmd } },
 	{ MODKEY|ShiftMask,             XK_Return,                  spawn,           {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                  spawn,           {.v = termcmd } },
-	{ MODKEY,                       XK_q,	                    spawn,           {.v = lsh } },
+	{ MODKEY,                       XK_q,	                    spawn,           SHCMD("~/dot/dwm/lsh") },
 	{ MODKEY,                       XK_r,                       togglebar,       {0} },
 	{ MODKEY,                       XK_f,                       setlayout,	     {.v = &layouts[0] } },
 	{ MODKEY,                       XK_j,                       focusstack,      {.i = +1 } },
@@ -112,17 +101,17 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period,                  focusmon,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,                   tagmon,          {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period,                  tagmon,          {.i = +1 } },
-	{ 0,							XF86XK_AudioMute,			spawn,           {.v = vmt } },
-	{ 0,							XF86XK_AudioLowerVolume,	spawn,           {.v = vdn } },
-	{ 0,							XF86XK_AudioRaiseVolume,	spawn,           {.v = vup } },
-	{ 0,							XF86XK_AudioMicMute,		spawn,           {.v = mmt } },
-	{ 0,							XF86XK_MonBrightnessDown,	spawn,           {.v = bdn } },
-	{ 0,							XF86XK_MonBrightnessUp,		spawn,           {.v = bup } },
-	{ 0,							XF86XK_Tools,				spawn,           {.v = opt } },
-	{ 0,							XF86XK_Search,				spawn,           {.v = loc } },
+	{ MODKEY|ShiftMask,				XK_s,						spawn,           SHCMD("scrot -s -F ~/scrot/scrot") },
+	{ 0,							XF86XK_AudioMute,			spawn,           SHCMD("amixer set Master toggle") },
+	{ 0,							XF86XK_AudioLowerVolume,	spawn,           SHCMD("~/dot/dwm/voldn") },
+	{ 0,							XF86XK_AudioRaiseVolume,	spawn,           SHCMD("~/dot/dwm/volup") },
+	{ 0,							XF86XK_AudioMicMute,		spawn,           SHCMD("amixer set Capture toggle") },
+	{ 0,							XF86XK_MonBrightnessDown,	spawn,           SHCMD("~/dot/dwm/brightdn") },
+	{ 0,							XF86XK_MonBrightnessUp,		spawn,           SHCMD("~/dot/dwm/brightup") },
+	{ 0,							XF86XK_Tools,				spawn,           TSHCMD("btop","btop") },
+	{ 0,							XF86XK_Search,				spawn,           TSHCMD("Type search query","~/dot/dwm/search") },
 	{ 0,							XF86XK_LaunchA,				spawn,           {.v = dmenucmd } },
-	{ 0,							XF86XK_Display,				spawn,           {.v = scr } },
-	{ 0,							XF86XK_Explorer,			spawn,           {.v = lsh } },
+	{ 0,							XF86XK_Explorer,			spawn,           SHCMD("~/dot/dwm/lsh") },
 	TAGKEYS(                        XK_1,                       0)
 	TAGKEYS(                        XK_2,                       1)
 	TAGKEYS(                        XK_3,                       2)
@@ -145,9 +134,9 @@ static const Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
  	{ ClkWinTitle,          0,              Button1,        focusstack,     {.i = +1 } },
 /* 	{ ClkWinTitle,          0,              Button2,        spawn,			{.v = dmenucmd } }, */
-	{ ClkStatusText,        0,              Button1,        spawn,          {.v = clk } },
- 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = jrn } },
-	{ ClkStatusText,        0,              Button3,        spawn,          {.v = now } },
+	{ ClkStatusText,        0,              Button1,        spawn,          SHCMD("~/dot/dwm/date") },
+ 	{ ClkStatusText,        0,              Button2,        spawn,          TSHCMD("journal.c","~/dot/dwm/jrn") },
+	{ ClkStatusText,        0,              Button3,        spawn,          SHCMD("~/dot/dwm/now") },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        resizemouse,    {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        togglefloating, {0} },
