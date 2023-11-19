@@ -59,9 +59,8 @@ static const Layout layouts[] = {
 /* 	{ Mod1Mask|ControlMask,			KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ Mod1Mask|ShiftMask,			KEY,      toggletag,      {.ui = 1 << TAG} }, */
 
-/* static const char* terminal = "alacritty" */
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define TERMINAL "st"
+#define TERMINAL "alacritty"
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 #define TSHCMD(tittle,cmd) { .v = (const char*[]){ "/bin/sh", "-c",TERMINAL " -T " tittle " -e " cmd, NULL } }
 /* commands */
@@ -134,6 +133,7 @@ static const Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
  	{ ClkWinTitle,          0,              Button1,        focusstack,     {.i = +1 } },
 /* 	{ ClkWinTitle,          0,              Button2,        spawn,			{.v = dmenucmd } }, */
+	{ ClkWinTitle,          0,              Button3,        togglefloating,	{0} },
 	{ ClkStatusText,        0,              Button1,        spawn,          SHCMD("~/dot/dwm/date") },
  	{ ClkStatusText,        0,              Button2,        spawn,          TSHCMD("journal.c","~/dot/dwm/jrn") },
 	{ ClkStatusText,        0,              Button3,        spawn,          SHCMD("~/dot/dwm/now") },
@@ -141,8 +141,8 @@ static const Button buttons[] = {
 	{ ClkClientWin,         MODKEY,         Button2,        resizemouse,    {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        togglefloating, {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button2,        tag,		    {0} },
+	{ ClkTagBar,            0,              Button3,        tag,		    {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        toggleview,		{0} },
-	{ ClkTagBar,            MODKEY,         Button2,        toggletag,		{0} },
+	{ ClkTagBar,            MODKEY,         Button3,        toggletag,		{0} },
 };
 
