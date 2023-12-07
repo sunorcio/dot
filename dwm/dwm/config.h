@@ -132,6 +132,8 @@ static const Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button2,        setlayout,      {.v = &layouts[1]} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
  	{ ClkWinTitle,          0,              Button1,        focusstack,     {.i = +1 } },
+ 	{ ClkWinTitle,          0,              Button4,        viewreldn,      {0} },
+ 	{ ClkWinTitle,          0,              Button5,        viewrelup,      {0} },
 /* 	{ ClkWinTitle,          0,              Button2,        spawn,			{.v = dmenucmd } }, */
 	{ ClkWinTitle,          0,              Button3,        togglefloating,	{0} },
 	{ ClkStatusText,        0,              Button1,        spawn,          SHCMD("~/dot/dwm/date") },
