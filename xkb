@@ -59,7 +59,7 @@ xkb_keycodes "evdev+aliases(qwerty)" {
     <KPMU> = 63;
     <LALT> = 64;
     <SPCE> = 65;
-    <CAPS> = 135;
+    <CAPS> = 134;
     <FK01> = 67;
     <FK02> = 68;
     <FK03> = 69;
@@ -126,8 +126,8 @@ xkb_keycodes "evdev+aliases(qwerty)" {
     <HJCV> = 131;
     <AE13> = 132;
     <LWIN> = 133;
-    <RWIN> = 134;
-    <COMP> = 105;
+    <RWIN> = 105;
+    <COMP> = 135;
     <STOP> = 136;
     <AGAI> = 137;
     <PROP> = 138;
