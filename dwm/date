@@ -1,3 +1,5 @@
 #!/bin/bash
 
 xprop -root -set WM_NAME "$(date "+%a %d %m %Y")"
+sleep 3
+xprop -root -set WM_NAME "$(acpi | awk -F',' '{print $2}')amp $(date +%H:%M)"
