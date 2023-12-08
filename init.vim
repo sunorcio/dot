@@ -173,8 +173,9 @@
 :cnoremap <c-r>p <c-r>+
 :vnoremap \ <C-v>077lA\<esc>
 ":vnoremap t :s/no\\|map/got/
-:vnoremap <A-t> :s/    /\t/<CR>
+:vnoremap <A-t> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>
 :vnoremap <A-p> <esc>`>a */<esc>`<i/* <esc>
+:nnoremap <A-p> V<esc>`>a */<esc>`<i/* <esc>
 :vnoremap <A-d>p :s/\/\* \\| \*\//   /<CR>`>a */<esc>`<i/* <esc>
 :vnoremap <A-d><A-p> :s/\/\* \\| \*\//   /<CR>`>a */<esc>`<i/* <esc>
 :vnoremap <A-d>d :s/\/\* *\\| *\*\/\\|   *//<CR>
