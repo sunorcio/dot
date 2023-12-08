@@ -1,6 +1,6 @@
 #!/sbin/openrc-run
 
-description="Thinkpad X240 trackpoint settings"
+description="Thinkpad X230 trackpoint settings"
 
 depend() {
 	need udev
@@ -8,9 +8,9 @@ depend() {
 
 start()
 {
-	echo 200 > /sys/devices/platform/i8042/serio1/driver/serio3/sensitivity
-	echo 80 > /sys/devices/platform/i8042/serio1/driver/serio3/speed
-	echo 30 > /sys/devices/platform/i8042/serio1/driver/serio3/drift_time
-	echo 0 > /sys/devices/platform/i8042/serio1/driver/serio3/inertia
+	echo 255 > /sys/devices/platform/i8042/serio1/serio2/sensitivity
+	echo 200 > /sys/devices/platform/i8042/serio1/serio2/speed
+	echo 30 > /sys/devices/platform/i8042/serio1/serio2/drift_time
+	echo 0 > /sys/devices/platform/i8042/serio1/serio2/inertia
 	return 0
 }
