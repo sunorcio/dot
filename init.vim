@@ -93,12 +93,14 @@
 :noremap  <C-l>	$
 :noremap  <C-h>	0
 
-:noremap <S-A-j> <c-w>v<c-w>w<c-w>=:e .<CR>
-:noremap <S-A-l> :tabnew<CR>:e .<CR>
-:noremap <S-j>	<c-w>w<c-w>=
-:noremap <S-k>	<c-w>R<c-w>w<c-w>=
-:noremap <S-l>  :tabnext<CR>
-:noremap <S-h>	:tabprevious<CR>
+:noremap <C-A-j> <c-w>v<c-w>w<c-w>=:e .<CR>
+:noremap <C-A-l> :tabnew<CR>:e .<CR>
+:noremap <S-A-k> <c-w>q
+:noremap <S-A-h> :tabclose<CR>
+:noremap <A-j>	<c-w>w<c-w>=
+:noremap <A-k>	<c-w>R<c-w>w<c-w>=
+:noremap <A-l>  :tabnext<CR>
+:noremap <A-h>	:tabprevious<CR>
 :noremap =		<S-j>
 :noremap ?		<S-k>
 
