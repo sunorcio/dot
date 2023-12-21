@@ -79,7 +79,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_j,                       focusstack,      {.i = +1 } },
 	{ MODKEY,                       XK_k,                       focusstack,      {.i = -1 } },
 	{ MODKEY,			            XK_i,                       incnmaster,      {.i = +1 } },
-	{ MODKEY,						XK_n,                       incnmaster,      {.i = 0 } },//reset to 1
+	{ MODKEY,						XK_n,                       incnmaster,      {.i = 0 } },
 	{ MODKEY,                       XK_h,	                    viewreldn,	     {0} },
 	{ MODKEY,                       XK_l,	                    viewrelup,	     {0} },
 	{ MODKEY,                       XK_Left,                    viewreldn,	     {0} },
@@ -127,24 +127,29 @@ static const Key keys[] = {
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
-	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {.v = &layouts[0]} },
-	{ ClkLtSymbol,          0,              Button2,        setlayout,      {.v = &layouts[1]} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
- 	{ ClkWinTitle,          0,              Button1,        focusstack,     {.i = +1 } },
- 	{ ClkWinTitle,          0,              Button4,        viewreldn,      {0} },
- 	{ ClkWinTitle,          0,              Button5,        viewrelup,      {0} },
-/* 	{ ClkWinTitle,          0,              Button2,        spawn,			{.v = dmenucmd } }, */
-	{ ClkWinTitle,          0,              Button3,        togglefloating,	{0} },
-	{ ClkStatusText,        0,              Button1,        spawn,          SHCMD("~/dot/dwm/date") },
- 	{ ClkStatusText,        0,              Button2,        spawn,          TSHCMD("journal.c","~/dot/dwm/jrn") },
-	{ ClkStatusText,        0,              Button3,        spawn,          SHCMD("~/dot/dwm/now") },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        resizemouse,    {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        togglefloating, {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        tag,		    {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        toggleview,		{0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,		{0} },
+	/* click				event mask		button			function		argument */
+	{ ClkRootWin,			0,				Button1,		spawn,			{.v = termcmd} },
+	{ ClkRootWin,			0,				Button3,		spawn,			{.v = dmenucmd} },
+	{ ClkLtSymbol,  		0,              Button1,        setlayout,      {.v = &layouts[0]} },
+	{ ClkLtSymbol,  		0,              Button2,        setlayout,      {.v = &layouts[1]} },
+	{ ClkLtSymbol,  		0,              Button3,        setlayout,      {.v = &layouts[2]} },
+	{ ClkWinTitle,  		0,              Button1,        focusstack,     {.i = +1 } },
+	{ ClkWinTitle,  		0,              Button2,        togglefloating,	{0} },
+	{ ClkWinTitle,  		0,              Button3,        focusstack,     {.i = -1 } },
+	{ ClkWinTitle,  		0,              Button4,        viewreldn,      {0} },
+	{ ClkWinTitle,  		0,              Button5,        viewrelup,      {0} },
+	{ ClkStatusText,		0,              Button1,        spawn,          SHCMD("pkill date ; ~/dot/dwm/date") },
+/* 	{ ClkStatusText,		0,              Button2,        spawn,          TSHCMD("journal.c","~/dot/dwm/jrn") }, */
+	{ ClkStatusText,		0,				Button3,		spawn,			SHCMD("~/dot/dwm/now") },
+	{ ClkStatusText,		MODKEY,         Button1,        spawn,          TSHCMD("calcurse","calcurse") },
+	{ ClkStatusText,		MODKEY,         Button2,        spawn,          TSHCMD("journal.c","~/dot/dwm/jrn") },
+	{ ClkStatusText,		MODKEY,         Button3,        spawn,          TSHCMD("btop","btop") },
+	{ ClkClientWin,			MODKEY,			Button1,		movemouse,		{0} },
+	{ ClkClientWin, 		MODKEY,         Button2,        resizemouse,    {0} },
+	{ ClkClientWin, 		MODKEY,         Button3,        togglefloating, {0} },
+	{ ClkTagBar,    		0,              Button1,        view,           {0} },
+	{ ClkTagBar,    		0,              Button3,        tag,		    {0} },
+	{ ClkTagBar,    		MODKEY,         Button1,        toggleview,		{0} },
+	{ ClkTagBar,    		MODKEY,         Button3,        toggletag,		{0} },
 };
 

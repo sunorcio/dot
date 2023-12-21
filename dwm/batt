@@ -2,6 +2,6 @@
 
 while [ true ]
 do
-	xprop -root -set WM_NAME "$(acpi | awk -F',' '{print $2}')amp $(date +%H:%M)"
+	~/dot/dwm/now
 	sleep 32
 done

@@ -23,6 +23,9 @@
 ":autocmd VimEnter * syntax off
 
 ":set timeoutlen=100
+:set mouse=a
+:aunmenu PopUp.How-to\ disable\ mouse
+:aunmenu PopUp.-1-
 :set wrap
 :set sel=old
 :set virtualedit=block
@@ -95,8 +98,6 @@
 
 :noremap <C-A-j> <c-w>v<c-w>w<c-w>=:e .<CR>
 :noremap <C-A-l> :tabnew<CR>:e .<CR>
-:noremap <S-A-k> <c-w>q
-:noremap <S-A-h> :tabclose<CR>
 :noremap <A-j>	<c-w>w<c-w>=
 :noremap <A-k>	<c-w>R<c-w>w<c-w>=
 :noremap <A-l>  :tabnext<CR>
@@ -110,7 +111,9 @@
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
 :noremap <A-CR> :make<CR>
-:noremap <A-m> :tabnew<CR>:ter<CR>iclear && bc -l<CR>
+:noremap <A-c> :tabnew<CR>:ter<CR>iclear && bc -l<CR>
+:noremap <A-m> :make -C %:h<CR>
+:noremap <A-r> :so $MYVIMRC<CR>
 ":noremap <A-M> :mk<CR>
 ":noremap <S-A-M> :!rm .exrc<CR>
 
@@ -175,18 +178,24 @@
 :cnoremap <c-r>p <c-r>+
 :vnoremap \ <C-v>077lA\<esc>
 ":vnoremap t :s/no\\|map/got/
-:vnoremap <A-t> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>
+:vnoremap <A-t> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>:noh<CR>
+:nnoremap <A-t> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>:noh<CR>
 :vnoremap <A-p> <esc>`>a */<esc>`<i/* <esc>
 :nnoremap <A-p> V<esc>`>a */<esc>`<i/* <esc>
-:vnoremap <A-d>p :s/\/\* \\| \*\//   /<CR>`>a */<esc>`<i/* <esc>
-:vnoremap <A-d><A-p> :s/\/\* \\| \*\//   /<CR>`>a */<esc>`<i/* <esc>
-:vnoremap <A-d>d :s/\/\* *\\| *\*\/\\|   *//<CR>
-:vnoremap <A-d><A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>
+:nnoremap <A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>:noh<CR>
+":vnoremap <A-d>p :s/\/\* *\\| *\*\/\\|   *//<CR>`>a */<esc>`<i/* <esc>
+":vnoremap <A-d><A-p> :s/\/\* *\\| *\*\/\\|   *//<CR>`>a */<esc>`<i/* <esc>
+ ":s/\/\* \\| \*\//   /<CR>
+":vnoremap <A-d>d :s/\/\* *\\| *\*\/\\|   *//<CR>
+":vnoremap <A-d><A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>
+:vnoremap <A-d>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
+:vnoremap <A-d><A-p> :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
+:vnoremap <A-d>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
+:vnoremap <A-d><A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
 :vnoremap <C-A-p> V>gvc<space><BS>}<esc>POfor(i = 0;i<0;i++){<esc>
 :vnoremap <S-A-p> V>gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
 :nnoremap <S-A-p> A<CR>if(<esc>pa){<CR>}<up><end><CR>
-
 
 
 
