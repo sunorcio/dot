@@ -112,7 +112,6 @@
 :noremap <A-v> gv
 :noremap <A-CR> :make<CR>
 :noremap <A-q> :tabnew<CR>:ter<CR>
-:noremap <A-c> :tabnew<CR>:ter<CR>iclear && bc -l<CR>
 :noremap <A-m> :make -C %:h<CR>
 :noremap <A-o> :e %:h<CR>
 :noremap <A-r> :so $MYVIMRC<CR>
