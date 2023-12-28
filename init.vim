@@ -111,7 +111,7 @@
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
 :noremap <A-CR> :make<CR>
-:noremap <A-q> :tabnew<CR>:ter<CR>i
+:noremap <A-q> :tabnew<CR>:ter<CR>icm ""
 :noremap <A-m> :make -C %:h<CR>
 :noremap <A-o> :e %:h<CR>
 :noremap <A-r> :so $MYVIMRC<CR>
