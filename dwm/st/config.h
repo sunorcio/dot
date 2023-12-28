@@ -6,11 +6,13 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-static char *font = "xos4 Terminus:pixelsize=17:antialias=false:hinting=true:autohint=false";
-//static char *font = "UW Ttyp0:pixelsize=16:antialias=false:hinting=false:autohint=false";
-//static char *font = "BmPlus ToshibaSat 8x16:pixelsize=16:antialias=false:hinting=false:autohint=false";
-//static char *font = "Liberation Mono:pixelsize=15:antialias=true:hinting=true:autohint=false";
-//static char *font = "LispM:style=Monospace:pixelsize=13:antialias=false:hinting=false:autohint=false";
+static char *font = "xos4 Terminus\-Shinonome Powerline:pixelsize=16:antialias=false:hinting=true:autohint=false";
+/* static char *font = "xos4 Terminus:pixelsize=17:antialias=false:hinting=true:autohint=false"; */
+/* static char *font = "Shinonome Gothic:pixelsize=16:antialias=false:hinting=true:autohint=false"; */
+/* static char *font = "UW Ttyp0:pixelsize=16:antialias=false:hinting=false:autohint=false"; */
+/* static char *font = "BmPlus ToshibaSat 8x16:pixelsize=16:antialias=false:hinting=false:autohint=false"; */
+/* static char *font = "Liberation Mono:pixelsize=15:antialias=true:hinting=true:autohint=false"; */
+/* static char *font = "LispM:style=Monospace:pixelsize=13:antialias=false:hinting=false:autohint=false"; */
 
 static int borderpx = 0;
 
@@ -196,8 +198,8 @@ static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
 	{ XK_ANY_MOD,	        XK_Insert,      selpaste,       {.i =  0} },
-	{ MODKEY,               XK_Home,		zoom,           {.f = -7} },
-	{ MODKEY,               XK_End,			zoom,           {.f = +7} },
+	{ MODKEY,               XK_Home,		zoom,           {.f = -6} },
+	{ MODKEY,               XK_End,			zoom,           {.f = +6} },
 	{ MODKEY,               XK_Up,			zoomreset,      {.f =  0} },
 	{ TERMMOD,				XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,				XK_V,           clippaste,      {.i =  0} },

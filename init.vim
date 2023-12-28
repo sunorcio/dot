@@ -24,8 +24,8 @@
 
 ":set timeoutlen=100
 :set mouse=a
-:aunmenu PopUp.How-to\ disable\ mouse
-:aunmenu PopUp.-1-
+:autocmd VimEnter * aunmenu PopUp.How-to\ disable\ mouse
+:autocmd VimEnter * aunmenu PopUp.-1-
 :set wrap
 :set sel=old
 :set virtualedit=block
@@ -111,8 +111,10 @@
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
 :noremap <A-CR> :make<CR>
+:noremap <A-q> :tabnew<CR>:ter<CR>
 :noremap <A-c> :tabnew<CR>:ter<CR>iclear && bc -l<CR>
 :noremap <A-m> :make -C %:h<CR>
+:noremap <A-o> :e %:h<CR>
 :noremap <A-r> :so $MYVIMRC<CR>
 ":noremap <A-M> :mk<CR>
 ":noremap <S-A-M> :!rm .exrc<CR>
@@ -135,8 +137,9 @@
 ":noremap q; q:
 
 :vnoremap a A
-:vnoremap a<c-r> <nop>
+:vnoremap a<c-r> A<c-r>
 :vnoremap a<c-r>p A<c-r>+
+":vnoremap a<tab> A<tab>
 :vnoremap i I
 
 :vnoremap <TAB> >gv
@@ -180,6 +183,8 @@
 ":vnoremap t :s/no\\|map/got/
 :vnoremap <A-t> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>:noh<CR>
 :nnoremap <A-t> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>:noh<CR>
+:vnoremap <A-T> :s/\t/    /<CR>:noh<CR>
+:nnoremap <A-T> :s/\t/    /<CR>:noh<CR>
 :vnoremap <A-p> <esc>`>a */<esc>`<i/* <esc>
 :nnoremap <A-p> V<esc>`>a */<esc>`<i/* <esc>
 :nnoremap <A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>:noh<CR>
@@ -192,6 +197,10 @@
 :vnoremap <A-d><A-p> :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
 :vnoremap <A-d>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
 :vnoremap <A-d><A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
+:vnoremap <A-d>c :s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
+:vnoremap <A-d><A-c> :s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
+:vnoremap <A-d>C :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>:noh<CR>
+:vnoremap <A-d><A-C> :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>:noh<CR>
 :vnoremap <C-A-p> V>gvc<space><BS>}<esc>POfor(i = 0;i<0;i++){<esc>
 :vnoremap <S-A-p> V>gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
@@ -310,6 +319,11 @@ lua <<EOF
   vim.keymap.set("n", "gi", "<cmd>tab split | lua vim.lsp.buf.implementation()<CR>", bufopts)
   vim.keymap.set("n", "gr", "<cmd>tab split | lua vim.lsp.buf.references()<CR>", bufopts)
   vim.keymap.set("n", "gt", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>", bufopts)
+  vim.keymap.set("n", "<A-g>D", "<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
+  vim.keymap.set("n", "<A-g>d", "<cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
+  vim.keymap.set("n", "<A-g>i", "<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
+  vim.keymap.set("n", "<A-g>r", "<cmd>lua vim.lsp.buf.references()<CR>", bufopts)
+  vim.keymap.set("n", "<A-g>t", "<cmd>lua vim.lsp.buf.type_definition()<CR>", bufopts)
   vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', '<space>j', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<space>k', vim.lsp.buf.signature_help, bufopts)
