@@ -2,14 +2,15 @@
 
 ":set background=dark
 :colorscheme habamax
-:highlight Normal		ctermfg=195	ctermbg=16
+:highlight Normal		ctermbg=16  ctermfg=250 "ctermfg=195
+:highlight Comment		ctermfg=240
 :highlight Type			ctermfg=65
-:highlight Identifier	ctermfg=181
+:highlight Identifier	ctermfg=138 "ctermfg=181
 :highlight PreProc		ctermfg=94
-:highlight Constant		ctermfg=172
-:highlight String		ctermfg=36
-:highlight Statement	ctermfg=139
-:highlight Special		ctermfg=153
+":highlight Constant	ctermfg=173
+:highlight String		ctermfg=66
+:highlight Statement	ctermfg=140
+:highlight Special		ctermfg=146
 :highlight MatchParen	ctermfg=195	ctermbg=236	cterm=NONE
 :highlight MsgArea		ctermfg=255	ctermbg=234
 :highlight WinSeparator	ctermfg=233	ctermbg=0
@@ -107,6 +108,8 @@
 
 :tnoremap ; <c-\><c-n>:
 :tnoremap <esc> <c-\><c-n>
+":tnoremap <C-h> <c-b>
+":tnoremap <C-l> <c-f>
 :nnoremap <silent> <esc> <esc>:noh<CR>
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
@@ -172,36 +175,30 @@
 :vnoremap D} "ws{}<esc>"wP
 :vnoremap D< "ws<><esc>"wP
 :vnoremap D> "ws<><esc>"wP
-:vnoremap D/ "ws/*  */<esc>2h"wP
 
 :vnoremap p P
 :vnoremap P p
 :inoremap <c-r>p <c-r>+
 :cnoremap <c-r>p <c-r>+
 :vnoremap \ <C-v>077lA\<esc>
-":vnoremap t :s/no\\|map/got/
 :vnoremap <A-t> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>:noh<CR>
-:nnoremap <A-t> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>:noh<CR>
-:vnoremap <A-T> :s/\t/    /<CR>:noh<CR>
-:nnoremap <A-T> :s/\t/    /<CR>:noh<CR>
+":nnoremap <A-t> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>:noh<CR>
+":vnoremap <A-T> :s/\t/    /<CR>:noh<CR>
+":nnoremap <A-T> :s/\t/    /<CR>:noh<CR>
 :vnoremap <A-p> <esc>`>a */<esc>`<i/* <esc>
 :nnoremap <A-p> V<esc>`>a */<esc>`<i/* <esc>
+:vnoremap <A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>:noh<CR>
 :nnoremap <A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>:noh<CR>
 ":vnoremap <A-d>p :s/\/\* *\\| *\*\/\\|   *//<CR>`>a */<esc>`<i/* <esc>
 ":vnoremap <A-d><A-p> :s/\/\* *\\| *\*\/\\|   *//<CR>`>a */<esc>`<i/* <esc>
  ":s/\/\* \\| \*\//   /<CR>
-":vnoremap <A-d>d :s/\/\* *\\| *\*\/\\|   *//<CR>
-":vnoremap <A-d><A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>
-:vnoremap <A-d>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
-:vnoremap <A-d><A-p> :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
-:vnoremap <A-d>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
-:vnoremap <A-d><A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
-:vnoremap <A-d>c :s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
-:vnoremap <A-d><A-c> :s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
-:vnoremap <A-d>C :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>:noh<CR>
-:vnoremap <A-d><A-C> :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>:noh<CR>
-:vnoremap <C-A-p> V>gvc<space><BS>}<esc>POfor(i = 0;i<0;i++){<esc>
-:vnoremap <S-A-p> V>gvc<space><BS>}<esc>POif(){<left><left>
+:vnoremap <A-c>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
+:nnoremap <A-c>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
+:vnoremap <A-c>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
+:nnoremap <A-c>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
+
+:vnoremap <C-A-p> <esc>`<V`>>gvc<space><BS>}<esc>POfor(i = 0;i<0;i++){<esc>
+:vnoremap <S-A-p> <esc>`<V`>>gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
 :nnoremap <S-A-p> A<CR>if(<esc>pa){<CR>}<up><end><CR>
 
