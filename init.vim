@@ -175,6 +175,7 @@
 :vnoremap D} "ws{}<esc>"wP
 :vnoremap D< "ws<><esc>"wP
 :vnoremap D> "ws<><esc>"wP
+:vnoremap D/ "ws/*  */<esc>hh"wP
 
 :vnoremap p P
 :vnoremap P p
