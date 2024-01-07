@@ -118,6 +118,8 @@
 :noremap <A-m> :make -C %:h<CR>
 :noremap <A-o> :e %:h<CR>
 :noremap <A-r> :so $MYVIMRC<CR>
+:noremap <S-A-w> :SessionSave<CR>
+:noremap <S-A-q> :qa<CR>
 ":noremap <A-M> :mk<CR>
 ":noremap <S-A-M> :!rm .exrc<CR>
 
@@ -232,7 +234,7 @@ lua <<EOF
   require("auto-session").setup {
     bypass_session_save_file_types = nil,
     cwd_change_handling = {
-	  restore_upcoming_session = true,
+	  restore_upcoming_session = nil,
 	  pre_cwd_changed_hook = nil,
 	  post_cwd_changed_hook = nil,
 	},
