@@ -208,6 +208,8 @@
 "pluginstall:
 "sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 call plug#begin()
+	Plug 'rmagatti/auto-session'
+
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'hrsh7th/cmp-nvim-lsp'
 	Plug 'hrsh7th/cmp-buffer'
@@ -227,6 +229,14 @@ set completeopt=menu,menuone,noselect
 
 lua <<EOF
 
+  require("auto-session").setup {
+    bypass_session_save_file_types = nil,
+    cwd_change_handling = {
+	  restore_upcoming_session = true,
+	  pre_cwd_changed_hook = nil,
+	  post_cwd_changed_hook = nil,
+	},
+  }
 
 -- Set up nvim-cmp.
   local cmp = require'cmp'
