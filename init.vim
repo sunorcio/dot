@@ -2,7 +2,7 @@
 
 ":set background=dark
 :colorscheme habamax
-:highlight Normal		ctermbg=16  ctermfg=250 "ctermfg=195
+:highlight Normal		ctermbg=16  ctermfg=250
 :highlight Comment		ctermfg=240
 :highlight Type			ctermfg=65
 :highlight Identifier	ctermfg=138 "ctermfg=181
@@ -10,7 +10,7 @@
 ":highlight Constant	ctermfg=173
 :highlight String		ctermfg=66
 :highlight Statement	ctermfg=140
-:highlight Special		ctermfg=146
+:highlight Special		ctermfg=146 "ctermfg=195
 :highlight MatchParen	ctermfg=195	ctermbg=236	cterm=NONE
 :highlight MsgArea		ctermfg=255	ctermbg=234
 :highlight WinSeparator	ctermfg=233	ctermbg=0
@@ -19,7 +19,7 @@
 :highlight TabLineSel	ctermfg=68	ctermbg=0	cterm=NONE
 :highlight TabLine		ctermfg=238	ctermbg=233
 :highlight TabLineFill				ctermbg=233
-:highlight CursorLine	ctermbg=235
+:highlight CursorLine	ctermbg=233
 :highlight CursorColumn	ctermbg=232
 ":autocmd VimEnter * syntax off
 
