@@ -113,9 +113,9 @@
 :nnoremap <silent> <esc> <esc>:noh<CR>
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
-:noremap <A-CR> :make<CR>
+:noremap <A-CR> :tabnew<CR>:make<CR>
 :noremap <A-q> :tabnew<CR>:ter<CR>icm ""
-:noremap <A-m> :make -C %:h<CR>
+:noremap <A-m> :tabnew<CR>:make -C %:h<CR>
 :noremap <A-o> :e %:h<CR>
 :noremap <A-r> :so $MYVIMRC<CR>
 :noremap <S-A-w> :SessionSave<CR>
