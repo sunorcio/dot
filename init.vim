@@ -114,7 +114,7 @@
 :nnoremap <silent> <esc> <esc>:noh<CR>
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
-:noremap <A-CR> :tabnew<CR>:make<CR>
+:noremap <A-CR> :make<CR>
 :noremap <A-q> :tabnew<CR>:ter<CR>icm ""
 :noremap <A-m> :make -C %:h<CR>
 :noremap <A-o> :e %:h<CR>
@@ -205,6 +205,7 @@
 :vnoremap <S-A-p> <esc>`<V`>>gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
 :nnoremap <S-A-p> A<CR>if(<esc>pa){<CR>}<up><end><CR>
+:inoremap <A-i> SDL_Log("%d",);
 
 
 

@@ -1,3 +1,9 @@
 #!/bin/bash
 
-xprop -root -set WM_NAME "$(acpi | awk -F', |%' '{print $2}')%amp $(date +%H:%M)"
+charging="$(acpi | awk -F': | c|, ' '{print $2}')"
+if [ $charging = 'Discharging' ]
+then
+	xprop -root -set WM_NAME "-$(acpi | awk -F', |%' '{print $2}')%amp $(date +%H:%M)"
+else
+	xprop -root -set WM_NAME "+$(acpi | awk -F', |%' '{print $2}')%amp $(date +%H:%M)"
+fi
