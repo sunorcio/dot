@@ -30,6 +30,7 @@
 :set wrap
 :set sel=old
 :set virtualedit=block
+:set nowrapscan
 :set number
 :set tabstop=4
 :set shiftwidth=4
@@ -263,7 +264,7 @@ lua <<EOF
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-j>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.abort(),
       ['<C-i>'] = cmp.mapping.confirm({ select = true }),
 	  }),
     sources = cmp.config.sources({

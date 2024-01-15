@@ -43,8 +43,11 @@ alias qlist='qlist --color'
 alias eix='eix -F'
 alias emerge="emerge --color y"
 alias ls="ls --color=always"
+alias grep="grep --color=always"
 
 alias sudo="~/00_past/sudo"
 alias gitclone="~/00_past/gitclone"
 alias wpa="~/00_past/wpa"
 alias modlist="~/00_past/modlist"
+alias cm="~/00_past/cmath"
+alias torrent="~/00_past/torrent"

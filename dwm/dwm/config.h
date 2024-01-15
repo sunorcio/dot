@@ -139,11 +139,8 @@ static const Button buttons[] = {
 	{ ClkWinTitle,			0,				Button4,		viewreldn,	  	{0} },
 	{ ClkWinTitle,			0,				Button5,		viewrelup,	  	{0} },
 	{ ClkStatusText,		0,				Button1,		spawn,		  	SHCMD("~/dot/dwm/date") },
-/*	{ ClkStatusText,		0,				Button2,		asdf,			{0} }, */
 	{ ClkStatusText,		0,				Button3,		spawn,			SHCMD("~/dot/dwm/now") },
-	{ ClkStatusText,		MODKEY,			Button1,		spawn,			TSHCMD("calcurse","calcurse") },
-	{ ClkStatusText,		MODKEY,		 	Button2,		spawn,		  	TSHCMD("journal.c","~/dot/dwm/jrn") },
-	{ ClkStatusText,		MODKEY,		 	Button3,		spawn,		  	TSHCMD("btop","btop") },
+	{ ClkStatusText,		MODKEY,		 	Button3,		spawn,		  	TSHCMD("journal.c","~/dot/dwm/jrn") },
 	{ ClkClientWin,			MODKEY,			Button1,		movemouse,		{0} },
 	{ ClkClientWin,			MODKEY,			Button2,		resizemouse,	{0} },
 	{ ClkClientWin,			MODKEY,		 	Button3,		togglefloating, {0} },
