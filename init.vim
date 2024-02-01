@@ -190,14 +190,14 @@ endfunction
 :noremap <A-k>	<c-w>R<c-w>w<c-w>=
 :noremap <S-j>	<c-w>L
 :noremap <S-k>	<c-w>K
-:noremap -		<S-j>
+:nnoremap -		<S-j>
+:nnoremap =		:=
 :noremap ?		<S-k>
-:noremap =		:=
-:noremap <silent> <C-A-l> :tabnew<CR>:e .<CR>
-:noremap <silent> <A-l>  :tabnext<CR>
-:noremap <silent> <A-h>	:tabprevious<CR>
-:noremap <silent> <S-l>	:tabmove +1<CR>
-:noremap <silent> <S-h>	:tabmove -1<CR>
+:noremap <silent> <C-A-l>	<esc>:tabnew<CR>:e .<CR>
+:noremap <silent> <A-l>	<esc>:tabnext<CR>
+:noremap <silent> <A-h>	<esc>:tabprevious<CR>
+:noremap <silent> <S-l>	<esc>:tabmove +1<CR>
+:noremap <silent> <S-h>	<esc>:tabmove -1<CR>
 
 :tnoremap ; <c-\><c-n>:
 :tnoremap <esc> <c-\><c-n>
