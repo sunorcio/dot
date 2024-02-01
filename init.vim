@@ -2,26 +2,105 @@
 
 ":set background=dark
 :colorscheme habamax
-:highlight Normal		ctermbg=16  ctermfg=250
+:highlight Normal		ctermfg=250 ctermbg=16
 :highlight Comment		ctermfg=240
 :highlight Type			ctermfg=65
-:highlight Identifier	ctermfg=138 "ctermfg=181
+:highlight Identifier	ctermfg=138 "181
+:hi @lsp.type.operator.c				ctermfg=255 "189
+:hi @lsp.type.function					ctermfg=174
+:hi @lsp.typemod.function.declaration.c ctermfg=217
 :highlight PreProc		ctermfg=94
 ":highlight Constant	ctermfg=173
 :highlight String		ctermfg=66
 :highlight Statement	ctermfg=140
-:highlight Special		ctermfg=146 "ctermfg=195
+:highlight Special		ctermfg=146 "195
 :highlight MatchParen	ctermfg=195	ctermbg=236	cterm=NONE
 :highlight MsgArea		ctermfg=255	ctermbg=234
 :highlight WinSeparator	ctermfg=233	ctermbg=0
 :highlight StatusLine	ctermfg=68	ctermbg=233
 :highlight StatusLineNC	ctermfg=238	ctermbg=233
+:highlight ModeMsg		ctermfg=0	ctermbg=68
 :highlight TabLineSel	ctermfg=68	ctermbg=0	cterm=NONE
 :highlight TabLine		ctermfg=238	ctermbg=233
+:highlight Title		ctermfg=143	ctermbg=233	cterm=NONE "186
 :highlight TabLineFill				ctermbg=233
 :highlight CursorLine	ctermbg=233
 :highlight CursorColumn	ctermbg=232
+:highlight CursorLineNR ctermfg=238	ctermbg=0	cterm=NONE
+:highlight LineNR		ctermfg=234	ctermbg=0	cterm=NONE
 ":autocmd VimEnter * syntax off
+
+
+:set tabline=%!TabLine()
+function! TabLine()
+  let s = ''
+  " loop through each tab page
+  for i in range(tabpagenr('$'))
+	if i + 1 == tabpagenr()
+	  let s .= '%#Title#/%#TabLineSel#'
+	else
+	  let s .= '%#Title#\%#TabLine#'
+	endif
+    "if i + 1 == tabpagenr()
+    "  let s .= '%#TabLineSel#' " WildMenu
+    "else
+    "  let s .= '%#Title#'
+    "endif
+    " set the tab page number (for mouse clicks)
+    let s .= '%' . (i + 1) . 'T '
+    " set page number string
+    "let s .= i + 1 . ''
+    "let s .= '\ '
+    " get buffer names and statuses
+    let n = ''  " temp str for buf names
+    let m = 0   " &modified counter
+    let buflist = tabpagebuflist(i + 1)
+    " loop through each buffer in a tab
+    for b in buflist
+      if getbufvar(b, "&buftype") == 'help'
+        " let n .= '[H]' . fnamemodify(bufname(b), ':t:s/.txt$//')
+      elseif getbufvar(b, "&buftype") == 'quickfix'
+        " let n .= '[Q]'
+      elseif getbufvar(b, "&modifiable")
+        let n .= fnamemodify(bufname(b), ':t') . ', '  "pathshorten(bufname(b))
+      endif
+      if getbufvar(b, "&modified")
+        let m += 1
+      endif
+    endfor
+    " let n .= fnamemodify(bufname(buflist[tabpagewinnr(i + 1) - 1]), ':t')
+    let n = substitute(n, ', $', '', '')
+    " add modified label
+    if m > 0
+      let s .= '+'
+      " let s .= '[' . m . '+]'
+    endif
+    if i + 1 == tabpagenr()
+      let s .= ' %#TabLineSel#'
+    else
+      let s .= ' %#TabLine#'
+    endif
+    " add buffer names
+    if n == ''
+      let s.= '[New]'
+    else
+      let s .= n . ' '
+    endif
+    " switch to no underlining and add final space
+    let s .= ' '
+  endfor
+  if tabpagenr() < 10
+    let s .= '%#Title#\%#TabLineFill#%<%T'
+  else
+    let s .= '%#Title#\%T'
+  endif
+   "right-aligned close button
+   "if tabpagenr('$') > 1
+     "let s .= '%=%#TabLineFill#%999Xclose'
+   "endif
+  return s
+endfunction
+
 
 ":set timeoutlen=100
 :set mouse=a
@@ -30,8 +109,10 @@
 :set wrap
 :set sel=old
 :set virtualedit=block
-:set nowrapscan
+":set nowrapscan
+:set showbreak=\ 
 :set number
+":set signcolumn=yes
 :set tabstop=4
 :set shiftwidth=4
 :set smarttab
@@ -39,8 +120,10 @@
 :set clipboard^=unnamed,unnamedplus
 :set switchbuf=useopen,usetab,newtab
 :set cmdheight=0
+":set showcmd
+":set showcmdloc=statusline
+":set statusline=
 :set notitle
-:set nofoldenable
 :set foldlevel=0
 :set foldmethod=syntax
 :set foldignore=#\*/
@@ -51,8 +134,8 @@
 :set guicursor=n-v-sm-c:block,i-ci-ve:ver25,r-cr-o:hor20
 :set cul
 :set culopt=number
-:autocmd ModeChanged n:* set culopt=line
-:autocmd ModeChanged *:[v] set cuc
+:autocmd ModeChanged n:* set culopt=line,number
+":autocmd ModeChanged *:[v] set cuc
 :autocmd ModeChanged *:n set nocuc | set culopt=number
 
 :autocmd VimEnter * noremap <c-right> 2zl
@@ -71,6 +154,7 @@
 :noremap <c-up>		2<c-y>M
 :noremap <c-end>	<>
 
+:noremap <silent> <A-a> :set foldlevel=0<CR>
 :noremap <C-a> za
 ":noremap <silent> <C-m> :set foldenable<CR>:%foldc<CR>
 :noremap <S-m> zi
@@ -94,19 +178,26 @@
 :noremap r<C-y> r&
 :noremap r<C-u> r*
 
-:noremap  <C-j>	2jzz
-:noremap  <C-k>	2kzz
-:noremap  <C-l>	$
-:noremap  <C-h>	0
+:noremap	<C-j>	2jzz
+:noremap	<C-k>	2kzz
+:vnoremap	<C-j>	2j
+:vnoremap	<C-k>	2k
+:noremap	<C-l>	$
+:noremap	<C-h>	0
 
-:noremap <C-A-j> <c-w>v<c-w>w<c-w>=:e .<CR>
-:noremap <C-A-l> :tabnew<CR>:e .<CR>
+:noremap <silent> <C-A-j> <c-w>v<c-w>w<c-w>=:e %:h<CR>
 :noremap <A-j>	<c-w>w<c-w>=
 :noremap <A-k>	<c-w>R<c-w>w<c-w>=
-:noremap <A-l>  :tabnext<CR>
-:noremap <A-h>	:tabprevious<CR>
-:noremap =		<S-j>
+:noremap <S-j>	<c-w>L
+:noremap <S-k>	<c-w>K
+:noremap -		<S-j>
 :noremap ?		<S-k>
+:noremap =		:=
+:noremap <silent> <C-A-l> :tabnew<CR>:e .<CR>
+:noremap <silent> <A-l>  :tabnext<CR>
+:noremap <silent> <A-h>	:tabprevious<CR>
+:noremap <silent> <S-l>	:tabmove +1<CR>
+:noremap <silent> <S-h>	:tabmove -1<CR>
 
 :tnoremap ; <c-\><c-n>:
 :tnoremap <esc> <c-\><c-n>
@@ -115,15 +206,21 @@
 :nnoremap <silent> <esc> <esc>:noh<CR>
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
-:noremap <A-CR> :make<CR>
-:noremap <A-q> :tabnew<CR>:ter<CR>icm ""
-:noremap <A-m> :make -C %:h<CR>
-:noremap <A-o> :e %:h<CR>
-:noremap <A-r> :so $MYVIMRC<CR>
-:noremap <S-A-w> :SessionSave<CR>
-:noremap <S-A-q> :qa<CR>
+":noremap <A-;> :!./
+:noremap <silent> <A-n> :tabnew<CR>:e ~/main/journal/todo<CR>
+:noremap <silent> <A-m> :make -j4<CR>
+:noremap <silent> <A-CR> :make -C %:h -j4<CR>
+:noremap <silent> <A-t> :tabnew<CR>:ter<CR>i
+:noremap <silent> <A-q> :tabnew<CR>:e ~/main/math/math.c<CR>
+:noremap <silent> <A-o> :e %:h<CR>
+:noremap <silent> <A-r> :so $MYVIMRC<CR>
+:noremap <silent> <A-c> :set cmdheight=1<CR>:nnoremap <lt>silent> <lt>esc> :set cmdheight=0<lt>CR><lt>esc>:noh<lt>CR><CR>
+:noremap <silent> <S-A-w> :SessionSave<CR>
+:noremap <silent> <S-A-q> :qa<CR>
 ":noremap <A-M> :mk<CR>
 ":noremap <S-A-M> :!rm .exrc<CR>
+:inoremap <A-S-i> printf("%d\n",);<left><left>
+:inoremap <A-i> SDL_Log("%d",);<left><left>
 
 :noremap b ge
 :noremap B gE
@@ -186,27 +283,25 @@
 :inoremap <c-r>p <c-r>+
 :cnoremap <c-r>p <c-r>+
 :vnoremap \ <C-v>077lA\<esc>
-:vnoremap <A-t> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>:noh<CR>
-":nnoremap <A-t> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>:noh<CR>
-":vnoremap <A-T> :s/\t/    /<CR>:noh<CR>
-":nnoremap <A-T> :s/\t/    /<CR>:noh<CR>
-:vnoremap <A-p> <esc>`>a */<esc>`<i/* <esc>
-:nnoremap <A-p> V<esc>`>a */<esc>`<i/* <esc>
-:vnoremap <A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>:noh<CR>
-:nnoremap <A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>:noh<CR>
+:vnoremap <silent> <A-f> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>:noh<CR>
+":nnoremap <silent> <A-f> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>:noh<CR>
+":noremap <silent> <A-F> :s/\t/    /<CR>:noh<CR>
+:vnoremap <silent> <A-p> <esc>`>a */<esc>`<i/* <esc>
+:nnoremap <silent> <A-p> V<esc>`>a */<esc>`<i/* <esc>
+:vnoremap <silent> <A-d> :s/\/\* *\\| *\*\/\\|/<CR>:noh<CR>
+:nnoremap <silent> <A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>:noh<CR>
 ":vnoremap <A-d>p :s/\/\* *\\| *\*\/\\|   *//<CR>`>a */<esc>`<i/* <esc>
 ":vnoremap <A-d><A-p> :s/\/\* *\\| *\*\/\\|   *//<CR>`>a */<esc>`<i/* <esc>
  ":s/\/\* \\| \*\//   /<CR>
-:vnoremap <A-c>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
-:nnoremap <A-c>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
-:vnoremap <A-c>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
-:nnoremap <A-c>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
+:vnoremap <silent> <A-s>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a<esc>`<i<esc>:noh<CR>
+:nnoremap <silent> <A-s>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
+:vnoremap <silent> <A-s>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
+:nnoremap <silent> <A-s>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
 
 :vnoremap <C-A-p> <esc>`<V`>>gvc<space><BS>}<esc>POfor(i = 0;i<0;i++){<esc>
 :vnoremap <S-A-p> <esc>`<V`>>gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
 :nnoremap <S-A-p> A<CR>if(<esc>pa){<CR>}<up><end><CR>
-:inoremap <A-i> SDL_Log("%d",);
 
 
 
