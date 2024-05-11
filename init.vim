@@ -293,12 +293,12 @@ endfunction
 ":vnoremap <A-d>p :s/\/\* *\\| *\*\/\\|   *//<CR>`>a */<esc>`<i/* <esc>
 ":vnoremap <A-d><A-p> :s/\/\* *\\| *\*\/\\|   *//<CR>`>a */<esc>`<i/* <esc>
  ":s/\/\* \\| \*\//   /<CR>
-:vnoremap <silent> <A-s>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a<esc>`<i<esc>:noh<CR>
+:vnoremap <silent> <A-s>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
 :nnoremap <silent> <A-s>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
 :vnoremap <silent> <A-s>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
 :nnoremap <silent> <A-s>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
 
-:vnoremap <C-A-p> <esc>`<V`>>gvc<space><BS>}<esc>POfor(i = 0;i<0;i++){<esc>
+:vnoremap <C-A-p> <esc>`<V`>>gvc<space><BS>}<esc>PO{int i;for(i = 0;i<0;i++){<esc>
 :vnoremap <S-A-p> <esc>`<V`>>gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
 :nnoremap <S-A-p> A<CR>if(<esc>pa){<CR>}<up><end><CR>

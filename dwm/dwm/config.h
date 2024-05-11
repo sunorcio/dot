@@ -100,7 +100,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period,                  focusmon,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,                   tagmon,          {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period,                  tagmon,          {.i = +1 } },
-	{ MODKEY|ShiftMask,				XK_s,						spawn,           SHCMD("scrot -s -F ~/scrot/scrot.png --format png") },
+	{ MODKEY|ShiftMask,				XK_s,						spawn,           SHCMD("scrot -s -F ~/bunker/scrot/scrot.png --format png") },
 	{ 0,							XF86XK_AudioMute,			spawn,           SHCMD("amixer set Master toggle") },
 	{ 0,							XF86XK_AudioLowerVolume,	spawn,           SHCMD("~/dot/dwm/voldn") },
 	{ 0,							XF86XK_AudioRaiseVolume,	spawn,           SHCMD("~/dot/dwm/volup") },
