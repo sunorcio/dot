@@ -2,7 +2,7 @@
 
 ":set background=dark
 :colorscheme habamax
-:highlight Normal		ctermfg=250 ctermbg=16
+:highlight Normal		ctermfg=248 ctermbg=16
 :highlight Comment		ctermfg=240
 :highlight Type			ctermfg=65
 :highlight Identifier	ctermfg=138 "181
@@ -207,11 +207,9 @@ endfunction
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
 ":noremap <A-;> :!./
-:noremap <silent> <A-n> :tabnew<CR>:e ~/main/journal/todo<CR>
-:noremap <silent> <A-m> :make -j4<CR>
-:noremap <silent> <A-CR> :make -C %:h -j4<CR>
+:noremap <silent> <A-CR> :make -j4<CR>
+:noremap <silent> <A-m> :make -C %:h -j4<CR>
 :noremap <silent> <A-t> :tabnew<CR>:ter<CR>i
-:noremap <silent> <A-q> :tabnew<CR>:e ~/main/math/math.c<CR>
 :noremap <silent> <A-o> :e %:h<CR>
 :noremap <silent> <A-r> :so $MYVIMRC<CR>
 :noremap <silent> <A-c> :set cmdheight=1<CR>:nnoremap <lt>silent> <lt>esc> :set cmdheight=0<lt>CR><lt>esc>:noh<lt>CR><CR>
@@ -298,7 +296,7 @@ endfunction
 :vnoremap <silent> <A-s>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
 :nnoremap <silent> <A-s>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
 
-:vnoremap <C-A-p> <esc>`<V`>>gvc<space><BS>}<esc>PO{int i;for(i = 0;i<0;i++){<esc>
+:vnoremap <C-A-p> <esc>`<V`>>gvc<space><BS>}}<esc>POfor(i = 0;i<0;i++){<esc>O{unsigned int i;<esc>jj$
 :vnoremap <S-A-p> <esc>`<V`>>gvc<space><BS>}<esc>POif(){<left><left>
 :nnoremap <C-A-p> A<CR>switch(<esc>pa){<CR>}<up><end><CR>break;<up><end><CR>:<left>case<space>
 :nnoremap <S-A-p> A<CR>if(<esc>pa){<CR>}<up><end><CR>
