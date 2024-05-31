@@ -7,12 +7,16 @@ app-misc/neofetch
 app-portage/cpuid2cpuflags
 app-shells/bash-completion
 app-text/mupdf
+cross-x86_64-w64-mingw32/binutils
+cross-x86_64-w64-mingw32/gcc
+cross-x86_64-w64-mingw32/mingw64-runtime
 dev-debug/lldb
 dev-libs/cglm
 dev-util/github-cli
 dev-vcs/git
 media-fonts/kochi-substitute
 media-fonts/shinonome
+media-fonts/spleen
 media-gfx/feh
 media-gfx/imagemagick
 media-gfx/scrot
@@ -33,6 +37,7 @@ net-wireless/wpa_supplicant
 sys-apps/mlocate
 sys-block/io-scheduler-udev-rules
 sys-boot/grub
+sys-devel/crossdev
 sys-firmware/intel-microcode
 sys-fs/dosfstools
 sys-fs/exfatprogs
