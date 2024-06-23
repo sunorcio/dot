@@ -28,7 +28,7 @@ PS1="\[\e[36m\]\u\[\e[0m\] \[\e[1;34m\]\$PWD \[\e[0m\]$\[\e[0m\] "
 #xprop -id $(xprop -root _NET_ACTIVE_WINDOW | cut -b 41-) -f _NET_WM_NAME 8s -set _NET_WM_NAME "asdfasdf"
 if [ $(cat ~/dot/initvar) -eq 1 ]
 then
-	xbacklight -set 50
+	xbacklight -set 70
 	xset r rate 180 70
 	xkbcomp ~/.xkb-custom $DISPLAY
 	clear
@@ -40,7 +40,7 @@ fi
 
 
 alias qlist='qlist --color'
-alias eix='eix -F'
+#alias eix='eix -F'
 alias emerge="emerge --color y"
 alias ls="ls --color=always"
 alias grep="grep --color=always"

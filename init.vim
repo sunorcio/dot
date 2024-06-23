@@ -143,9 +143,8 @@ endfunction
 ":noremap <c-right>	2zl
 ":noremap <c-left>	2zh
 ":noremap t :noremap <lt>esc> :echo "asdf"<lt>CR><CR>
-:noremap <silent> <MiddleMouse> :set nowrap<CR>:set virtualedit=all<CR>:set nocul<CR>0:set guicursor=a:ver25<CR>:noremap <lt>esc> :set wrap <lt>CR>:set virtualedit=block<lt>CR>:set cul<lt>CR>:set guicursor=n-v-sm-c:block,i-ci-ve:ver25,r-cr-o:hor20<lt>CR>:noremap <lt>lt>silent> <lt>lt>esc> <lt>lt>esc>:noh<lt>lt>CR><lt>CR><CR>M
-:noremap <silent> <s-right> :set nowrap<CR>:set virtualedit=all<CR>:set nocul<CR>0:set guicursor=a:ver25<CR>:noremap <lt>esc> :set wrap <lt>CR>:set virtualedit=block<lt>CR>:set cul<lt>CR>:set guicursor=n-v-sm-c:block,i-ci-ve:ver25,r-cr-o:hor20<lt>CR>:noremap <lt>lt>silent> <lt>lt>esc> <lt>lt>esc>:noh<lt>lt>CR><lt>CR><CR>M
-:noremap <silent> <s-left> :set wrap<CR>:set virtualedit=block<CR>:set cul<CR>:set guicursor=n-v-sm-c:block,i-ci-ve:ver25,r-cr-o:hor20<CR>:noremap <lt>silent> <lt>esc> <lt>esc>:noh<lt>CR><CR>
+
+
 :noremap <right>	zlM
 :noremap <down>		<c-e>M
 :noremap <left>		zhMh
@@ -307,6 +306,7 @@ endfunction
 "sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 call plug#begin()
 	Plug 'rmagatti/auto-session'
+	Plug 'anuvyklack/hydra.nvim'
 
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'hrsh7th/cmp-nvim-lsp'
@@ -325,8 +325,65 @@ call plug#end()
 
 set completeopt=menu,menuone,noselect
 
+
 lua <<EOF
 
+-- Hydra Submodes
+  local Scrollmode = require('hydra')
+  Scrollmode({
+    name = 'free scroll',
+    --hint = [[]],
+    mode = 'n',
+    config = {
+	  invoke_on_body = true,
+      on_key = function()
+      end,
+      on_enter = function()
+        vim.o.wrap = false
+    	vim.o.virtualedit = "all"
+    	vim.o.cursorline = false
+    	vim.o.guicursor = "a:ver25"
+      end,
+      on_exit = function()
+        -- No need to set vim.o state back here
+      end,
+    },
+    body = 'zf',
+    heads = {
+	  { 'h', 'h' },
+      { 'j', 'j' },
+      { 'k', 'k' },
+      { 'l', 'l' },
+      { 'H', '2h' },
+      { 'J', '2j' },
+      { 'K', '2k' },
+      { 'L', '2l' },
+    }
+  })
+
+  --local Treemode = require('hydra')
+  --Treemode({
+  --  name = 'Tree edit',
+  --  --hint = [[]],
+  --  mode = 'n',
+  --  config = {
+  --    invoke_on_body = true,
+  --    on_enter = function()
+  --    end,
+  --    on_exit = function()
+  --      -- No need to set vim.o state back here
+  --    end
+  --  },
+  --  body = 'zt',
+  --  heads = {
+  --    { 'j', 'j' },
+  --    { 'k', 'k' },
+  --    { 'i', 'i' },
+  --  }
+  --})
+
+
+-- Autosession
   require("auto-session").setup {
     bypass_session_save_file_types = nil,
     cwd_change_handling = {
