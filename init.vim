@@ -102,10 +102,30 @@ function! TabLine()
 endfunction
 
 
-":set timeoutlen=100
 :set mouse=a
-:autocmd VimEnter * aunmenu PopUp.How-to\ disable\ mouse
-:autocmd VimEnter * aunmenu PopUp.-1-
+:set nomousefocus
+:set mousemodel=extend
+:map <MiddleMouse> <nop>
+:map <2-MiddleMouse> <nop>
+:map <3-MiddleMouse> <nop>
+:map <4-MiddleMouse> <nop>
+:map <A-RightMouse> <nop>
+:map <ScrollWheelUp> <nop>
+:map <S-ScrollWheelUp> <nop>
+:map <C-ScrollWheelUp> <nop>
+:map <ScrollWheelDown> <nop>
+:map <S-ScrollWheelDown> <nop>
+:map <C-ScrollWheelDown> <nop>
+:map <ScrollWheelLeft> <nop>
+:map <S-ScrollWheelLeft> <nop>
+:map <C-ScrollWheelLeft> <nop>
+:map <ScrollWheelRight> <nop>
+:map <S-ScrollWheelRight> <nop>
+:map <C-ScrollWheelRight> <nop>
+":autocmd VimEnter * aunmenu PopUp.How-to\ disable\ mouse
+":autocmd VimEnter * aunmenu PopUp.-1-
+
+":set timeoutlen=100
 :set wrap
 :set sel=old
 :set virtualedit=block
@@ -331,7 +351,7 @@ lua <<EOF
 -- Hydra Submodes
   local Scrollmode = require('hydra')
   Scrollmode({
-    name = 'free scroll',
+    name = 'Free scroll',
     --hint = [[]],
     mode = 'n',
     config = {
@@ -341,7 +361,7 @@ lua <<EOF
       on_enter = function()
         vim.o.wrap = false
     	vim.o.virtualedit = "all"
-    	vim.o.cursorline = false
+    	vim.o.cul = false
     	vim.o.guicursor = "a:ver25"
       end,
       on_exit = function()
@@ -349,15 +369,28 @@ lua <<EOF
       end,
     },
     body = 'zf',
+    body = '<MiddleMouse>',
     heads = {
-	  { 'h', 'h' },
-      { 'j', 'j' },
-      { 'k', 'k' },
-      { 'l', 'l' },
-      { 'H', '2h' },
-      { 'J', '2j' },
-      { 'K', '2k' },
-      { 'L', '2l' },
+	  { '<MiddleMouse>', '', {desc=false} },
+	  { '<1-MiddleMouse>', '0', {desc=false} },
+	  { '<2-MiddleMouse>', '0', {desc=false} },
+	  { '<3-MiddleMouse>', '0', {desc=false} },
+	  { 'h', 'zhh' },
+      { 'j', '<c-e>M' },
+      { 'k', '<c-y>M' },
+      { 'l', 'lzl' },
+      { '<C-h>', '2zh2h', {desc=false} },
+      { '<C-j>', '2<c-e>M', {desc=false} },
+      { '<C-k>', '2<c-y>M', {desc=false} },
+      { '<C-l>', '2l2zl', {desc=false} },
+      { '<ScrollWheelLeft>', '4zh4h' },
+      { '<ScrollWheelDown>', '2<c-e>M' },
+      { '<ScrollWheelUp>', '2<c-y>M' },
+      { '<ScrollWheelRight>', '4l4zl' },
+	  { '<C-ScrollWheelLeft>', '2zh2h', {desc=false} },
+      { '<C-ScrollWheelDown>', '<c-e>M', {desc=false} },
+      { '<C-ScrollWheelUp>', '<c-y>M', {desc=false} },
+      { '<C-ScrollWheelRight>', '2l2zl', {desc=false} },
     }
   })
 
