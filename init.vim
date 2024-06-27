@@ -171,7 +171,7 @@ endfunction
 :noremap <up>		<c-y>M
 :noremap <c-down>	2<c-e>M
 :noremap <c-up>		2<c-y>M
-:noremap <c-end>	<>
+:noremap <c-end>	<end>
 
 :noremap <silent> <A-a> :set foldlevel=0<CR>
 :noremap <C-a> za
@@ -365,7 +365,7 @@ lua <<EOF
     	vim.o.guicursor = "a:ver25"
       end,
       on_exit = function()
-        -- No need to set vim.o state back here
+        -- No need to set vim.o state back here, only vim.opt
       end,
     },
     body = 'zf',
@@ -393,27 +393,6 @@ lua <<EOF
       { '<C-ScrollWheelRight>', '2l2zl', {desc=false} },
     }
   })
-
-  --local Treemode = require('hydra')
-  --Treemode({
-  --  name = 'Tree edit',
-  --  --hint = [[]],
-  --  mode = 'n',
-  --  config = {
-  --    invoke_on_body = true,
-  --    on_enter = function()
-  --    end,
-  --    on_exit = function()
-  --      -- No need to set vim.o state back here
-  --    end
-  --  },
-  --  body = 'zt',
-  --  heads = {
-  --    { 'j', 'j' },
-  --    { 'k', 'k' },
-  --    { 'i', 'i' },
-  --  }
-  --})
 
 
 -- Autosession
