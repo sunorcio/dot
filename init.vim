@@ -180,8 +180,8 @@ endfunction
 
 :noremap! <C-b> <left>
 :noremap! <C-f> <right>
-:noremap  <C-b> 10<c-y>M0
-:noremap  <C-f> 10<c-e>M0
+:noremap  <C-b> [][{zz
+:noremap  <C-f> ]m[{]}][[{zz
 :noremap  <C-n> <c-e>
 :noremap  <C-p> <c-y>
 
