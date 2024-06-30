@@ -89,7 +89,7 @@ function! TabLine()
     " switch to no underlining and add final space
     let s .= ' '
   endfor
-  if tabpagenr() < 10
+  if tabpagenr() < 7
     let s .= '%#Title#\%#TabLineFill#%<%T'
   else
     let s .= '%#Title#\%T'
