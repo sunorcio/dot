@@ -222,7 +222,7 @@ endfunction
 :tnoremap <esc> <c-\><c-n>
 ":tnoremap <C-h> <c-b>
 ":tnoremap <C-l> <c-f>
-:nnoremap <silent> <esc> <esc>:noh<CR>
+:nnoremap <silent> <esc> <esc>:noh<CR>:set cmdheight=0<CR>
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
 ":noremap <A-;> :!./
@@ -231,7 +231,7 @@ endfunction
 :noremap <silent> <A-t> :tabnew<CR>:ter<CR>i
 :noremap <silent> <A-o> :e %:h<CR>
 :noremap <silent> <A-r> :so $MYVIMRC<CR>
-:noremap <silent> <A-c> :set cmdheight=1<CR>:nnoremap <lt>silent> <lt>esc> :set cmdheight=0<lt>CR><lt>esc>:noh<lt>CR><CR>
+:noremap <silent> <A-c> :set cmdheight=1<CR>
 :noremap <silent> <S-A-w> :SessionSave<CR>
 :noremap <silent> <S-A-q> :qa<CR>
 ":noremap <A-M> :mk<CR>
@@ -368,7 +368,6 @@ lua <<EOF
         -- No need to set vim.o state back here, only vim.opt
       end,
     },
-    body = 'zf',
     body = '<MiddleMouse>',
     heads = {
 	  { '<MiddleMouse>', '', {desc=false} },
@@ -393,7 +392,6 @@ lua <<EOF
       { '<C-ScrollWheelRight>', '2l2zl', {desc=false} },
     }
   })
-
 
 -- Autosession
   require("auto-session").setup {
