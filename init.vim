@@ -205,6 +205,7 @@ endfunction
 :noremap	<C-h>	0
 
 :noremap <silent> <C-A-j> <c-w>v<c-w>w<c-w>=:e %:h<CR>
+:noremap <silent> <C-A-k> <c-w>s<c-w>w<c-w>=:e %:h<CR>
 :noremap <A-j>	<c-w>w<c-w>=
 :noremap <A-k>	<c-w>R<c-w>w<c-w>=
 :noremap <S-j>	<c-w>L
