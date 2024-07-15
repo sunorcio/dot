@@ -219,8 +219,8 @@ endfunction
 :noremap <silent> <S-l>	<esc>:tabmove +1<CR>
 :noremap <silent> <S-h>	<esc>:tabmove -1<CR>
 
-:tnoremap ; <c-\><c-n>:
-:tnoremap <esc> <c-\><c-n>
+:tnoremap ; <c-\><c-n>
+":tnoremap <esc> <c-\><c-n>
 ":tnoremap <C-h> <c-b>
 ":tnoremap <C-l> <c-f>
 :nnoremap <silent> <esc> <esc>:noh<CR>:set cmdheight=0<CR>
