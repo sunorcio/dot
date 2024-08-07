@@ -1522,7 +1522,7 @@ setlayout(const Arg *arg)
 		drawbar(selmon);
 }
 
-//sunorcio
+//
 static Arg hackbuffer = {0};
 /* arg > 1.0 will set mfact absolutely */
 void

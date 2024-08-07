@@ -227,9 +227,9 @@ endfunction
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
 ":noremap <A-;> :!./
-:noremap <silent> <A-CR> :make -j4<CR>
-:noremap <silent> <A-m> :make -C %:h -j4<CR>
 :noremap <silent> <A-t> :tabnew<CR>:ter<CR>i
+:noremap <silent> <A-CR> :tabnew<CR>:ter<CR>imake -j$(nproc)<CR>
+:noremap <silent> <A-m> :make -C %:h -j$(nproc)<CR>
 :noremap <silent> <A-o> :e %:h<CR>
 :noremap <silent> <A-r> :so $MYVIMRC<CR>
 :noremap <silent> <A-c> :set cmdheight=1<CR>
