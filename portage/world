@@ -12,6 +12,7 @@ cross-x86_64-w64-mingw32/gcc
 cross-x86_64-w64-mingw32/mingw64-runtime
 dev-debug/lldb
 dev-libs/cglm
+dev-python/pynvim
 dev-util/github-cli
 dev-vcs/git
 media-fonts/kochi-substitute
@@ -28,7 +29,6 @@ media-sound/bluez-alsa
 media-video/pipewire
 net-analyzer/bmon
 net-ftp/lftp
-net-im/discord
 net-misc/chrony
 net-p2p/ctorrent
 net-wireless/bluez

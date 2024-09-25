@@ -1,8 +1,9 @@
 :autocmd! BufNewFile,BufRead *.h set filetype=c
 
+:set notermguicolors
 ":set background=dark
 :colorscheme habamax
-:highlight Normal		ctermfg=248 ctermbg=16
+:highlight Normal		ctermfg=249 ctermbg=16
 :highlight Comment		ctermfg=240
 :highlight Type			ctermfg=65
 :highlight Identifier	ctermfg=138 "181
@@ -89,7 +90,7 @@ function! TabLine()
     " switch to no underlining and add final space
     let s .= ' '
   endfor
-  if tabpagenr() < 7
+  if tabpagenr() < 5
     let s .= '%#Title#\%#TabLineFill#%<%T'
   else
     let s .= '%#Title#\%T'
@@ -124,6 +125,10 @@ endfunction
 :map <C-ScrollWheelRight> <nop>
 ":autocmd VimEnter * aunmenu PopUp.How-to\ disable\ mouse
 ":autocmd VimEnter * aunmenu PopUp.-1-
+
+let g:netrw_sort_by="name"
+let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,\.frag$,\.data$,\~\=\*$,*,\.o$,\.obj$,\.info$,\.swp$,\.bak$,\~$'
+
 
 ":set timeoutlen=100
 :set wrap
@@ -219,8 +224,9 @@ endfunction
 :noremap <silent> <S-l>	<esc>:tabmove +1<CR>
 :noremap <silent> <S-h>	<esc>:tabmove -1<CR>
 
-:tnoremap ; <c-\><c-n>:
-":tnoremap <esc> <c-\><c-n>
+:tnoremap ;; <c-\><c-n>:
+:tnoremap ;<esc> <c-\><c-n>
+:tnoremap ;q <c-u>exit<CR><c-\><c-n>:tabclose<CR>:tabprevious<CR>
 ":tnoremap <C-h> <c-b>
 ":tnoremap <C-l> <c-f>
 :nnoremap <silent> <esc> <esc>:noh<CR>:set cmdheight=0<CR>
@@ -323,11 +329,14 @@ endfunction
 
 
 
-"pluginstall:
-"sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+"pluginstall:	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
 call plug#begin()
 	Plug 'rmagatti/auto-session'
 	Plug 'anuvyklack/hydra.nvim'
+	Plug 'tikhomirov/vim-glsl'
+"	Plug 'puremourning/vimspector'
 
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'hrsh7th/cmp-nvim-lsp'
@@ -338,13 +347,17 @@ call plug#begin()
 	Plug 'hrsh7th/cmp-vsnip'
 	Plug 'hrsh7th/vim-vsnip'
 
-	Plug 'tikhomirov/vim-glsl'
 	set encoding=UTF-8
 
 call plug#end()
 
 
+"let g:vimspector_enable_mappings = 'HUMAN'
+"let g:vimspector_install_gadgets = [ '--verbose', '--enable-c' ]
+
 set completeopt=menu,menuone,noselect
+
+
 
 
 lua <<EOF
@@ -528,4 +541,3 @@ lua <<EOF
 
 
 EOF
-
