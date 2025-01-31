@@ -126,6 +126,11 @@ endfunction
 ":autocmd VimEnter * aunmenu PopUp.How-to\ disable\ mouse
 ":autocmd VimEnter * aunmenu PopUp.-1-
 
+
+let g:netrw_banner=0
+"\(^\|\s\s\)\zs\.\S\+
+let g:netrw_liststyle = 3
+let g:netrw_list_hide = '.*\.o,.*\.o\.json'
 let g:netrw_sort_by="name"
 let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,\.frag$,\.data$,\~\=\*$,*,\.o$,\.obj$,\.info$,\.swp$,\.bak$,\~$'
 
@@ -138,10 +143,10 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :set showbreak=\ 
 :set number
 ":set signcolumn=yes
-:set tabstop=4
-:set shiftwidth=4
+:set tabstop=2
+:set shiftwidth=2
 :set smarttab
-:set softtabstop=4
+:set softtabstop=2
 :set clipboard^=unnamed,unnamedplus
 :set switchbuf=useopen,usetab,newtab
 :set cmdheight=0
@@ -314,13 +319,19 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :nnoremap <silent> <A-p> V<esc>`>a */<esc>`<i/* <esc>
 :vnoremap <silent> <A-d> :s/\/\* *\\| *\*\/\\|/<CR>:noh<CR>
 :nnoremap <silent> <A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>:noh<CR>
+
+"this sucks but does work
 ":vnoremap <A-d>p :s/\/\* *\\| *\*\/\\|   *//<CR>`>a */<esc>`<i/* <esc>
 ":vnoremap <A-d><A-p> :s/\/\* *\\| *\*\/\\|   *//<CR>`>a */<esc>`<i/* <esc>
  ":s/\/\* \\| \*\//   /<CR>
 :vnoremap <silent> <A-s>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
+:vnoremap <silent> <A-s><A-p> :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
 :nnoremap <silent> <A-s>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
+:nnoremap <silent> <A-s><A-p> :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
 :vnoremap <silent> <A-s>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
+:vnoremap <silent> <A-s><A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
 :nnoremap <silent> <A-s>d :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
+:nnoremap <silent> <A-s><A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>gv:s/\/\/ /\/\* /<CR>gv:s/ \/\// \*\//<CR>:noh<CR>
 
 :vnoremap <C-A-p> <esc>`<V`>>gvc<space><BS>}}<esc>POfor(i = 0;i<0;i++){<esc>O{unsigned int i;<esc>jj$
 :vnoremap <S-A-p> <esc>`<V`>>gvc<space><BS>}<esc>POif(){<left><left>
@@ -336,7 +347,7 @@ call plug#begin()
 	Plug 'rmagatti/auto-session'
 	Plug 'anuvyklack/hydra.nvim'
 	Plug 'tikhomirov/vim-glsl'
-"	Plug 'puremourning/vimspector'
+	Plug 'mfussenegger/nvim-dap'
 
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'hrsh7th/cmp-nvim-lsp'
@@ -352,8 +363,7 @@ call plug#begin()
 call plug#end()
 
 
-"let g:vimspector_enable_mappings = 'HUMAN'
-"let g:vimspector_install_gadgets = [ '--verbose', '--enable-c' ]
+
 
 set completeopt=menu,menuone,noselect
 
@@ -361,6 +371,10 @@ set completeopt=menu,menuone,noselect
 
 
 lua <<EOF
+
+
+-- Set up nvim-dap
+--  local Scrollmode = require('hydra')
 
 -- Hydra Submodes
   local Scrollmode = require('hydra')
