@@ -218,8 +218,8 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :noremap	<C-d>	<nop>
 :noremap	<C-u>	<nop>
 
-:noremap <silent> <C-A-j> <c-w>v<c-w>w<c-w>=:e %:h<CR>
-:noremap <silent> <C-A-k> <c-w>s<c-w>w<c-w>=:e %:h<CR>
+:noremap <silent> <C-A-j> <c-w>v<c-w>=:e %:h<CR>
+:noremap <silent> <C-A-k> <c-w>s<c-w>=:e %:h<CR>
 :noremap <A-j>	<c-w>w<c-w>=
 :noremap <A-k>	<c-w>R<c-w>w<c-w>=
 :noremap <S-j>	<c-w>L
