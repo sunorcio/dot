@@ -142,13 +142,15 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 ":set nowrapscan
 :set showbreak=\ 
 :set number
-":set signcolumn=yes
+:set signcolumn=auto
 :set tabstop=2
 :set shiftwidth=2
 :set smarttab
 :set softtabstop=2
 :set clipboard^=unnamed,unnamedplus
 :set switchbuf=useopen,usetab,newtab
+:set splitright
+:set splitbelow
 :set cmdheight=0
 ":set showcmd
 ":set showcmdloc=statusline
@@ -213,6 +215,8 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :vnoremap	<C-k>	2k
 :noremap	<C-l>	$
 :noremap	<C-h>	0
+:noremap	<C-d>	<nop>
+:noremap	<C-u>	<nop>
 
 :noremap <silent> <C-A-j> <c-w>v<c-w>w<c-w>=:e %:h<CR>
 :noremap <silent> <C-A-k> <c-w>s<c-w>w<c-w>=:e %:h<CR>
@@ -234,7 +238,7 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :tnoremap ;q <c-u>exit<CR><c-\><c-n>:tabclose<CR>:tabprevious<CR>
 ":tnoremap <C-h> <c-b>
 ":tnoremap <C-l> <c-f>
-:nnoremap <silent> <esc> <esc>:noh<CR>:set cmdheight=0<CR>
+:nnoremap <silent> <esc> <esc>:noh<CR>:set cmdheight=0<CR>:set statusline=<CR>
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
 ":noremap <A-;> :!./
@@ -373,36 +377,63 @@ set completeopt=menu,menuone,noselect
 lua <<EOF
 
 
--- Set up nvim-dap
---  local Scrollmode = require('hydra')
+  local dap = require('dap')
+  dap.adapters.lldb = {
+    type = 'executable',
+    command = '/usr/bin/lldb-dap',
+    name = 'lldb',
+  }
+
+  dap.configurations.c = {
+		{
+			name = 'Launch',
+			type = 'lldb',
+			request = 'launch',
+			preRunCommands = 'make TARGET_BIN=a.out TARGET_DEBUG=on',
+			program = vim.fn.getcwd() .. '/a.out'--[[function()
+						return vim.fn.input('Path to executable: ',
+								vim.fn.getcwd() .. '/', 'file')
+					end--]],
+			cwd = '${workspaceFolder}',
+			stopOnEntry = false,
+			args = {},
+		},
+  }
 
 -- Hydra Submodes
+	--middlemouse free-scrolling
   local Scrollmode = require('hydra')
   Scrollmode({
-    name = 'Free scroll',
+    name = 'FREESCROLL',
     --hint = [[]],
     mode = 'n',
     config = {
+		color = 'pink',
+			hint = {
+				type = 'statusline',
+			},
 	  invoke_on_body = true,
       on_key = function()
       end,
       on_enter = function()
         vim.o.wrap = false
-    	vim.o.virtualedit = "all"
-    	vim.o.cul = false
-    	vim.o.guicursor = "a:ver25"
+				vim.o.virtualedit = "all"
+				vim.o.cul = false
+				vim.o.guicursor = "a:ver25"
       end,
       on_exit = function()
-        -- No need to set vim.o state back here, only vim.opt
+        -- No need to reset vim.o state, it will auto-reset
+				-- only vim.opt needs to be reset
       end,
     },
     body = '<MiddleMouse>',
     heads = {
-	  { '<MiddleMouse>', '', {desc=false} },
-	  { '<1-MiddleMouse>', '0', {desc=false} },
-	  { '<2-MiddleMouse>', '0', {desc=false} },
-	  { '<3-MiddleMouse>', '0', {desc=false} },
-	  { 'h', 'zhh' },
+			{ '<esc>', ':set statusline=<CR>', {desc=false,exit=true,silent=true} },
+			{ '<MiddleMouse>', '', {desc=false} },
+			{ '<1-MiddleMouse>', '0', {desc=false} },
+			{ '<2-MiddleMouse>', '0', {desc=false} },
+			{ '<3-MiddleMouse>', '0', {desc=false} },
+			{ 'h', 'zhh', },
       { 'j', '<c-e>M' },
       { 'k', '<c-y>M' },
       { 'l', 'lzl' },
@@ -414,10 +445,61 @@ lua <<EOF
       { '<ScrollWheelDown>', '2<c-e>M' },
       { '<ScrollWheelUp>', '2<c-y>M' },
       { '<ScrollWheelRight>', '4l4zl' },
-	  { '<C-ScrollWheelLeft>', '2zh2h', {desc=false} },
+			{ '<C-ScrollWheelLeft>', '2zh2h', {desc=false} },
       { '<C-ScrollWheelDown>', '<c-e>M', {desc=false} },
       { '<C-ScrollWheelUp>', '<c-y>M', {desc=false} },
       { '<C-ScrollWheelRight>', '2l2zl', {desc=false} },
+    }
+  })
+	--debugging functions
+  local Debugmode = require('hydra')
+  Scrollmode({
+    name = 'DEBUG',
+    --hint = [[]],
+    mode = 'n',
+    config = {
+			color = 'pink',
+			hint = {
+				type = 'statusline',
+			},
+			buffer = nil,
+			invoke_on_body = true,
+      on_key = function()
+					end,
+      on_enter = function()
+						--vim.o.signcolumn = 'yes'
+						vim.o.cmdheight = 0
+					end,
+      on_exit = function()
+						-- No need to reset vim.o state, it will auto-reset
+						-- only vim.opt needs to be reset
+					end,
+    },
+    body = '<C-d>',
+    heads = {
+			{ '<esc>', ':set statusline=<CR>', {desc=false,exit=true,silent=true} },
+			{ '<C-d>', '', {desc=false} },
+			{ 'b', ':DapToggleBreakpoint<CR>',
+					{desc='break',silent=true,nowait=true} },
+			{ 'c', ':DapClearBreakpoints<CR>', 
+					{desc='clear',silent=true,nowait=true} },
+			{ 'r', ':DapContinue<CR>', {desc='run',silent=true,nowait=true} },
+			{ 't', ':DapTerminate<CR>', {desc='terminate',silent=true,nowait=true} },
+			{ '<S-j>', ':DapStepInto<CR>', {desc='step',silent=true,nowait=true} },
+			--{ '<S-h>', ':DapStepOut<CR>', {desc='out',silent=true,nowait=true} },
+			{ '<S-l>', ':DapStepOver<CR>', {desc='over',silent=true,nowait=true} },
+			{ '<space>', function() require('dap.ui.widgets').hover() end,
+					{desc='hover',silent=true,nowait=true} },
+			{ 'q', function() require('dap').repl.open() end,
+					{desc='repl',silent=true,nowait=true} },
+			{ 'p', function() require('dap.ui.widgets').preview() end,
+					{desc='preview',silent=true,nowait=true} },
+			{ 'f', function() local widgets = require('dap.ui.widgets')
+					widgets.centered_float(widgets.frames)end,
+					{desc='frame',silent=true,nowait=true} },
+			{ 's', function() local widgets = require('dap.ui.widgets')
+					widgets.centered_float(widgets.scopes) end,
+					{desc='scope',silent=true,nowait=true} },
     }
   })
 
@@ -493,10 +575,11 @@ lua <<EOF
     --})
 --  })
 
-  -- Set up lspconfig.
-  local capabilities = require('cmp_nvim_lsp').default_capabilities()-- Mappings.
+	-- Set up lspconfig.
+	-- Mappings.
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
 	
-  -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+  -- See `:help vim.diagnostic.*`
   local opts = { noremap=true, silent=true }
   vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
   vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
@@ -506,28 +589,38 @@ lua <<EOF
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
   local on_attach = function(client, bufnr)
-  --Disable semantic tokens for highlights
-  --client.server_capabilities.semanticTokensProvider = nil
+		--Disable semantic tokens for highlights
+		--client.server_capabilities.semanticTokensProvider = nil
 
-  -- Enable completion triggered by <c-x><c-o>
+		-- Enable completion triggered by <c-x><c-o>
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.declaration()<CR>", bufopts)
-  vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", bufopts)
-  vim.keymap.set("n", "gi", "<cmd>tab split | lua vim.lsp.buf.implementation()<CR>", bufopts)
-  vim.keymap.set("n", "gr", "<cmd>tab split | lua vim.lsp.buf.references()<CR>", bufopts)
-  vim.keymap.set("n", "gt", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>", bufopts)
-  vim.keymap.set("n", "<A-g>D", "<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
-  vim.keymap.set("n", "<A-g>d", "<cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
-  vim.keymap.set("n", "<A-g>i", "<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
-  vim.keymap.set("n", "<A-g>r", "<cmd>lua vim.lsp.buf.references()<CR>", bufopts)
-  vim.keymap.set("n", "<A-g>t", "<cmd>lua vim.lsp.buf.type_definition()<CR>", bufopts)
-  vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', '<space>j', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', '<space>k', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>w', vim.lsp.buf.rename, bufopts)
+		-- Mappings.
+		-- See `:help vim.lsp.*` for documentation on any of the below functions
+		local bufopts = { noremap=true, silent=true, buffer=bufnr }
+		vim.keymap.set("n", "gD",
+				"<cmd>tab split | lua vim.lsp.buf.declaration()<CR>", bufopts)
+		vim.keymap.set("n", "gd",
+				"<cmd>tab split | lua vim.lsp.buf.definition()<CR>", bufopts)
+		vim.keymap.set("n", "gi",
+				"<cmd>tab split | lua vim.lsp.buf.implementation()<CR>", bufopts)
+		vim.keymap.set("n", "gr",
+				"<cmd>tab split | lua vim.lsp.buf.references()<CR>", bufopts)
+		vim.keymap.set("n", "gt",
+				"<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>", bufopts)
+		vim.keymap.set("n", "<A-g>D",
+				"<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
+		vim.keymap.set("n", "<A-g>d",
+				"<cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
+		vim.keymap.set("n", "<A-g>i",
+				"<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
+		vim.keymap.set("n", "<A-g>r",
+				"<cmd>lua vim.lsp.buf.references()<CR>", bufopts)
+		vim.keymap.set("n", "<A-g>t",
+				"<cmd>lua vim.lsp.buf.type_definition()<CR>", bufopts)
+		vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, bufopts)
+		vim.keymap.set('n', '<space>j', vim.lsp.buf.hover, bufopts)
+		vim.keymap.set('n', '<space>k', vim.lsp.buf.signature_help, bufopts)
+		vim.keymap.set('n', '<space>w', vim.lsp.buf.rename, bufopts)
   end
 
   vim.diagnostic.config {
