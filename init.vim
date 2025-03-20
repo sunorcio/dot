@@ -34,72 +34,83 @@
 
 :set tabline=%!TabLine()
 function! TabLine()
-  let s = ''
+
+	let s = ''
+
   " loop through each tab page
-  for i in range(tabpagenr('$'))
-	if i + 1 == tabpagenr()
-	  let s .= '%#Title#/%#TabLineSel#'
-	else
-	  let s .= '%#Title#\%#TabLine#'
-	endif
-    "if i + 1 == tabpagenr()
+	for i in range(tabpagenr('$'))
+
+		" set separators based on current tab
+		if i + 1 == tabpagenr()
+			let s .= '%#Title#/%#TabLineSel#'
+		else
+			let s .= '%#Title#\%#TabLine#'
+		endif
+		"if i + 1 == tabpagenr()
     "  let s .= '%#TabLineSel#' " WildMenu
     "else
     "  let s .= '%#Title#'
     "endif
+
     " set the tab page number (for mouse clicks)
     let s .= '%' . (i + 1) . 'T '
+
     " set page number string
     "let s .= i + 1 . ''
     "let s .= '\ '
+
     " get buffer names and statuses
     let n = ''  " temp str for buf names
     let m = 0   " &modified counter
     let buflist = tabpagebuflist(i + 1)
+
     " loop through each buffer in a tab
     for b in buflist
-      if getbufvar(b, "&buftype") == 'help'
-        " let n .= '[H]' . fnamemodify(bufname(b), ':t:s/.txt$//')
-      elseif getbufvar(b, "&buftype") == 'quickfix'
-        " let n .= '[Q]'
-      elseif getbufvar(b, "&modifiable")
+			"if getbufvar(b, "&buftype") == 'help'
+			"	let n .= '[H]' . fnamemodify(bufname(b), ':t:s/.txt$//')
+			"elseif getbufvar(b, "&buftype") == 'quickfix'
+			"	let n .= '[Q]'
+			if getbufvar(b, "&modifiable")
         let n .= fnamemodify(bufname(b), ':t') . ', '  "pathshorten(bufname(b))
       endif
+
       if getbufvar(b, "&modified")
         let m += 1
       endif
     endfor
+
     " let n .= fnamemodify(bufname(buflist[tabpagewinnr(i + 1) - 1]), ':t')
     let n = substitute(n, ', $', '', '')
+
     " add modified label
-    if m > 0
-      let s .= '+'
-      " let s .= '[' . m . '+]'
+    if m == 1
+			let s .= '+'
+		elseif m > 1
+			let s .= '++'
     endif
-    if i + 1 == tabpagenr()
-      let s .= ' %#TabLineSel#'
-    else
-      let s .= ' %#TabLine#'
-    endif
+
     " add buffer names
     if n == ''
-      let s.= '[New]'
+      let s .= '[New]'
     else
-      let s .= n . ' '
+      let s .= n
     endif
+
     " switch to no underlining and add final space
     let s .= ' '
   endfor
+
   if tabpagenr() < 5
-    let s .= '%#Title#\%#TabLineFill#%<%T'
+    let s .= '%#Title#\%#TabLineFill#%<'
   else
-    let s .= '%#Title#\%T'
+    let s .= '%#Title#\'
   endif
-   "right-aligned close button
-   "if tabpagenr('$') > 1
-     "let s .= '%=%#TabLineFill#%999Xclose'
-   "endif
-  return s
+
+	" right-aligned close button
+	"if tabpagenr('$') > 1
+		"let s .= '%=%#TabLineFill#%999Xclose'
+	"endif
+	return s
 endfunction
 
 
@@ -127,10 +138,16 @@ endfunction
 ":autocmd VimEnter * aunmenu PopUp.-1-
 
 
+"let g:loaded_netrw = 1
+"let g:loaded_netrwPlugin = 1
+"let g:loaded_netrwSettings = 1
+"let g:loaded_netrwFileHandlers = 1
+"let g:loaded_netrw_gitignore = 1
+
 let g:netrw_banner=0
 "\(^\|\s\s\)\zs\.\S\+
 let g:netrw_liststyle = 3
-let g:netrw_list_hide = '.*\.o,.*\.o\.json'
+let g:netrw_list_hide = '.*\.o,.*\.o\.json,.*\.d'
 let g:netrw_sort_by="name"
 let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,\.frag$,\.data$,\~\=\*$,*,\.o$,\.obj$,\.info$,\.swp$,\.bak$,\~$'
 
@@ -151,6 +168,7 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :set switchbuf=useopen,usetab,newtab
 :set splitright
 :set splitbelow
+:set showtabline=2
 :set cmdheight=0
 ":set showcmd
 ":set showcmdloc=statusline
@@ -218,16 +236,17 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :noremap	<C-d>	<nop>
 :noremap	<C-u>	<nop>
 
-:noremap <silent> <C-A-j> <c-w>v<c-w>=:e %:h<CR>
-:noremap <silent> <C-A-k> <c-w>s<c-w>=:e %:h<CR>
-:noremap <A-j>	<c-w>w<c-w>=
-:noremap <A-k>	<c-w>R<c-w>w<c-w>=
-:noremap <S-j>	<c-w>L
-:noremap <S-k>	<c-w>K
+:noremap <silent> <C-A-j> <c-w>v<c-w>L<c-w>=:Explore<CR>
+:noremap <silent> <C-A-k> <c-w>s<c-w>=:Explore<CR>
+:noremap <A-j> <c-w>w<c-w>=
+":noremap <A-k>	<c-w>R<c-w>w<c-w>=
+:noremap <A-k> <c-w><bar>
+:noremap <S-j> <c-w>L
+:noremap <S-k> <c-w>K
 :nnoremap -		<S-j>
 :nnoremap =		:=
 :noremap ?		<S-k>
-:noremap <silent> <C-A-l>	<esc>:tabnew<CR>:e .<CR>
+:noremap <silent> <C-A-l>	<esc>:tabnew<CR>:Explore<CR>
 :noremap <silent> <A-l>	<esc>:tabnext<CR>
 :noremap <silent> <A-h>	<esc>:tabprevious<CR>
 :noremap <silent> <S-l>	<esc>:tabmove +1<CR>
@@ -249,6 +268,8 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :noremap <silent> <A-r> :so $MYVIMRC<CR>
 :noremap <silent> <A-c> :set cmdheight=1<CR>
 :noremap <silent> <S-A-w> :SessionSave<CR>
+:noremap <silent> <A-q> :q<CR>
+:noremap <silent> <C-A-q> :tabclose<CR>
 :noremap <silent> <S-A-q> :qa<CR>
 ":noremap <A-M> :mk<CR>
 ":noremap <S-A-M> :!rm .exrc<CR>
