@@ -79,15 +79,19 @@ function! TabLine()
       endif
     endfor
 
-    " let n .= fnamemodify(bufname(buflist[tabpagewinnr(i + 1) - 1]), ':t')
-    let n = substitute(n, ', $', '', '')
+    "let n .= fnamemodify(bufname(buflist[tabpagewinnr(i + 1) - 1]), ':t')
+    let n = substitute(n, '\( ,\|, $\)\+', '', '')
+    let n = substitute(n, '\( ,\|, $\)\+', '', '')
 
     " add modified label
-    if m == 1
-			let s .= '+'
-		elseif m > 1
-			let s .= '++'
-    endif
+    if m > 0
+			let s .= '+ '
+		endif
+    "if m == 1
+		"	let s .= '+'
+		"elseif m > 1
+		"	let s .= '++'
+    "endif
 
     " add buffer names
     if n == ''
