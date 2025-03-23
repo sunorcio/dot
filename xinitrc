@@ -60,4 +60,5 @@ fi
 
 
 
+echo 1 > ~/dot/initvar
 exec ~/.startdwm

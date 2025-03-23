@@ -7,7 +7,6 @@ if [[ -f ~/.bashrc ]] ; then
 fi
 
 
-echo 1 > ~/dot/initvar
 
 
-startx
+startx >/dev/null 2>&1
