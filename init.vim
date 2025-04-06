@@ -192,20 +192,20 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 ":autocmd ModeChanged *:[v] set cuc
 :autocmd ModeChanged *:n set nocuc | set culopt=number
 
-:autocmd VimEnter * noremap <c-right> 2zl
-:autocmd VimEnter * noremap <c-left> 2zh2h
-":noremap <c-right>	2zl
-":noremap <c-left>	2zh
+:autocmd VimEnter * noremap <C-right> 2zl
+:autocmd VimEnter * noremap <C-left> 2zh2h
+":noremap <C-right>	2zl
+":noremap <C-left>	2zh
 ":noremap t :noremap <lt>esc> :echo "asdf"<lt>CR><CR>
 
 
-:noremap <right>	zlM
-:noremap <down>		<c-e>M
-:noremap <left>		zhMh
-:noremap <up>		<c-y>M
-:noremap <c-down>	2<c-e>M
-:noremap <c-up>		2<c-y>M
-:noremap <c-end>	<end>
+:noremap <right> zlM
+:noremap <down> <C-e>M
+:noremap <left> zhMh
+:noremap <up> <C-y>M
+:noremap <C-down> 2<C-e>M
+:noremap <C-up> 2<C-y>M
+:noremap <C-end> <end>
 
 :noremap <silent> <A-a> :set foldlevel=0<CR>
 :noremap <C-a> za
@@ -242,11 +242,11 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 
 :noremap <silent> <C-A-j> <c-w>v<c-w>L<c-w>=:Explore<CR>
 :noremap <silent> <C-A-k> <c-w>s<c-w>=:Explore<CR>
-:noremap <A-j> <c-w>w<c-w>=
+:noremap <A-j> <C-w>w<C-w>=
 ":noremap <A-k>	<c-w>R<c-w>w<c-w>=
-:noremap <A-k> <c-w><bar>
-:noremap <S-j> <c-w>L
-:noremap <S-k> <c-w>K
+:noremap <A-k> <C-w><bar>
+:noremap <S-j> <C-w>L
+:noremap <S-k> <C-w>K
 :nnoremap -		<S-j>
 :nnoremap =		:=
 :noremap ?		<S-k>
@@ -256,15 +256,16 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :noremap <silent> <S-l>	<esc>:tabmove +1<CR>
 :noremap <silent> <S-h>	<esc>:tabmove -1<CR>
 
-:tnoremap ;; <c-\><c-n>:
-:tnoremap ;<esc> <c-\><c-n>
-:tnoremap ;q <c-u>exit<CR><c-\><c-n>:tabclose<CR>:tabprevious<CR>
-":tnoremap <C-h> <c-b>
-":tnoremap <C-l> <c-f>
+:tnoremap ;; <C-\><C-n>:
+:tnoremap ;<esc> <C-\><C-n>
+:tnoremap ;q <C-u>exit<CR><C-\><C-n>:tabclose<CR>:tabprevious<CR>
+":tnoremap <C-h> <C-b>
+":tnoremap <C-l> <C-f>
 :nnoremap <silent> <esc> <esc>:noh<CR>:set cmdheight=0<CR>:set statusline=<CR>
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
 ":noremap <A-;> :!./
+:noremap <A-w> ebve"ry:grep -r <C-r>r .<CR>:cfdo %s/<C-r>r/
 :noremap <silent> <A-t> :tabnew<CR>:ter<CR>i
 :noremap <silent> <A-CR> :tabnew<CR>:ter<CR>imake -j$(nproc)<CR>
 :noremap <silent> <A-m> :make -C %:h -j$(nproc)<CR>
@@ -298,8 +299,8 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 ":noremap q; q:
 
 :vnoremap a A
-:vnoremap a<c-r> A<c-r>
-:vnoremap a<c-r>p A<c-r>+
+:vnoremap a<C-r> A<C-r>
+:vnoremap a<C-r>p A<C-r>+
 ":vnoremap a<tab> A<tab>
 :vnoremap i I
 
@@ -311,9 +312,9 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :vnoremap / "qy/\V<C-R>q<CR>N
 :noremap s "_s
 :vnoremap S :s/
-:vnoremap <c-s> :s/\V<c-r>+/
+:vnoremap <C-s> :s/\V<c-r>+/
 :nnoremap S :%s/
-:nnoremap <c-s> :%s/\V<c-r>+/
+:nnoremap <C-s> :%s/\V<c-r>+/
 :nnoremap x c<right>
 :nnoremap X c
 :vnoremap x c
@@ -338,11 +339,11 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 
 :vnoremap p P
 :vnoremap P p
-:inoremap <c-r>p <c-r>+
-:cnoremap <c-r>p <c-r>+
+:inoremap <C-r>p <C-r>+
+:cnoremap <C-r>p <C-r>+
 :vnoremap \ <C-v>077lA\<esc>
-:vnoremap <silent> <A-f> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>:noh<CR>
-":nnoremap <silent> <A-f> :s/    \\|   \t\\|  \t\\| \t/\t/<CR>:noh<CR>
+:vnoremap <silent> <A-f> :s/  \\| \t/\t/<CR>:noh<CR>
+":nnoremap <silent> <A-f> :s/  \\| \t/\t/<CR>:noh<CR>
 ":noremap <silent> <A-F> :s/\t/    /<CR>:noh<CR>
 :vnoremap <silent> <A-p> <esc>`>a */<esc>`<i/* <esc>
 :nnoremap <silent> <A-p> V<esc>`>a */<esc>`<i/* <esc>
@@ -352,7 +353,7 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 "this sucks but does work
 ":vnoremap <A-d>p :s/\/\* *\\| *\*\/\\|   *//<CR>`>a */<esc>`<i/* <esc>
 ":vnoremap <A-d><A-p> :s/\/\* *\\| *\*\/\\|   *//<CR>`>a */<esc>`<i/* <esc>
- ":s/\/\* \\| \*\//   /<CR>
+":s/\/\* \\| \*\//   /<CR>
 :vnoremap <silent> <A-s>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
 :vnoremap <silent> <A-s><A-p> :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
 :nnoremap <silent> <A-s>p :s/\/\* /\/\/ /<CR>gv:s/ \*\// \/\//<CR>`>a */<esc>`<i/* <esc>:noh<CR>
