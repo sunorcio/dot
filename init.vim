@@ -261,11 +261,14 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :tnoremap ;q <C-u>exit<CR><C-\><C-n>:tabclose<CR>:tabprevious<CR>
 ":tnoremap <C-h> <C-b>
 ":tnoremap <C-l> <C-f>
+
 :nnoremap <silent> <esc> <esc>:noh<CR>:set cmdheight=0<CR>:set statusline=<CR>
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
 ":noremap <A-;> :!./
-:noremap <A-w> ebve"ry:grep -r <C-r>r .<CR>:cfdo %s/<C-r>r/
+
+:noremap <A-w> ebve"ry:grep -r <C-r>r .<CR>:cfdo %s/\<<C-r>r\>/
+":tabdo windo s/<C-r>r/
 :noremap <silent> <A-t> :tabnew<CR>:ter<CR>i
 :noremap <silent> <A-CR> :tabnew<CR>:ter<CR>imake -j$(nproc)<CR>
 :noremap <silent> <A-m> :make -C %:h -j$(nproc)<CR>
