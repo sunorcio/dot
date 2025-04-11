@@ -244,7 +244,7 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :noremap <silent> <C-A-k> <c-w>s<c-w>=:Explore<CR>
 :noremap <A-j> <C-w>w<C-w>=
 ":noremap <A-k>	<c-w>R<c-w>w<c-w>=
-:noremap <A-k> <C-w><bar>
+:noremap <A-k> <C-w><bar><C-w>_
 :noremap <S-j> <C-w>L
 :noremap <S-k> <C-w>K
 :nnoremap -		<S-j>
@@ -267,7 +267,7 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :noremap <A-v> gv
 ":noremap <A-;> :!./
 
-:noremap <A-w> ebve"ry:grep -r <C-r>r .<CR>:cfdo %s/\<<C-r>r\>/
+:noremap <A-w> ebve"ry:grep -r '\<<C-r>r\>' .<CR>:cfdo %s/\<<C-r>r\>/<C-r>r
 ":tabdo windo s/<C-r>r/
 :noremap <silent> <A-t> :tabnew<CR>:ter<CR>i
 :noremap <silent> <A-CR> :tabnew<CR>:ter<CR>imake -j$(nproc)<CR>
