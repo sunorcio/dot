@@ -161,7 +161,7 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :set sel=old
 :set virtualedit=block
 ":set nowrapscan
-:set showbreak=\ 
+:set showbreak=\ \ 
 :set number
 :set signcolumn=auto
 :set tabstop=2
@@ -259,6 +259,8 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :tnoremap ;; <C-\><C-n>:
 :tnoremap ;<esc> <C-\><C-n>
 :tnoremap ;q <C-u>exit<CR><C-\><C-n>:tabclose<CR>:tabprevious<CR>
+:tnoremap <A-q> <C-u>exit<CR><C-\><C-n>:tabclose<CR>:tabprevious<CR>
+:tnoremap ;<esc> <C-\><C-n>
 ":tnoremap <C-h> <C-b>
 ":tnoremap <C-l> <C-f>
 
@@ -267,8 +269,10 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :noremap <A-v> gv
 ":noremap <A-;> :!./
 
-:noremap <A-w> ebve"ry:grep -r '\<<C-r>r\>' .<CR>:cfdo %s/\<<C-r>r\>/<C-r>r
+:noremap <A-w> ebve"ry:grep --include \*.c --include \*.h -r '\<<C-r>r\>' .<CR>:cfdo %s/\<<C-r>r\>/<C-r>r
+:vnoremap <A-w> "ry:grep --include \*.c --include \*.h -r '<C-r>r' .<CR>:cfdo %s/<C-r>r/<C-r>r
 ":tabdo windo s/<C-r>r/
+"
 :noremap <silent> <A-t> :tabnew<CR>:ter<CR>i
 :noremap <silent> <A-CR> :tabnew<CR>:ter<CR>imake -j$(nproc)<CR>
 :noremap <silent> <A-m> :make -C %:h -j$(nproc)<CR>
@@ -418,7 +422,7 @@ lua <<EOF
 			name = 'Launch',
 			type = 'lldb',
 			request = 'launch',
-			preRunCommands = 'make TARGET_BIN=a.out TARGET_DEBUG=on',
+			--preRunCommands = 'make a TARGET_BIN=a TARGET_DEBUG=on',
 			program = vim.fn.getcwd() .. '/a.out'--[[function()
 						return vim.fn.input('Path to executable: ',
 								vim.fn.getcwd() .. '/', 'file')
@@ -508,27 +512,19 @@ lua <<EOF
     heads = {
 			{ '<esc>', ':set statusline=<CR>', {desc=false,exit=true,silent=true} },
 			{ '<C-d>', '', {desc=false} },
-			{ 'b', ':DapToggleBreakpoint<CR>',
-					{desc='break',silent=true,nowait=true} },
-			{ 'c', ':DapClearBreakpoints<CR>', 
-					{desc='clear',silent=true,nowait=true} },
+			{ 'b', ':DapToggleBreakpoint<CR>', {desc='break',silent=true,nowait=true} },
+			{ 'c', ':DapClearBreakpoints<CR>', {desc='clear',silent=true,nowait=true} },
+			{ 'R', ':make debug<CR>', {desc='compile',silent=true,nowait=true} },
 			{ 'r', ':DapContinue<CR>', {desc='run',silent=true,nowait=true} },
 			{ 't', ':DapTerminate<CR>', {desc='terminate',silent=true,nowait=true} },
 			{ '<S-j>', ':DapStepInto<CR>', {desc='step',silent=true,nowait=true} },
 			--{ '<S-h>', ':DapStepOut<CR>', {desc='out',silent=true,nowait=true} },
 			{ '<S-l>', ':DapStepOver<CR>', {desc='over',silent=true,nowait=true} },
-			{ '<space>', function() require('dap.ui.widgets').hover() end,
-					{desc='hover',silent=true,nowait=true} },
-			{ 'q', function() require('dap').repl.open() end,
-					{desc='repl',silent=true,nowait=true} },
-			{ 'p', function() require('dap.ui.widgets').preview() end,
-					{desc='preview',silent=true,nowait=true} },
-			{ 'f', function() local widgets = require('dap.ui.widgets')
-					widgets.centered_float(widgets.frames)end,
-					{desc='frame',silent=true,nowait=true} },
-			{ 's', function() local widgets = require('dap.ui.widgets')
-					widgets.centered_float(widgets.scopes) end,
-					{desc='scope',silent=true,nowait=true} },
+			{ '<space>', function() require('dap.ui.widgets').hover() end, {desc='hover',silent=true,nowait=true} },
+			{ 'q', function() require('dap').repl.open() end, {desc='repl',silent=true,nowait=true} },
+			{ 'p', function() require('dap.ui.widgets').preview() end, {desc='preview',silent=true,nowait=true} },
+			{ 'f', function() local widgets = require('dap.ui.widgets') widgets.centered_float(widgets.frames)end, {desc='frame',silent=true,nowait=true} },
+			{ 's', function() local widgets = require('dap.ui.widgets') widgets.centered_float(widgets.scopes) end, {desc='scope',silent=true,nowait=true} },
     }
   })
 
@@ -626,26 +622,16 @@ lua <<EOF
 		-- Mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
 		local bufopts = { noremap=true, silent=true, buffer=bufnr }
-		vim.keymap.set("n", "gD",
-				"<cmd>tab split | lua vim.lsp.buf.declaration()<CR>", bufopts)
-		vim.keymap.set("n", "gd",
-				"<cmd>tab split | lua vim.lsp.buf.definition()<CR>", bufopts)
-		vim.keymap.set("n", "gi",
-				"<cmd>tab split | lua vim.lsp.buf.implementation()<CR>", bufopts)
-		vim.keymap.set("n", "gr",
-				"<cmd>tab split | lua vim.lsp.buf.references()<CR>", bufopts)
-		vim.keymap.set("n", "gt",
-				"<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>", bufopts)
-		vim.keymap.set("n", "<A-g>D",
-				"<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
-		vim.keymap.set("n", "<A-g>d",
-				"<cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
-		vim.keymap.set("n", "<A-g>i",
-				"<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
-		vim.keymap.set("n", "<A-g>r",
-				"<cmd>lua vim.lsp.buf.references()<CR>", bufopts)
-		vim.keymap.set("n", "<A-g>t",
-				"<cmd>lua vim.lsp.buf.type_definition()<CR>", bufopts)
+		vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.declaration()<CR>", bufopts)
+		vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", bufopts)
+		vim.keymap.set("n", "gi", "<cmd>tab split | lua vim.lsp.buf.implementation()<CR>", bufopts)
+		vim.keymap.set("n", "gr", "<cmd>tab split | lua vim.lsp.buf.references()<CR>", bufopts)
+		vim.keymap.set("n", "gt", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>", bufopts)
+		vim.keymap.set("n", "<A-g>D", "<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
+		vim.keymap.set("n", "<A-g>d", "<cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
+		vim.keymap.set("n", "<A-g>i", "<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
+		vim.keymap.set("n", "<A-g>r", "<cmd>lua vim.lsp.buf.references()<CR>", bufopts)
+		vim.keymap.set("n", "<A-g>t", "<cmd>lua vim.lsp.buf.type_definition()<CR>", bufopts)
 		vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, bufopts)
 		vim.keymap.set('n', '<space>j', vim.lsp.buf.hover, bufopts)
 		vim.keymap.set('n', '<space>k', vim.lsp.buf.signature_help, bufopts)
@@ -666,13 +652,13 @@ lua <<EOF
     capabilities = capabilities,
     on_attach = on_attach,
     flags = lsp_flags,
-	cmd = {
-		"clangd",
-		"--completion-style=detailed",
-		"--clang-tidy",
-		"--header-insertion=never",
-		"--function-arg-placeholders=0",
-	},
+		cmd = {
+			"clangd",
+			"--completion-style=detailed",
+			"--clang-tidy",
+			"--header-insertion=never",
+			"--function-arg-placeholders=0",
+		},
   }
 
 
