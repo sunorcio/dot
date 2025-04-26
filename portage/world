@@ -15,6 +15,7 @@ cross-x86_64-w64-mingw32/mingw64-runtime
 dev-libs/cglm
 dev-python/pynvim
 dev-util/github-cli
+dev-util/perf
 dev-vcs/git
 llvm-core/clang
 llvm-core/lldb
