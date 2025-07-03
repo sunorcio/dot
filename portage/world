@@ -55,7 +55,7 @@ sys-power/acpi
 sys-power/acpid
 sys-process/btop
 sys-process/dcron
-www-client/firefox
+www-client/firefox-bin
 www-client/links
 x11-apps/bdftopcf
 x11-apps/setxkbmap
