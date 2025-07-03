@@ -60,5 +60,6 @@ fi
 
 
 
+gentoo-pipewire-launcher &
 echo 1 > ~/dot/initvar
 exec ~/.startdwm
