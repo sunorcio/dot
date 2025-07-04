@@ -39,8 +39,8 @@ fi
 
 
 
-alias qlist='qlist --color'
-#alias eix='eix -F'
+alias qlist="qlist --color"
+#alias eix="eix -F"
 alias emerge="emerge --color y"
 alias ls="ls --color=always"
 alias grep="grep --color=always"
@@ -52,3 +52,5 @@ alias modlist="~/00_past/shcmd/modlist"
 alias cm="~/00_past/shcmd/cmath"
 alias torrent="~/00_past/shcmd/torrent"
 alias lazygit="~/go/bin/lazygit"
+alias diff="diff --color=always"
+alias discord="apulse discord"
