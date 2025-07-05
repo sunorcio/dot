@@ -1,5 +1,6 @@
 app-admin/sysklogd
 app-arch/innoextract
+app-arch/p7zip
 app-editors/neovim
 app-eselect/eselect-repository
 app-laptop/laptop-mode-tools
@@ -33,6 +34,7 @@ media-sound/bluez-alsa
 media-video/pipewire
 net-analyzer/bmon
 net-ftp/lftp
+net-im/discord
 net-misc/chrony
 net-misc/zerotier
 net-p2p/ctorrent
