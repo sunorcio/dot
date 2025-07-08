@@ -1,0 +1,10 @@
+#!/bin/sh
+
+echo '#include <math.h>
+#include <stdio.h>
+int main(void){printf("%f\n",(float)('"$*"'));}' > yourcmath.c
+
+clang yourcmath.c -lm -o asdfmath
+./asdfmath
+rm asdfmath yourcmath.c
+
