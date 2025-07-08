@@ -66,11 +66,12 @@ function! TabLine()
 
     " loop through each buffer in a tab
     for b in buflist
+			"remember to ELSEIF
 			"if getbufvar(b, "&buftype") == 'help'
 			"	let n .= '[H]' . fnamemodify(bufname(b), ':t:s/.txt$//')
-			"elseif getbufvar(b, "&buftype") == 'quickfix'
-			"	let n .= '[Q]'
-			if getbufvar(b, "&modifiable")
+			if getbufvar(b, "&buftype") == 'quickfix'
+				let n .= '[Q]'
+			elseif getbufvar(b, "&modifiable")
         let n .= fnamemodify(bufname(b), ':t') . ', '  "pathshorten(bufname(b))
       endif
 
@@ -161,7 +162,10 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :set sel=old
 :set virtualedit=block
 ":set nowrapscan
-:set showbreak=\ \ 
+":set linebreak 
+":set breakat=\	!@*-+;:,./?
+":set breakat=\	!@*+;:,./?
+:set showbreak=\ \ \ 
 :set number
 :set signcolumn=auto
 :set tabstop=2
@@ -382,7 +386,7 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 
 call plug#begin()
 	Plug 'rmagatti/auto-session'
-	Plug 'anuvyklack/hydra.nvim'
+	Plug 'nvimtools/hydra.nvim'
 	Plug 'tikhomirov/vim-glsl'
 	Plug 'mfussenegger/nvim-dap'
 
@@ -625,13 +629,13 @@ lua <<EOF
 		vim.keymap.set("n", "gD", "<cmd>tab split | lua vim.lsp.buf.declaration()<CR>", bufopts)
 		vim.keymap.set("n", "gd", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", bufopts)
 		vim.keymap.set("n", "gi", "<cmd>tab split | lua vim.lsp.buf.implementation()<CR>", bufopts)
-		vim.keymap.set("n", "gr", "<cmd>tab split | lua vim.lsp.buf.references()<CR>", bufopts)
+		vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", bufopts)
 		vim.keymap.set("n", "gt", "<cmd>tab split | lua vim.lsp.buf.type_definition()<CR>", bufopts)
-		vim.keymap.set("n", "<A-g>D", "<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
-		vim.keymap.set("n", "<A-g>d", "<cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
-		vim.keymap.set("n", "<A-g>i", "<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
-		vim.keymap.set("n", "<A-g>r", "<cmd>lua vim.lsp.buf.references()<CR>", bufopts)
-		vim.keymap.set("n", "<A-g>t", "<cmd>lua vim.lsp.buf.type_definition()<CR>", bufopts)
+		--vim.keymap.set("n", "<A-g>D", "<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
+		--vim.keymap.set("n", "<A-g>d", "<cmd>lua vim.lsp.buf.definition()<CR>", bufopts)
+		--vim.keymap.set("n", "<A-g>i", "<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
+		--vim.keymap.set("n", "<A-g>r", "<cmd>lua vim.lsp.buf.references()<CR>", bufopts)
+		--vim.keymap.set("n", "<A-g>t", "<cmd>lua vim.lsp.buf.type_definition()<CR>", bufopts)
 		vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, bufopts)
 		vim.keymap.set('n', '<space>j', vim.lsp.buf.hover, bufopts)
 		vim.keymap.set('n', '<space>k', vim.lsp.buf.signature_help, bufopts)
