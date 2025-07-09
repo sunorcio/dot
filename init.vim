@@ -3,32 +3,32 @@
 :set notermguicolors
 ":set background=dark
 :colorscheme habamax
-:highlight Normal		ctermfg=249 ctermbg=16
-:highlight Comment		ctermfg=240
-:highlight Type			ctermfg=65
-:highlight Identifier	ctermfg=138 "181
-:hi @lsp.type.operator.c				ctermfg=255 "189
-:hi @lsp.type.function					ctermfg=174
+:highlight Normal                       ctermfg=249 ctermbg=16
+:highlight Comment                      ctermfg=240     
+:highlight Type                         ctermfg=65      
+:highlight Identifier                   ctermfg=138 "fg181
+:hi @lsp.type.operator.c                ctermfg=255 "fg189
+:hi @lsp.type.function                  ctermfg=174
 :hi @lsp.typemod.function.declaration.c ctermfg=217
-:highlight PreProc		ctermfg=94
-":highlight Constant	ctermfg=173
-:highlight String		ctermfg=66
-:highlight Statement	ctermfg=140
-:highlight Special		ctermfg=146 "195
-:highlight MatchParen	ctermfg=195	ctermbg=236	cterm=NONE
-:highlight MsgArea		ctermfg=255	ctermbg=234
-:highlight WinSeparator	ctermfg=233	ctermbg=0
-:highlight StatusLine	ctermfg=68	ctermbg=233
-:highlight StatusLineNC	ctermfg=238	ctermbg=233
-:highlight ModeMsg		ctermfg=0	ctermbg=68
-:highlight TabLineSel	ctermfg=68	ctermbg=0	cterm=NONE
-:highlight TabLine		ctermfg=238	ctermbg=233
-:highlight Title		ctermfg=143	ctermbg=233	cterm=NONE "186
-:highlight TabLineFill				ctermbg=233
-:highlight CursorLine	ctermbg=233
-:highlight CursorColumn	ctermbg=232
-:highlight CursorLineNR ctermfg=238	ctermbg=0	cterm=NONE
-:highlight LineNR		ctermfg=234	ctermbg=0	cterm=NONE
+:highlight PreProc                      ctermfg=94             
+":highlight Constant                    ctermfg=173            
+:highlight String                       ctermfg=66             
+:highlight Statement                    ctermfg=140                         
+:highlight Special                      ctermfg=146 "fg195                    
+:highlight MatchParen                   ctermfg=195 ctermbg=236 cterm=NONE  
+:highlight MsgArea                      ctermfg=255 ctermbg=234             
+:highlight WinSeparator                 ctermfg=233 ctermbg=0
+:highlight StatusLine                   ctermfg=68  ctermbg=233
+:highlight StatusLineNC                 ctermfg=238 ctermbg=233
+:highlight ModeMsg                      ctermfg=0   ctermbg=68
+:highlight TabLineSel                   ctermfg=68  ctermbg=0   cterm=NONE
+:highlight TabLine                      ctermfg=238 ctermbg=233
+:highlight Title                        ctermfg=143 ctermbg=233 cterm=NONE "fg186
+:highlight TabLineFill                              ctermbg=233
+:highlight CursorLine                               ctermbg=233
+:highlight CursorColumn                             ctermbg=232
+:highlight CursorLineNR                 ctermfg=238 ctermbg=0   cterm=NONE
+:highlight LineNR                       ctermfg=234 ctermbg=0   cterm=NONE
 ":autocmd VimEnter * syntax off
 
 
@@ -47,32 +47,32 @@ function! TabLine()
 			let s .= '%#Title#\%#TabLine#'
 		endif
 		"if i + 1 == tabpagenr()
-    "  let s .= '%#TabLineSel#' " WildMenu
-    "else
-    "  let s .= '%#Title#'
-    "endif
-
-    " set the tab page number (for mouse clicks)
-    let s .= '%' . (i + 1) . 'T '
-
-    " set page number string
-    "let s .= i + 1 . ''
-    "let s .= '\ '
-
-    " get buffer names and statuses
-    let n = ''  " temp str for buf names
-    let m = 0   " &modified counter
-    let buflist = tabpagebuflist(i + 1)
-
-    " loop through each buffer in a tab
-    for b in buflist
+		"  let s .= '%#TabLineSel#' " WildMenu
+		"else
+		"  let s .= '%#Title#'
+		"endif
+		
+		" set the tab page number (for mouse clicks)
+		let s .= '%' . (i + 1) . 'T '
+		
+		" set page number string
+		"let s .= i + 1 . ''
+		"let s .= '\ '
+		
+		" get buffer names and statuses
+		let n = ''  " temp str for buf names
+		let m = 0   " &modified counter
+		let buflist = tabpagebuflist(i + 1)
+		
+		" loop through each buffer in a tab
+		for b in buflist
 			"remember to ELSEIF
 			"if getbufvar(b, "&buftype") == 'help'
 			"	let n .= '[H]' . fnamemodify(bufname(b), ':t:s/.txt$//')
 			if getbufvar(b, "&buftype") == 'quickfix'
 				let n .= '[Q]'
 			elseif getbufvar(b, "&modifiable")
-        let n .= fnamemodify(bufname(b), ':t') . ', '  "pathshorten(bufname(b))
+				let n .= fnamemodify(bufname(b), ':t') . ', '  "pathshorten(bufname(b))
       endif
 
       if getbufvar(b, "&modified")
@@ -198,8 +198,8 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 
 :autocmd VimEnter * noremap <C-right> 2zl
 :autocmd VimEnter * noremap <C-left> 2zh2h
-":noremap <C-right>	2zl
-":noremap <C-left>	2zh
+":noremap <C-right> 2zl
+":noremap <C-left>  2zh
 ":noremap t :noremap <lt>esc> :echo "asdf"<lt>CR><CR>
 
 
@@ -235,30 +235,30 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :noremap r<C-y> r&
 :noremap r<C-u> r*
 
-:noremap	<C-j>	2jzz
-:noremap	<C-k>	2kzz
-:vnoremap	<C-j>	2j
-:vnoremap	<C-k>	2k
-:noremap	<C-l>	$
-:noremap	<C-h>	0
-:noremap	<C-d>	<nop>
-:noremap	<C-u>	<nop>
+:noremap  <C-j> 2jzz
+:noremap  <C-k> 2kzz
+:vnoremap <C-j> 2j
+:vnoremap <C-k> 2k
+:noremap  <C-l> $
+:noremap  <C-h> 0
+:noremap  <C-d> <nop>
+:noremap  <C-u> <nop>
 
 :noremap <silent> <C-A-j> <c-w>v<c-w>L<c-w>=:Explore<CR>
 :noremap <silent> <C-A-k> <c-w>s<c-w>=:Explore<CR>
 :noremap <A-j> <C-w>w<C-w>=
-":noremap <A-k>	<c-w>R<c-w>w<c-w>=
+":noremap <A-k> <c-w>R<c-w>w<c-w>=
 :noremap <A-k> <C-w><bar><C-w>_
 :noremap <S-j> <C-w>L
 :noremap <S-k> <C-w>K
-:nnoremap -		<S-j>
-:nnoremap =		:=
-:noremap ?		<S-k>
-:noremap <silent> <C-A-l>	<esc>:tabnew<CR>:Explore<CR>
-:noremap <silent> <A-l>	<esc>:tabnext<CR>
-:noremap <silent> <A-h>	<esc>:tabprevious<CR>
-:noremap <silent> <S-l>	<esc>:tabmove +1<CR>
-:noremap <silent> <S-h>	<esc>:tabmove -1<CR>
+:nnoremap -   <S-j>
+:nnoremap =   :=
+:noremap ?    <S-k>
+:noremap <silent> <C-A-l> <esc>:tabnew<CR>:Explore<CR>
+:noremap <silent> <A-l> <esc>:tabnext<CR>
+:noremap <silent> <A-h> <esc>:tabprevious<CR>
+:noremap <silent> <S-l> <esc>:tabmove +1<CR>
+:noremap <silent> <S-h> <esc>:tabmove -1<CR>
 
 :tnoremap ;; <C-\><C-n>:
 :tnoremap ;<esc> <C-\><C-n>
@@ -382,7 +382,7 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 
 
 
-"pluginstall:	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+"pluginstall: sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 call plug#begin()
 	Plug 'rmagatti/auto-session'

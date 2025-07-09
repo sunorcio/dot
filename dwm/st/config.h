@@ -48,7 +48,7 @@ wchar_t *worddelimiters = L" ";
 
 /* selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;
-static unsigned int tripleclicktimeout = 600;
+static unsigned int tripleclicktimeout = 450;
 
 /* alt screens */
 int allowaltscreen = 1;
@@ -101,7 +101,7 @@ char *termname = "st-256color";
  *
  *	stty tabs
  */
-unsigned int tabspaces = 8;
+unsigned int tabspaces = 4;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -185,11 +185,11 @@ static uint forcemousemod = 0;
  * Beware that overloading Button1 will disable the selection.
  */
 static MouseShortcut mshortcuts[] = {
-	/* mask                 button   function        argument       release */
-	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
-	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
-	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
-	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
+	/* mask         button     function   argument             release */
+	{ ShiftMask,    Button4,   ttysend,   {.s = "\033[5;2~"} },
+	{ XK_ANY_MOD,   Button4,   ttysend,   {.s = "\031"} },
+	{ ShiftMask,    Button5,   ttysend,   {.s = "\033[6;2~"} },
+	{ XK_ANY_MOD,   Button5,   ttysend,   {.s = "\005"} },
 };
 
 /* Internal keyboard shortcuts. */
@@ -199,12 +199,12 @@ static MouseShortcut mshortcuts[] = {
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
-	{ XK_ANY_MOD,	        XK_Insert,      selpaste,       {.i =  0} },
-	{ MODKEY,               XK_Home,		zoom,           {.f = -6} },
-	{ MODKEY,               XK_End,			zoom,           {.f = +6} },
-	{ MODKEY,               XK_Up,			zoomreset,      {.f =  0} },
-	{ TERMMOD,				XK_C,           clipcopy,       {.i =  0} },
-	{ TERMMOD,				XK_V,           clippaste,      {.i =  0} },
+	{ XK_ANY_MOD,           XK_Insert,      selpaste,       {.i =  0} },
+	{ MODKEY,               XK_Home,        zoom,           {.f = -6} },
+	{ MODKEY,               XK_End,         zoom,           {.f = +6} },
+	{ MODKEY,               XK_Up,          zoomreset,      {.f =  0} },
+	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
+	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 };
 
 /*

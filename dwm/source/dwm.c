@@ -229,8 +229,8 @@ static void updatetitle(Client *c);
 static void updatewindowtype(Client *c);
 static void updatewmhints(Client *c);
 static void view(const Arg *arg);
-static void viewreldn(void);
-static void viewrelup(void);
+static void viewreldn(const Arg *arg);
+static void viewrelup(const Arg *arg);
 static Client *wintoclient(Window w);
 static Monitor *wintomon(Window w);
 static int xerror(Display *dpy, XErrorEvent *ee);
@@ -1072,7 +1072,7 @@ manage(Window w, XWindowAttributes *wa)
 		c->isfloating = c->oldstate = trans != None || c->isfixed;
 	if (c->isfloating)
 		XRaiseWindow(dpy, c->win);
-	//
+//
         c->x = selmon->mw *0.53;
         c->w = selmon->mw - c->x;
 	attach(c);
@@ -2074,7 +2074,7 @@ view(const Arg *arg)
 	arrange(selmon);
 }
 void
-viewreldn(void)
+viewreldn(const Arg *arg)
 {
 	if (lastview>>1 & TAGMASK) {
 		lastview>>=1;
@@ -2085,7 +2085,7 @@ viewreldn(void)
 	}
 }
 void
-viewrelup(void)
+viewrelup(const Arg *arg)
 {
 	if (lastview<<1 & TAGMASK) {
 		lastview<<=1;
@@ -2174,7 +2174,7 @@ zoom(const Arg *arg)
 	pop(c);
 }
 
-//
+//startup
 void
 initconf()
 {
@@ -2213,10 +2213,10 @@ main(int argc, char *argv[])
 #endif /* __OpenBSD__ */
 	scan();
 
-	//User startup parameters
+//startup parameters
 	initconf();
 	run();
-	//User cleanup
+//cleanup
 	clearconf();
 
 	cleanup();
