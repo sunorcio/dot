@@ -63,9 +63,11 @@ static const Layout layouts[] = {
 #define TERMINAL "st"
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 #define TSHCMD(tittle,cmd) { .v = (const char*[]){ "/bin/sh", "-c",TERMINAL " -T " tittle " -e " cmd, NULL } }
+
 /* commands */
+static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *termcmd[]  = { TERMINAL, NULL };
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *lockcmd[]  = { "slock", NULL };
 
 static const Key keys[] = {
@@ -73,7 +75,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Escape,                  spawn,              {.v = lockcmd } },
 	{ MODKEY|ShiftMask,             XK_Return,                  spawn,              {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                  spawn,              {.v = termcmd } },
-	{ MODKEY,                       XK_q,                       spawn,              SHCMD("~/dot/dwm/lsh") },
+	{ MODKEY,                       XK_q,                       spawn,              TSHCMD("bash history","~/dot/dwm/lsh") },
 	{ MODKEY,                       XK_r,                       togglebar,          {0} },
 	{ MODKEY,                       XK_f,                       setlayout,          {.v = &layouts[0] } },
 	{ MODKEY,                       XK_j,                       focusstack,         {.i = +1 } },
@@ -110,7 +112,7 @@ static const Key keys[] = {
 	{ 0,                            XF86XK_Tools,               spawn,              TSHCMD("btop","btop") },
 	{ 0,                            XF86XK_Search,              spawn,              TSHCMD("Type search query","~/dot/dwm/search") },
 	{ 0,                            XF86XK_LaunchA,             spawn,              {.v = dmenucmd } },
-	{ 0,                            XF86XK_Explorer,            spawn,              SHCMD("~/dot/dwm/lsh") },
+	{ 0,                            XF86XK_Explorer,            spawn,              TSHCMD("bash history","~/dot/dwm/lsh") },
 	TAGKEYS(                        XK_1,                       0)
 	TAGKEYS(                        XK_2,                       1)
 	TAGKEYS(                        XK_3,                       2)

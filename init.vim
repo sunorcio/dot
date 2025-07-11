@@ -152,7 +152,7 @@ endfunction
 let g:netrw_banner=0
 "\(^\|\s\s\)\zs\.\S\+
 let g:netrw_liststyle = 3
-let g:netrw_list_hide = '.*\.o,.*\.o\.json,.*\.d'
+let g:netrw_list_hide = '.*\.o$,.*\.o\.json$,.*\.d$'
 let g:netrw_sort_by="name"
 let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,\.frag$,\.data$,\~\=\*$,*,\.o$,\.obj$,\.info$,\.swp$,\.bak$,\~$'
 

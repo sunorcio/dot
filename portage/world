@@ -15,9 +15,12 @@ cross-x86_64-w64-mingw32/gcc
 cross-x86_64-w64-mingw32/mingw64-runtime
 dev-libs/cglm
 dev-python/pynvim
+dev-util/gdbus-codegen
 dev-util/github-cli
 dev-util/perf
 dev-vcs/git
+games-emulation/melonds
+games-util/steam-launcher
 llvm-core/clang
 llvm-core/lldb
 media-fonts/kochi-substitute
@@ -28,9 +31,11 @@ media-gfx/imagemagick
 media-gfx/scrot
 media-libs/alsa-lib
 media-libs/glew
+media-libs/libsdl2
 media-sound/alsa-utils
 media-sound/apulse
 media-sound/bluez-alsa
+media-video/ffmpeg
 media-video/pipewire
 net-analyzer/bmon
 net-ftp/lftp

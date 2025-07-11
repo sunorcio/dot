@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-static char *font = "xos4 Terminus\-Shinonome Powerline:pixelsize=16:antialias=false:hinting=true:autohint=false";
+static char *font = "xos4 Terminus\\-Shinonome Powerline:pixelsize=16:antialias=false:hinting=false:autohint=false";
 /* static char *font = "Spleen 8x16:pixelsize=16:style=Medium:antialias=true:hinting=true:autohint=false"; */
 /* static char *font = "xos4 Terminus:pixelsize=17:antialias=false:hinting=true:autohint=false"; */
 /* static char *font = "Shinonome Gothic:pixelsize=16:antialias=false:hinting=true:autohint=false"; */
@@ -63,7 +63,7 @@ int allowwindowops = 0;
  * near minlatency, but it waits longer for slow updates to avoid partial draw.
  * low minlatency will tear/flicker more, as it can "detect" idle too early.
  */
-static double minlatency = 8;
+static double minlatency = 4;
 static double maxlatency = 33;
 
 /*

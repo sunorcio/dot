@@ -30,7 +30,7 @@ if [ $(cat ~/dot/initvar) -eq 1 ]
 then
 	xbacklight -set 70
 	xset r rate 180 70
-	xkbcomp ~/.xkb-custom $DISPLAY
+	xkbcomp ~/dot/xkb $DISPLAY
 	clear
 	PROMPT_COMMAND="neofetch
 					PROMPT_COMMAND='' "
