@@ -1,0 +1,13 @@
+# required by sys-firmware/intel-microcode (argument)
+>=sys-firmware/intel-microcode-20231114_p20231114 intel-ucode
+# required by sys-kernel/linux-firmware (argument)
+=sys-kernel/linux-firmware-20231030 linux-fw-redistributable
+# required by kochi-substitute (argument)
+>=media-fonts/kochi-substitute-20030809-r3 free-noncomm
+# required by discord (argument)
+>=net-im/discord-0.0.42 all-rights-reserved
+# required by zerotier (argument)
+>=net-misc/zerotier-1.14.1 BUSL-1.1
+games-util/steam-launcher ValveSteamLicense
+# required by p7zip (argument)
+>=app-arch/p7zip-17.05-r2 unRAR

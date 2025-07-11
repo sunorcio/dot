@@ -1,0 +1,6 @@
+media-libs/libsdl2 static-libs -alsa
+media-libs/glew static-libs
+# required by net-wireless/wavemon-0.9.5::gentoo
+# required by @selected
+# required by @world (argument)
+>=dev-libs/libnl-3.10.0 utils

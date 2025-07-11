@@ -1,0 +1,12 @@
+# package.accept_keywords# required by igt-gpu-tools (argument)
+=x11-apps/igt-gpu-tools-1.27.1-r1 ~amd64
+# required by github-cli (argument)
+=dev-util/github-cli-2.33.0 ~amd64
+# required by bluez-alsa (argument)
+=media-sound/bluez-alsa-4.0.0 ~amd64
+# required by cglm (argument)
+=dev-libs/cglm-0.9.1 ~amd64
+# required by tty-clock (argument)
+=app-misc/tty-clock-2.3 ~amd64
+# required by zerotier (argument)
+=net-misc/zerotier-1.14.1 ~amd64
