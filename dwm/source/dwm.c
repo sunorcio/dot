@@ -207,6 +207,8 @@ static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
+static void tagreldn(const Arg *arg);
+static void tagrelup(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *m);
 static void togglebar(const Arg *arg);
@@ -1694,6 +1696,44 @@ tag(const Arg *arg)
 	}
 }
 
+//
+void
+tagreldn(const Arg *arg)
+{
+	unsigned int lastview;
+
+	if (selmon->sel && selmon->sel->tags >> 1 & TAGMASK) {
+		selmon->sel->tags = selmon->sel->tags >> 1 & TAGMASK;
+
+		if (selmon->tagset[selmon->seltags]>>1 & TAGMASK) {
+			lastview = (selmon->tagset[selmon->seltags] >> 1);
+			selmon->seltags ^= 1; /* toggle sel tagset */
+			selmon->tagset[selmon->seltags] = lastview & TAGMASK;
+		}
+
+		focus(NULL);
+		arrange(selmon);
+	}
+}
+void
+tagrelup(const Arg *arg)
+{
+	unsigned int lastview;
+
+	if (selmon->sel && selmon->sel->tags << 1 & TAGMASK) {
+		selmon->sel->tags = selmon->sel->tags << 1 & TAGMASK;
+
+		if (selmon->tagset[selmon->seltags]<<1 & TAGMASK) {
+			lastview = (selmon->tagset[selmon->seltags] << 1);
+			selmon->seltags ^= 1; /* toggle sel tagset */
+			selmon->tagset[selmon->seltags] = lastview & TAGMASK;
+		}
+
+		focus(NULL);
+		arrange(selmon);
+	}
+}
+
 void
 tagmon(const Arg *arg)
 {
@@ -2077,8 +2117,6 @@ updatewmhints(Client *c)
 	}
 }
 
-//
-static unsigned int lastview = {1};
 void
 view(const Arg *arg)
 {
@@ -2087,16 +2125,18 @@ view(const Arg *arg)
 	selmon->seltags ^= 1; /* toggle sel tagset */
 	if (arg->ui & TAGMASK) {
 		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
-		lastview = arg->ui;
 	}
 	focus(NULL);
 	arrange(selmon);
 }
+
+//
 void
 viewreldn(const Arg *arg)
 {
-	if (lastview>>1 & TAGMASK) {
-		lastview>>=1;
+	unsigned int lastview;
+	if (selmon->tagset[selmon->seltags]>>1 & TAGMASK) {
+		lastview = selmon->tagset[selmon->seltags] >> 1;
 		selmon->seltags ^= 1; /* toggle sel tagset */
 		selmon->tagset[selmon->seltags] = lastview & TAGMASK;
 		focus(NULL);
@@ -2106,8 +2146,9 @@ viewreldn(const Arg *arg)
 void
 viewrelup(const Arg *arg)
 {
-	if (lastview<<1 & TAGMASK) {
-		lastview<<=1;
+	unsigned int lastview;
+	if (selmon->tagset[selmon->seltags]<<1 & TAGMASK) {
+		lastview = selmon->tagset[selmon->seltags] << 1;
 		selmon->seltags ^= 1; /* toggle sel tagset */
 		selmon->tagset[selmon->seltags] = lastview & TAGMASK;
 		focus(NULL);
