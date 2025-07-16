@@ -358,8 +358,10 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 ":noremap <silent> <A-F> :s/\t/    /<CR>:noh<CR>
 :vnoremap <silent> <A-p> <esc>`>a */<esc>`<i/* <esc>
 :nnoremap <silent> <A-p> V<esc>`>a */<esc>`<i/* <esc>
-:vnoremap <silent> <A-d> :s/\/\* *\\| *\*\/\\|/<CR>:noh<CR>
-:nnoremap <silent> <A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>:noh<CR>
+":vnoremap <silent> <A-d> :s/\/\* *\\| *\*\/\\|/<CR>:noh<CR>
+":nnoremap <silent> <A-d> :s/\/\* *\\| *\*\/\\|   *//<CR>:noh<CR>
+:vnoremap <silent> <A-d> :s/\/\* \\| \*\//<CR>:noh<CR>
+:nnoremap <silent> <A-d> :s/\/\* \\| \*\//<CR>:noh<CR>
 
 "this sucks but does work
 ":vnoremap <A-d>p :s/\/\* *\\| *\*\/\\|   *//<CR>`>a */<esc>`<i/* <esc>

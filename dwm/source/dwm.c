@@ -252,13 +252,13 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[ConfigureRequest] = configurerequest,
 	[ConfigureNotify] = configurenotify,
 	[DestroyNotify] = destroynotify,
-	[EnterNotify] = enternotify,
+/* 	[EnterNotify] = enternotify, */
 	[Expose] = expose,
 	[FocusIn] = focusin,
 	[KeyPress] = keypress,
 	[MappingNotify] = mappingnotify,
 	[MapRequest] = maprequest,
-	[MotionNotify] = motionnotify,
+/* 	[MotionNotify] = motionnotify, */
 	[PropertyNotify] = propertynotify,
 	[UnmapNotify] = unmapnotify
 };
@@ -1700,6 +1700,7 @@ tagmon(const Arg *arg)
 	if (!selmon->sel || !mons->next)
 		return;
 	sendmon(selmon->sel, dirtomon(arg->i));
+	focusmon(arg);
 }
 
 void
@@ -2200,7 +2201,7 @@ initconf()
 	hackbuffer.v = cmd;
 	spawn(&hackbuffer);
 
- 	const char* cmd1[] = {"/home/santi/dot/dwm/batt",NULL};
+ 	const char* cmd1[] = {"/opt/dwm/batt",NULL};
 	hackbuffer.v = cmd1;
 	spawn(&hackbuffer);
 }

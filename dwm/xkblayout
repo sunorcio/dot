@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+if [ $(cat ~/dot/xkbvar) -eq 1 ]
+then
+	xkbcomp ~/dot/xkb $DISPLAY
+	echo 0 > ~/dot/xkbvar
+else
+	setxkbmap es
+	echo 1 > ~/dot/xkbvar
+fi

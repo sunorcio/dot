@@ -61,21 +61,19 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define TERMINAL "st"
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-#define TSHCMD(tittle,cmd) { .v = (const char*[]){ "/bin/sh", "-c",TERMINAL " -T " tittle " -e " cmd, NULL } }
+#define SHCMD(cmd) { .v = (const char*[]){"/bin/sh", "-c", cmd, NULL} }
+#define TSHCMD(title,cmd) { .v = (const char*[]){"/bin/sh", "-c", TERMINAL " -T " title "-e " cmd, NULL} } /* title mustn't contain spaces */
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *termcmd[]  = { TERMINAL, NULL };
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *lockcmd[]  = { "slock", NULL };
+static const char *slockcmd[]  = { "slock", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key                         function            argument */
-	{ MODKEY,                       XK_Escape,                  spawn,              {.v = lockcmd } },
 	{ MODKEY|ShiftMask,             XK_Return,                  spawn,              {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                  spawn,              {.v = termcmd } },
-	{ MODKEY,                       XK_q,                       spawn,              TSHCMD("bash history","~/dot/dwm/lsh") },
 	{ MODKEY,                       XK_period,                  focusstack,         {.i = +1 } },
 	{ MODKEY,                       XK_comma,                   focusstack,         {.i = -1 } },
 	{ MODKEY,                       XK_i,                       incnmaster,         {.i = +1 } },
@@ -87,12 +85,12 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Down,                    focusstack,         {.i = +1 } },
 	{ MODKEY,                       XK_o,                       setmfact,           {.f = -0.01 } },
 	{ MODKEY,                       XK_m,                       setmfact,           {.f = +0.01 } },
-	{ MODKEY|ShiftMask,             XK_space,                   zoom,               {0} },
-	{ MODKEY|ShiftMask,             XK_t,                       togglebar,          {0} },
-	{ MODKEY|ShiftMask,             XK_f,                       togglefullscreen,   {0} },
-	{ MODKEY,                       XK_space,                   setlayout,          {.v = &layouts[0] } },
-	{ MODKEY,                       XK_t,                       setlayout,          {.v = &layouts[1] } },
-	{ MODKEY,                       XK_f,                       setlayout,          {.v = &layouts[2] } },
+	{ MODKEY,                       XK_space,                   zoom,               {0} },
+/* 	{ MODKEY,                       XK_t,                       togglebar,          {0} }, */
+	{ MODKEY,                       XK_f,                       togglefullscreen,   {0} },
+	{ MODKEY|ShiftMask,             XK_space,                   setlayout,          {.v = &layouts[0] } },
+	{ MODKEY|ShiftMask,             XK_t,                       setlayout,          {.v = &layouts[1] } },
+	{ MODKEY|ShiftMask,             XK_f,                       setlayout,          {.v = &layouts[2] } },
 	{ MODKEY,                       XK_Tab,                     focusstack,         {.i = +1 } },
 	{ MODKEY,                       XK_0,                       view,               {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,                       tag,                {.ui = ~0 } },
@@ -100,17 +98,23 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_k,                       focusmon,           {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_j,                       tagmon,             {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,                       tagmon,             {.i = -1 } },
+	{ MODKEY,                       XK_q,                       spawn,              TSHCMD("bash_history","~/dot/dwm/lsh") },
 	{ MODKEY|ShiftMask,             XK_s,                       spawn,              SHCMD("scrot -s -F ~/scrot.png --format png") },
+	{ MODKEY,                       XK_p,                       spawn,              SHCMD("~/dot/x230/setmonitor") },
 	{ 0,                            XF86XK_AudioMute,           spawn,              SHCMD("amixer set Master toggle") },
 	{ 0,                            XF86XK_AudioLowerVolume,    spawn,              SHCMD("~/dot/dwm/voldn") },
 	{ 0,                            XF86XK_AudioRaiseVolume,    spawn,              SHCMD("~/dot/dwm/volup") },
 	{ 0,                            XF86XK_AudioMicMute,        spawn,              SHCMD("amixer set Capture toggle") },
 	{ 0,                            XF86XK_MonBrightnessDown,   spawn,              SHCMD("~/dot/dwm/brightdn") },
 	{ 0,                            XF86XK_MonBrightnessUp,     spawn,              SHCMD("~/dot/dwm/brightup") },
+	{ 0,                            XF86XK_MonBrightnessUp,     spawn,              SHCMD("~/dot/dwm/brightup") },
+	{ 0,                            XF86XK_TouchpadToggle,      spawn,              SHCMD("~/dot/dwm/xkblayout") },
+	{ 0,                            XF86XK_Display,             spawn,              SHCMD("~/dot/x230/setmonitor") },
+	{ 0,                            XF86XK_ScreenSaver,         spawn,              {.v = slockcmd } },
 	{ 0,                            XF86XK_Tools,               spawn,              TSHCMD("btop","btop") },
-	{ 0,                            XF86XK_Search,              spawn,              TSHCMD("Type search query","~/dot/dwm/search") },
+	{ 0,                            XF86XK_Search,              spawn,              TSHCMD("type_search_query","~/dot/dwm/search") },
 	{ 0,                            XF86XK_LaunchA,             spawn,              {.v = dmenucmd } },
-	{ 0,                            XF86XK_Explorer,            spawn,              TSHCMD("bash history","~/dot/dwm/lsh") },
+	{ 0,                            XF86XK_Explorer,            spawn,              TSHCMD("bash_history","~/dot/dwm/lsh") },
 	TAGKEYS(                        XK_1,                       0)
 	TAGKEYS(                        XK_2,                       1)
 	TAGKEYS(                        XK_3,                       2)
@@ -121,7 +125,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                       7)
 	TAGKEYS(                        XK_9,                       8)
 	{ MODKEY|ShiftMask,             XK_w,                       killclient,         {0} },
-	{ MODKEY|ShiftMask,             XK_Escape,                  quit,               {0} },
+	{ MODKEY,                       XK_Escape,                  quit,               {0} },
 };
 
 /* button definitions */
@@ -133,20 +137,19 @@ static const Button buttons[] = {
 	{ ClkLtSymbol,     0,           Button1,   setlayout,        {.v = &layouts[0]} },
 	{ ClkLtSymbol,     0,           Button2,   setlayout,        {.v = &layouts[1]} },
 	{ ClkLtSymbol,     0,           Button3,   setlayout,        {.v = &layouts[2]} },
-	{ ClkWinTitle,     0,           Button1,   focusstack,       {.i = +1 } },
-	{ ClkWinTitle,     0,           Button2,   spawn,            {.v = dmenucmd} },
-	{ ClkWinTitle,     MODKEY,      Button2,   togglefloating,   {0} },
+/* 	{ ClkWinTitle,     0,           Button1,   focusstack,       {.i = +1 } }, */
+	{ ClkWinTitle,     0,           Button2,   togglefloating,   {0} },
 	{ ClkWinTitle,     0,           Button3,   focusstack,       {.i = -1 } },
-	{ ClkWinTitle,     0,           Button4,   viewreldn,        {0} },
-	{ ClkWinTitle,     0,           Button5,   viewrelup,        {0} },
+	{ ClkWinTitle,     0,           Button4,   togglefloating,   {0} },
+	{ ClkWinTitle,     0,           Button5,   focusstack,       {.i = +1 } },
 	{ ClkTagBar,       0,           Button4,   viewreldn,        {0} },
 	{ ClkTagBar,       0,           Button5,   viewrelup,        {0} },
 	{ ClkStatusText,   0,           Button1,   spawn,            SHCMD("~/dot/dwm/date") },
 	{ ClkStatusText,   0,           Button3,   spawn,            SHCMD("~/dot/dwm/now") },
-	{ ClkStatusText,   0,           Button4,   spawn,            SHCMD("~/dot/dwm/brightdn") },
-	{ ClkStatusText,   0,           Button5,   spawn,            SHCMD("~/dot/dwm/brightup") },
-	{ ClkStatusText,   MODKEY,      Button4,   spawn,            SHCMD("~/dot/dwm/voldn") },
-	{ ClkStatusText,   MODKEY,      Button5,   spawn,            SHCMD("~/dot/dwm/volup") },
+	{ ClkStatusText,   0,           Button4,   spawn,            SHCMD("~/dot/dwm/brightup") },
+	{ ClkStatusText,   0,           Button5,   spawn,            SHCMD("~/dot/dwm/brightdn") },
+	{ ClkStatusText,   MODKEY,      Button4,   spawn,            SHCMD("~/dot/dwm/volup") },
+	{ ClkStatusText,   MODKEY,      Button5,   spawn,            SHCMD("~/dot/dwm/voldn") },
 	{ ClkClientWin,    MODKEY,      Button1,   movemouse,        {0} },
 	{ ClkClientWin,    MODKEY,      Button2,   togglefloating,   {0} },
 	{ ClkClientWin,    MODKEY,      Button3,   resizemouse,      {0} },

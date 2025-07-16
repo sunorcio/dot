@@ -31,10 +31,12 @@ then
 	xbacklight -set 70
 	xset r rate 180 70
 	xkbcomp ~/dot/xkb $DISPLAY
+	echo 0 > ~/dot/xkbvar
+	echo 0 > ~/dot/monvar
+	echo 0 > ~/dot/initvar
 	clear
 	PROMPT_COMMAND="neofetch
 					PROMPT_COMMAND='' "
-	echo 0 > ~/dot/initvar
 fi
 
 

@@ -1,4 +1,5 @@
 #!/bin/bash
 
+
 read query
 locate $query | nvim

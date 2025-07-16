@@ -10,3 +10,5 @@
 =app-misc/tty-clock-2.3 ~amd64
 # required by zerotier (argument)
 =net-misc/zerotier-1.14.1 ~amd64
+# required by libsdl3 (argument)
+=media-libs/libsdl3-3.2.16 ~amd64

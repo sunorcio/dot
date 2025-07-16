@@ -19,7 +19,6 @@ dev-util/gdbus-codegen
 dev-util/github-cli
 dev-util/perf
 dev-vcs/git
-games-emulation/melonds
 games-util/steam-launcher
 llvm-core/clang
 llvm-core/lldb
@@ -32,6 +31,7 @@ media-gfx/scrot
 media-libs/alsa-lib
 media-libs/glew
 media-libs/libsdl2
+media-libs/libsdl3
 media-sound/alsa-utils
 media-sound/apulse
 media-sound/bluez-alsa
@@ -56,6 +56,7 @@ sys-fs/exfatprogs
 sys-fs/mtools
 sys-fs/ntfs3g
 sys-fs/xfsprogs
+sys-kernel/dkms
 sys-kernel/gentoo-kernel
 sys-kernel/linux-firmware
 sys-power/acpi

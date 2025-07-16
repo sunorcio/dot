@@ -22,6 +22,7 @@ then
 	rm /opt/$DMENU_V.tar.gz -f;
 	rm /opt/$ST_V.tar.gz -f;
 	rm /opt/$SLOCK_V.tar.gz -f;
+	cp $HOME/dot/dwm/batt   /opt/dwm/;
 	cp $HOME/dot/dwm/source/dwm.c $HOME/dot/dwm/source/config.h   /opt/dwm/$DWM_V/;
 	cd /opt/dwm/$DWM_V;
 	make install clean;

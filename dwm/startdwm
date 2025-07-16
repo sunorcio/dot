@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 while true; do
 	#stderr
 	dwm 2> ~/.dwm.log

@@ -12,6 +12,7 @@ then
 	exit
 fi
 
+cp /opt/dwm/batt   $HOME/dot/dwm/
 cp /opt/dwm/$DWM_V/dwm.c /opt/$DWM_V/config.h           $HOME/dot/dwm/source/
 cp /opt/dmwnu/$DMENU_V/dmenu.c /opt/$DMENU_V/config.h   $HOME/dot/dwm/dmenu/
 cp /opt/st/$ST_V/config.h /opt/$ST_V/st.info            $HOME/dot/dwm/st/

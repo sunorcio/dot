@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 if [ "$(xbacklight -get)" = "0.000000" ]
 then
 	xbacklight -set 0.1
