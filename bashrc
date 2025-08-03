@@ -41,6 +41,7 @@ fi
 
 
 
+alias q="exit"
 alias qlist="qlist --color"
 #alias eix="eix -F"
 alias emerge="emerge --color y"
@@ -53,6 +54,7 @@ alias wpa="~/dot/shcmd/wpa"
 alias modlist="~/dot/shcmd/modlist"
 alias cm="~/dot/shcmd/cmath"
 alias torrent="~/dot/shcmd/torrent"
-alias lazygit="~/go/bin/lazygit"
 alias diff="diff --color=always"
-alias discord="apulse discord"
+alias discord="/opt/vesktop-1.5.8/vesktop"
+alias wplst="wpctl status"
+alias wpset="wpctl set-volume"

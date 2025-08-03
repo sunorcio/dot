@@ -90,12 +90,13 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_o,                       setmfact,           {.f = -0.01 } },
 	{ MODKEY,                       XK_m,                       setmfact,           {.f = +0.01 } },
 	{ MODKEY,                       XK_space,                   zoom,               {0} },
-/* 	{ MODKEY,                       XK_t,                       togglebar,          {0} }, */
-	{ MODKEY,                       XK_f,                       togglefullscreen,   {0} },
+	{ MODKEY,                       XK_t,                       togglefloating,     {0} },
+	{ MODKEY,                       XK_f,                       togglefullscreen,          {0} },
 	{ MODKEY|ShiftMask,             XK_space,                   setlayout,          {.v = &layouts[0] } },
 	{ MODKEY|ShiftMask,             XK_t,                       setlayout,          {.v = &layouts[1] } },
 	{ MODKEY|ShiftMask,             XK_f,                       setlayout,          {.v = &layouts[2] } },
 	{ MODKEY,                       XK_Tab,                     focusstack,         {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_Tab,                     focusstack,         {.i = -1 } },
 	{ MODKEY,                       XK_0,                       view,               {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,                       tag,                {.ui = ~0 } },
 	{ MODKEY,                       XK_j,                       focusmon,           {.i = +1 } },
@@ -105,6 +106,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_q,                       spawn,              TSHCMD("bash_history","~/dot/dwm/lsh") },
 	{ MODKEY|ShiftMask,             XK_s,                       spawn,              SHCMD("scrot -s -F ~/scrot.png --format png") },
 	{ MODKEY,                       XK_p,                       spawn,              SHCMD("~/dot/x230/setmonitor") },
+	{ MODKEY,                       XK_z,                       spawn,              SHCMD("~/dot/dwm/xkblayout") },
 	{ 0,                            XF86XK_AudioMute,           spawn,              SHCMD("amixer set Master toggle") },
 	{ 0,                            XF86XK_AudioLowerVolume,    spawn,              SHCMD("~/dot/dwm/voldn") },
 	{ 0,                            XF86XK_AudioRaiseVolume,    spawn,              SHCMD("~/dot/dwm/volup") },
@@ -129,7 +131,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                       7)
 	TAGKEYS(                        XK_9,                       8)
 	{ MODKEY|ShiftMask,             XK_w,                       killclient,         {0} },
-	{ MODKEY,                       XK_Escape,                  quit,               {0} },
+	{ MODKEY|ShiftMask,             XK_Escape,                  quit,               {0} },
 };
 
 /* button definitions */

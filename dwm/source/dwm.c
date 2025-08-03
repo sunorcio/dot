@@ -1083,9 +1083,9 @@ manage(Window w, XWindowAttributes *wa)
 		c->isfloating = c->oldstate = trans != None || c->isfixed;
 	if (c->isfloating)
 		XRaiseWindow(dpy, c->win);
-//
-        c->x = selmon->mw *0.53;
-        c->w = selmon->mw - c->x;
+/*  */
+	c->x = selmon->mw*0.53;
+	c->w = selmon->mw - c->x;
 	attach(c);
 	attachstack(c);
 	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
@@ -1533,8 +1533,8 @@ setlayout(const Arg *arg)
 		drawbar(selmon);
 }
 
-//
-static Arg hackbuffer = {0};
+/*  */
+static Arg cmdbuffer = {0};
 /* arg > 1.0 will set mfact absolutely */
 void
 setmfact(const Arg *arg)
@@ -1552,8 +1552,8 @@ setmfact(const Arg *arg)
 	char str[16] = {0};
 	sprintf(str,"%f",selmon->mfact);
 	const char* cmd[] = {"xprop","-root","-set","WM_NAME",str,NULL};
-	hackbuffer.v = cmd;
-	spawn(&hackbuffer);
+	cmdbuffer.v = cmd;
+	spawn(&cmdbuffer);
 }
 
 void
@@ -1696,7 +1696,7 @@ tag(const Arg *arg)
 	}
 }
 
-//
+/*  */
 void
 tagreldn(const Arg *arg)
 {
@@ -1734,13 +1734,18 @@ tagrelup(const Arg *arg)
 	}
 }
 
+/*  */
 void
 tagmon(const Arg *arg)
 {
+
 	if (!selmon->sel || !mons->next)
 		return;
+	if (selmon->sel->isfullscreen)
+		togglefullscreen(NULL);
 	sendmon(selmon->sel, dirtomon(arg->i));
 	focusmon(arg);
+	restack(selmon);
 }
 
 void
@@ -2130,7 +2135,7 @@ view(const Arg *arg)
 	arrange(selmon);
 }
 
-//
+/*  */
 void
 viewreldn(const Arg *arg)
 {
@@ -2234,24 +2239,24 @@ zoom(const Arg *arg)
 	pop(c);
 }
 
-//startup
+/*  */
 void
 initconf()
 {
 	const char* cmd[] = {TERMINAL,NULL};
-	hackbuffer.v = cmd;
-	spawn(&hackbuffer);
+	cmdbuffer.v = cmd;
+	spawn(&cmdbuffer);
 
  	const char* cmd1[] = {"/opt/dwm/batt",NULL};
-	hackbuffer.v = cmd1;
-	spawn(&hackbuffer);
+	cmdbuffer.v = cmd1;
+	spawn(&cmdbuffer);
 }
 void
 clearconf()
 {
  	const char* cmd[] = {"killall","batt",NULL};
-	hackbuffer.v = cmd;
-	spawn(&hackbuffer);
+	cmdbuffer.v = cmd;
+	spawn(&cmdbuffer);
 }
 
 int
@@ -2273,10 +2278,10 @@ main(int argc, char *argv[])
 #endif /* __OpenBSD__ */
 	scan();
 
-//startup parameters
+/*  */
 	initconf();
 	run();
-//cleanup
+/*  */
 	clearconf();
 
 	cleanup();

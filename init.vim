@@ -255,8 +255,8 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :nnoremap =   :=
 :noremap ?    <S-k>
 :noremap <silent> <C-A-l> <esc>:tabnew<CR>:Explore<CR>
-:noremap <silent> <A-l> <esc>:tabnext<CR>
-:noremap <silent> <A-h> <esc>:tabprevious<CR>
+:noremap <silent> <A-l> <esc>:tabnext<CR><C-w>=
+:noremap <silent> <A-h> <esc>:tabprevious<CR><C-w>=
 :noremap <silent> <S-l> <esc>:tabmove +1<CR>
 :noremap <silent> <S-h> <esc>:tabmove -1<CR>
 
@@ -566,7 +566,7 @@ lua <<EOF
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<CR>'] = cmp.mapping.abort(),
-      ['<C-i>'] = cmp.mapping.confirm({ select = true }),
+      ['<Tab>'] = cmp.mapping.confirm({ select = true }),
 	  }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
@@ -613,7 +613,8 @@ lua <<EOF
   -- See `:help vim.diagnostic.*`
   local opts = { noremap=true, silent=true }
   vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+  vim.keymap.set('n', '<space>f', vim.diagnostic.setloclist, opts)
+  vim.keymap.set('n', '<space>q', vim.diagnostic.setqflist, opts)
   vim.keymap.set('n', '<space>p', vim.diagnostic.goto_prev, opts)
   vim.keymap.set('n', '<space>n', vim.diagnostic.goto_next, opts)
 
