@@ -10,4 +10,9 @@ then
 	cp lazygitdir/lazygit /usr/bin/;
 	rm lazygit_0.54.0_linux_x86_64.tar.gz;
 	git clone https://github.com/brendangregg/FlameGraph;
+	wget https://renderdoc.org/stable/1.39/renderdoc_1.39.tar.gz;
+	tar -xzf renderdoc_1.39.tar.gz --one-top-level;
+	mv renderdoc_1.39 renderdocdir;
+	cp renderdocdir/bin/qrenderdoc renderdocdir/bin/renderdoccmd /usr/bin/;
+	rm renderdoc_1.39.tar.gz;
 fi"
