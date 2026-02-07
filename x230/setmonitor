@@ -7,5 +7,6 @@ then
 	echo 0 > ~/dot/monvar
 else
 	xrandr --output HDMI1 --mode 1920x1080 --left-of LVDS1
+	xrandr --output VGA1 --mode 1280x1024 -r 75 --left-of LVDS1
 	echo 1 > ~/dot/monvar
 fi
