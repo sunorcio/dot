@@ -74,7 +74,8 @@ sys-apps/dbus                   abi_x86_32
 sys-apps/systemd                abi_x86_32
 sys-apps/systemd-utils          abi_x86_32
 sys-apps/util-linux             abi_x86_32
-sys-devel/clang                 abi_x86_32
+# move sys-devel/clang llvm-core/clang
+llvm-core/clang                 abi_x86_32
 sys-libs/gdbm                   abi_x86_32
 sys-libs/gpm                    abi_x86_32
 sys-libs/libcap                 abi_x86_32
@@ -130,3 +131,51 @@ x11-misc/colord                 abi_x86_32
 # required by games-emulation/melonds-1.0_rc::gentoo
 # required by melonds (argument)
 >=sys-libs/zlib-1.3.1-r1 minizip
+# required by games-engines/openmw-0.49.0::gentoo
+# required by openmw (argument)
+>=sci-physics/bullet-3.21 double-precision
+# required by media-libs/libsdl-1.2.68::gentoo
+# required by dev-games/openscenegraph-openmw-3.6_p20221115-r2::gentoo[sdl]
+# required by games-engines/openmw-0.49.0::gentoo[osg-fork]
+# required by openmw (argument)
+>=media-libs/libsdl2-2.32.6 alsa
+# required by media-libs/tiff-4.7.0-r1::gentoo[webp]
+# required by media-libs/openjpeg-2.5.3-r1::gentoo
+# required by app-text/mupdf-1.25.6::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-libs/libwebp-1.6.0 abi_x86_32
+# required by dev-libs/elfutils-0.193-r1::gentoo[lzma]
+# required by dev-util/pahole-1.30::gentoo
+# required by sys-kernel/gentoo-kernel-6.12.63::gentoo[debug]
+# required by virtual/dist-kernel-6.12.63::gentoo
+>=app-arch/xz-utils-5.8.2 abi_x86_32
+# required by games-util/steam-launcher-1.0.0.85-r2::steam-overlay[vulkan]
+# required by @selected
+# required by @world (argument)
+>=media-libs/vulkan-loader-1.4.328.0-r1 abi_x86_32
+# required by media-libs/mesa-25.2.8::gentoo
+# required by games-util/steam-launcher-1.0.0.85-r2::steam-overlay[-video_cards_nvidia]
+# required by @selected
+# required by @world (argument)
+>=virtual/zlib-1.3.1-r1 abi_x86_32
+# required by net-misc/curl-8.19.0::gentoo[quic,openssl]
+# required by dev-lang/rust-bin-1.93.1::gentoo
+# required by gnome-base/librsvg-2.60.0::gentoo
+# required by media-gfx/imagemagick-7.1.2.10::gentoo[svg]
+# required by @selected
+# required by @world (argument)
+>=net-libs/ngtcp2-1.22.0 abi_x86_32
+# required by media-libs/mesa-25.3.6::gentoo[vulkan]
+# required by media-libs/libsdl2-2.32.8::gentoo[gles2]
+# required by media-video/ffmpeg-8.1::gentoo[sdl]
+# required by www-client/firefox-bin-150.0.1::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-libs/libdisplay-info-0.3.0 abi_x86_32
+# required by net-libs/gnutls-3.8.12-r1::gentoo[post-quantum]
+# required by media-video/ffmpeg-8.1::gentoo[-openssl,gnutls]
+# required by www-client/firefox-bin-150.0.2::gentoo
+# required by @selected
+# required by @world (argument)
+>=dev-libs/leancrypto-1.7.2-r3 abi_x86_32

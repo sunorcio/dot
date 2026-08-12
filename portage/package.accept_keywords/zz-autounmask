@@ -12,3 +12,41 @@
 =net-misc/zerotier-1.14.1 ~amd64
 # required by libsdl3 (argument)
 =media-libs/libsdl3-3.2.16 ~amd64
+# required by openmw (argument)
+=games-engines/openmw-0.49.0 ~amd64
+# required by games-engines/openmw-0.49.0::gentoo
+# required by openmw (argument)
+=dev-cpp/sol2-3.5.0-r1 ~amd64
+# required by games-engines/openmw-0.49.0::gentoo
+# required by openmw (argument)
+=dev-games/recastnavigation-1.6.0-r1 ~amd64
+# required by games-engines/openmw-0.49.0::gentoo
+# required by openmw (argument)
+=dev-games/mygui-3.4.3 ~amd64
+# required by games-engines/openmw-0.49.0::gentoo[osg-fork]
+# required by openmw (argument)
+=dev-games/openscenegraph-openmw-3.6_p20221115-r2 ~amd64
+# required by games-simulation/openttd-14.1::gentoo[openmedia]
+# required by openttd (argument)
+=games-misc/opengfx-7.1-r1 ~amd64
+# required by games-misc/opensfx-1.0.3-r1::gentoo
+# required by games-simulation/openttd-14.1::gentoo[openmedia,-dedicated]
+# required by openttd (argument)
+=games-util/catcodec-1.0.5 ~amd64
+# required by openttd (argument)
+=games-simulation/openttd-14.1 ~amd64
+# required by games-misc/opengfx-7.1-r1::gentoo
+# required by games-simulation/openttd-14.1::gentoo[openmedia]
+# required by openttd (argument)
+=games-util/nml-0.7.5 ~amd64
+# required by games-simulation/openttd-14.1::gentoo[openmedia,-dedicated]
+# required by openttd (argument)
+=games-misc/opensfx-1.0.3-r1 ~amd64
+# required by games-simulation/openttd-14.1::gentoo[openmedia,-dedicated]
+# required by openttd (argument)
+=games-misc/openmsx-0.4.2 ~amd64
+# required by games-simulation/openttd-14.1::gentoo
+# required by openttd (argument)
+=games-util/grfcodec-6.1.0-r1 ~amd64
+# required by celeste (argument)
+=games-rpg/celeste-1.4.0.0 ~amd64

@@ -11,3 +11,5 @@
 games-util/steam-launcher ValveSteamLicense
 # required by p7zip (argument)
 >=app-arch/p7zip-17.05-r2 unRAR
+# required by celeste (argument)
+>=games-rpg/celeste-1.4.0.0 all-rights-reserved

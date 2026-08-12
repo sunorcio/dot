@@ -173,7 +173,7 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :set smarttab
 :set softtabstop=2
 :set clipboard^=unnamed,unnamedplus
-:set switchbuf=useopen,usetab,newtab
+:set switchbuf=useopen,usetab,vsplit,newtab
 :set splitright
 :set splitbelow
 :set showtabline=2
@@ -271,10 +271,10 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :nnoremap <silent> <esc> <esc>:noh<CR>:set cmdheight=0<CR>:set statusline=<CR>
 :noremap <silent> <A-?> :Inspect<CR>
 :noremap <A-v> gv
-":noremap <A-;> :!./
 
 :noremap <A-w> ebve"ry:grep --include \*.c --include \*.h -r '\<<C-r>r\>' .<CR>:cfdo %s/\<<C-r>r\>/<C-r>r
 :vnoremap <A-w> "ry:grep --include \*.c --include \*.h -r '<C-r>r' .<CR>:cfdo %s/<C-r>r/<C-r>r
+:noremap <A-/> :grep --include \*.c --include \*.h -r '' .<left><left><left>
 ":tabdo windo s/<C-r>r/
 "
 :noremap <silent> <A-t> :tabnew<CR>:ter<CR>i
@@ -284,7 +284,7 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :noremap <silent> <A-r> :so $MYVIMRC<CR>
 :noremap <silent> <A-c> :set cmdheight=1<CR>
 :noremap <silent> <S-A-w> :SessionSave<CR>
-:noremap <silent> <A-q> :q<CR>
+:noremap <silent> <A-q> :q<CR><C-w>=
 :noremap <silent> <C-A-q> :tabclose<CR>
 :noremap <silent> <S-A-q> :qa<CR>
 ":noremap <A-M> :mk<CR>
@@ -308,6 +308,10 @@ let g:netrw_sort_sequence='[\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\.vert$,
 :noremap ; :
 :nnoremap : q:
 ":noremap q; q:
+:noremap q; :tabdo cclose<CR>:tabdo lclose<CR>
+":noremap <A-;> :!./
+":noremap <C-;> :tabdo cclose<CR>:tabdo lclose<CR>
+:noremap <A-:> :vert copen<CR><C-w>=
 
 :vnoremap a A
 :vnoremap a<C-r> A<C-r>
@@ -613,10 +617,10 @@ lua <<EOF
   -- See `:help vim.diagnostic.*`
   local opts = { noremap=true, silent=true }
   vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', '<space>f', vim.diagnostic.setloclist, opts)
-  vim.keymap.set('n', '<space>q', vim.diagnostic.setqflist, opts)
-  vim.keymap.set('n', '<space>p', vim.diagnostic.goto_prev, opts)
+  vim.keymap.set('n', '<space>f', ':lua vim.diagnostic.setloclist()<CR><C-w>L<C-w>=', opts)
+  vim.keymap.set('n', '<space>q', ':lua vim.diagnostic.setqflist()<CR><C-w>L<C-w>=', opts)
   vim.keymap.set('n', '<space>n', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', '<space>N', vim.diagnostic.goto_prev, opts)
 
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
